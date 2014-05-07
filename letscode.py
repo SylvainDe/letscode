@@ -861,6 +861,13 @@ class Lua(ScriptingLanguage):
 - RosettaCode : http://rosettacode.org/wiki/Category:Lua
 ''')
 
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            print("Hello, world!")
+        ''')
+
 
 class DatabaseLanguage(Language):
     """A generic class for database languages"""
@@ -1254,6 +1261,10 @@ class TestInterpretedLanguage(unittest.TestCase):
     def test_julia(self):
         """Tests stuff"""
         self.interpreter_flow(Julia)
+
+    def test_lua(self):
+        """Tests stuff"""
+        self.interpreter_flow(Lua)
 
 
 class TestCompiledLanguage(unittest.TestCase):
