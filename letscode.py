@@ -274,7 +274,7 @@ class CLanguage(CompiledLanguages):
             #include <stdio.h>
             //#include "%s"
 
-            int main()
+            int main(int argc, char* argv[])
             {
                 printf("Hello, world!\\n");
                 return 0;
@@ -348,7 +348,7 @@ class Cpp(CLanguage):
             #include <iostream>
             //#include "%s"
 
-            int main()
+            int main(int argc, char* argv[])
             {
                 std::cout << "Hello, world!" << std::endl;
                 return 0;
@@ -482,7 +482,6 @@ class XML(MarkupLanguage):
 
 class ScriptingLanguage(Language):
     """A generic class for scripting languages"""
-    default_content = ''
     vim_modeline = '# vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4'
     comment_begin = '#'
     comment_end = ''
@@ -649,7 +648,6 @@ class Python(ScriptingLanguage):
     name = 'python'
     extensions = ['py', 'pyc', 'pyo']
     vim_modeline = '# vim: filetype=python tabstop=8 expandtab shiftwidth=4 softtabstop=4'
-    default_content = 'print("toto")'
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Python_%28programming_language%29
 - Official site : https://www.python.org/
@@ -671,6 +669,22 @@ class Python(ScriptingLanguage):
     * Hidden features (StackOverflow) : http://stackoverflow.com/questions/101268/hidden-features-of-python
     * Snippets/tips/tricks (/r/Python) : http://www.reddit.com/r/Python/comments/19dir2/whats_the_one_code_snippetpython_tricketc_did_you/
     ''')
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return cls.get_shebang_line() + "\n" + cls.vim_modeline + dedent('''
+            """Docstring for Python module"""
+
+
+            def main():
+                """Main function"""
+                pass
+
+
+            if __name__ == "__main__":
+                main()
+            ''')
 
     @classmethod
     def unittest(cls, args):
