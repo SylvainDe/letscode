@@ -1104,31 +1104,37 @@ class TestCompiledLanguage(unittest.TestCase):
     """Unit tests for compiled languages"""
     def compilation_flow(self, klass):
         """Tests stuff"""
-        namespace = namedtuple('Namespace', 'filename action failure extension_mode override_file')
+        namespace = namedtuple('Namespace', 'filename extension_mode override_file')
         filename = tempfile.mkdtemp(prefix=klass.name + '_') + "filename"
-        args = namespace(
-            filename,
-            ['compile', 'run'],
-            'stop',
-            'auto',
-            'n')
-        self.assertFalse(klass.perform_actions(args))
+        args = namespace(filename, 'auto', 'n')
 
-        args = namespace(
-            filename,
-            ['create', 'run'],
-            'stop',
-            'auto',
-            'n')
-        self.assertFalse(klass.perform_actions(args))
+        # Cannot compile or run if file does not exist
+        self.assertFalse(klass.perform_action('compile', args))
+        self.assertFalse(klass.perform_action('run', args))
 
-        args = namespace(
-            filename,
-            ['create', 'compile', 'run'],
-            'stop',
-            'auto',
-            'n')
-        self.assertTrue(klass.perform_actions(args))
+        # Cannot create before compilation
+        self.assertTrue(klass.perform_action('create', args))
+        self.assertFalse(klass.perform_action('run', args))
+
+        # Can create, compile and run
+        self.assertTrue(klass.perform_action('create', args))
+        self.assertTrue(klass.perform_action('compile', args))
+        self.assertTrue(klass.perform_action('run', args))
+
+        # Removing output file -> cannot run
+        real_file = filename + "." + klass.extensions[0]
+        output_file = klass.get_output_filename(filename)
+        os.remove(output_file)
+        self.assertFalse(klass.perform_action('run', args))
+
+        # Can run after re-compilation
+        self.assertTrue(klass.perform_action('compile', args))
+        self.assertTrue(klass.perform_action('run', args))
+
+        # Removing file -> code is still running and compilation fails
+        os.remove(real_file)
+        self.assertTrue(klass.perform_action('run', args))
+        self.assertFalse(klass.perform_action('compile', args))
 
     def test_cpp(self):
         self.compilation_flow(Cpp)
