@@ -651,6 +651,15 @@ class Perl(ScriptingLanguage):
 - RosettaCode : http://rosettacode.org/wiki/Category:Java
     ''')
 
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            use strict;
+            use warnings;
+            print "Hello, world!\n";
+            ''')
+
 
 class Php(ScriptingLanguage):
     """Php"""
@@ -1276,6 +1285,10 @@ class TestInterpretedLanguage(unittest.TestCase):
     def test_ruby(self):
         """Tests stuff"""
         self.interpreter_flow(Ruby)
+
+    def test_perl(self):
+        """Tests stuff"""
+        self.interpreter_flow(Perl)
 
 
 class TestCompiledLanguage(unittest.TestCase):
