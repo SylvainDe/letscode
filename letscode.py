@@ -591,6 +591,13 @@ class Ruby(ScriptingLanguage):
     ''')
 
     @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            puts "Hello, world!"
+            ''')
+
+    @classmethod
     def debug(cls, args):
         """Launches the debugger"""
         filename = cls.get_actual_filename_to_use(args)
@@ -1265,6 +1272,10 @@ class TestInterpretedLanguage(unittest.TestCase):
     def test_lua(self):
         """Tests stuff"""
         self.interpreter_flow(Lua)
+
+    def test_ruby(self):
+        """Tests stuff"""
+        self.interpreter_flow(Ruby)
 
 
 class TestCompiledLanguage(unittest.TestCase):
