@@ -103,6 +103,7 @@ However, it calls a lot of other executables. Here's a non exhaustive list of th
  * pylint - sudo apt-get install pylint
  * pychecker - sudo apt-get install pychecker
  * pep8 - sudo apt-get install pep8
+ * clojure - wget http://central.maven.org/maven2/org/clojure/clojure/1.6.0/clojure-1.6.0.jar
 
 (I should have kept track of things as I was needing them but it is too late now).
 

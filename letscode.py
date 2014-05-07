@@ -137,7 +137,7 @@ class Language(object):
         assert cls.name is not None
         corner, side, top = '+', '|', '-'
         title = ' Information about ' + cls.name + ' '
-        line = corner + top*len(title) + corner
+        line = corner + top * len(title) + corner
         print('\n'.join([line, side + title + side, line, cls.information]))
         return True
 
@@ -310,13 +310,13 @@ class CLanguage(CompiledLanguages):
     @classmethod
     def metrics(cls, args):
         """Gets metrics for code"""
+        _ = cls.get_actual_filename_to_use(args)
         # to be done
-        filename = cls.get_actual_filename_to_use(args)
-        commands = {
-            'cppncss': [],
-            'cccc': [],
-            'sloccount': [],
-        }
+        #commands = {
+        #    'cppncss': [],
+        #    'cccc': [],
+        #    'sloccount': [],
+        #}
         return True
 
 
@@ -1003,7 +1003,7 @@ class Go(CompiledLanguages):
 
 class Clojure(Language):
     """Clojure"""
-    name = 'closure'
+    name = 'clojure'
     extensions = ['clj', 'edn']
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Clojure
@@ -1013,9 +1013,29 @@ class Clojure(Language):
 - Tools online :
     * Try Clojure http://tryclj.com/
     * Clojure compiler http://closure-compiler.appspot.com/home
+    * Clojure REPL http://himera.herokuapp.com/index.html
     * Interactive problems https://www.4clojure.com/
 - RosettaCode : http://rosettacode.org/wiki/Category:Clojure
 ''')
+    cmd_launch_jar = ['java', '-cp', 'clojure-1.6.0.jar', 'clojure.main']
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            (println "Hello world!")
+            ''')
+
+    @classmethod
+    def run(cls, args):
+        """Runs the code"""
+        filename = cls.get_actual_filename_to_use(args)
+        return subprocess_call_wrapper(cls.cmd_launch_jar + [filename])
+
+    @classmethod
+    def man(cls, _):
+        """Gets the manual"""
+        return subprocess_call_wrapper(cls.cmd_launch_jar + ['--help'])
 
 
 # Maybe this should inherit from scripting language and compiled
@@ -1051,6 +1071,7 @@ class Lisp(ScriptingLanguage):
     def get_interpreter_name(cls):
         """Gets the name of the interpreter"""
         return 'clisp'
+
 
 class Scheme(ScriptingLanguage):
     """Scheme"""
@@ -1333,6 +1354,10 @@ class TestInterpretedLanguage(unittest.TestCase):
     def test_scheme(self):
         """Tests stuff"""
         self.interpreter_flow(Scheme)
+
+    def test_clojure(self):
+        """Tests stuff"""
+        self.interpreter_flow(Clojure)
 
 
 class TestCompiledLanguage(unittest.TestCase):
