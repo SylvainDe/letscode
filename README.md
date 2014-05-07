@@ -85,3 +85,21 @@ Next steps :
 
 Re-organisation in multiple smaller files.
 
+
+Installation :
+--------------
+
+The installation of the script itself is as simple as it could be : get it and you are done.
+However, it calls a lot of other executables. Here's a non exhaustive list of them :
+
+ * clisp - sudo apt-get install clisp
+ * scheme / mit-scheme - sudo apt-get install mit-scheme
+ * golang - sudo apt-get install golang
+ * gccgo - sudo apt-get install gccgo
+ * ghc - sudo apt-get install ghc
+ * julia - sudo apt-get install julia
+ * lua - sudo apt-get install lua5.2
+
+(I should have kept track of things as I was needing them but it is too late now).
+
+
