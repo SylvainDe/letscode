@@ -839,6 +839,13 @@ class Julia(ScriptingLanguage):
 - RosettaCode : http://rosettacode.org/wiki/Category:Julia
 ''')
 
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            println("Hello, world!")
+            ''')
+
 
 class Lua(ScriptingLanguage):
     """Lua"""
@@ -1229,18 +1236,25 @@ class TestInterpretedLanguage(unittest.TestCase):
         self.assertTrue(klass.perform_action('create', args))
         self.assertTrue(klass.perform_action('run', args))
 
-        # Removing file -> code does not run 
+        # Removing file -> code does not run
         real_file = filename + "." + klass.extensions[0]
         os.remove(real_file)
         self.assertFalse(klass.perform_action('run', args))
 
     def test_python(self):
+        """Tests stuff"""
         self.interpreter_flow(Python)
         self.interpreter_flow(Python2)
         self.interpreter_flow(Python3)
-    
+
     def test_php(self):
+        """Tests stuff"""
         self.interpreter_flow(Php)
+
+    def test_julia(self):
+        """Tests stuff"""
+        self.interpreter_flow(Julia)
+
 
 class TestCompiledLanguage(unittest.TestCase):
     """Unit tests for compiled languages"""
@@ -1279,21 +1293,27 @@ class TestCompiledLanguage(unittest.TestCase):
         self.assertFalse(klass.perform_action('compile', args))
 
     def test_cpp(self):
+        """Tests stuff"""
         self.compilation_flow(Cpp)
 
     def test_c(self):
+        """Tests stuff"""
         self.compilation_flow(CLanguage)
 
     def test_java(self):
+        """Tests stuff"""
         self.compilation_flow(Java)
 
     def test_rust(self):
+        """Tests stuff"""
         self.compilation_flow(Rust)
 
     def test_haskell(self):
+        """Tests stuff"""
         self.compilation_flow(Haskell)
 
     def test_go(self):
+        """Tests stuff"""
         self.compilation_flow(Go)
 
 
