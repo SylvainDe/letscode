@@ -240,8 +240,11 @@ class CLanguage(CompiledLanguages):
     * FAQ http://www.c-faq.com/
 - Subreddit : http://www.reddit.com/r/C_Programming/
 - Tools online :
-    * Compiler (with ASM output) http://gcc.godbolt.org/
+    * Compiler (with ASM output - no run) http://gcc.godbolt.org/
+    * Compiler (with ASM output - no run) http://assembly.ynh.io/
     * C gibberish <-> English http://cdecl.org/
+    * Demangler : http://demangler.com/
+    * Online compiler (run) http://coliru.stacked-crooked.com/
 - RosettaCode : http://rosettacode.org/wiki/Category:C
 ''')
 
@@ -336,8 +339,11 @@ class Cpp(CLanguage):
     * Guru of the week http://www.gotw.ca/gotw/
 - Subreddit :
 - Tools online :
-    * Compiler (with ASM output) http://gcc.godbolt.org/
+    * Compiler (with ASM output - no run) http://gcc.godbolt.org/
+    * Compiler (with ASM output - no run) http://assembly.ynh.io/
     * C gibberish <-> English http://cdecl.org/
+    * Demangler : http://demangler.com/
+    * Online compiler (run) http://coliru.stacked-crooked.com/
 - RosettaCode : http://rosettacode.org/wiki/Category:C%2B%2B
 ''')
 
@@ -369,6 +375,8 @@ class Java(CompiledLanguages):
 - Subreddit : http://www.reddit.com/r/java/
 - Tools online :
     * Visualiser : http://cscircles.cemc.uwaterloo.ca/java_visualize/
+    * Demangler : http://demangler.com/
+    * REPL : http://www.javarepl.com/console.html
 - Misc ressources :
     * Hidden features (StackOverflow) : http://stackoverflow.com/questions/15496/hidden-features-of-java
     ''')
@@ -607,6 +615,16 @@ class Javascript(ScriptingLanguage):
     * https://developer.mozilla.org/en-US/docs/Web/JavaScript
     * http://www.ecmascript.org/
 - Subreddit : http://www.reddit.com/r/javascript/
+- Tools online :
+    * JS Bin http://jsbin.com/
+    * JS Hint http://www.jshint.com/
+    * JS Lint http://www.jslint.com/
+    * JS Lint http://www.javascriptlint.com/online_lint.php
+    * JS Perf http://jsperf.com/
+    * JS Fiddle http://jsfiddle.net/
+    * JS Compress http://jscompress.com/
+    * Javascript interpreter (with pause and undo) http://wthimbleby.github.io/tailspin/
+    * Fun : Sound of JS http://soundofjs.com
     ''')
 
 
@@ -639,6 +657,9 @@ class Php(ScriptingLanguage):
 - Tools online :
     * Sandbox with multiple versions http://sandbox.onlinephpfunctions.com/
     * Performances on 100+ PHP versions http://3v4l.org/
+    * PHP Fiddle http://phpfiddle.org/
+    * PHP Sandbox http://www.exorithm.com/algorithm/sandbox
+    * PHP Lint www.icosaedro.it/phplint/phplint-on-line.html
 - RosettaCode : http://rosettacode.org/wiki/Category:PHP
     ''')
 
@@ -664,6 +685,12 @@ class Python(ScriptingLanguage):
 - Subreddit : http://www.reddit.com/r/Python/
 - Tools online :
     * PEP 8 online : http://pep8online.com/
+    * Python tutor - visualisation : http://www.pythontutor.com/visualize.html
+    * Python shell : http://shell.appspot.com/
+    * Python interpretet : http://mathcs.holycross.edu/~kwalsh/python/
+    * Learn Python with interactive console : http://www.learnpython.org/
+    * Client side Python interpretet http://www.skulpt.org/
+    * Python checker http://pych.atomidata.com/
 - RosettaCode : http://rosettacode.org/wiki/Category:Python
 - Misc ressources :
     * Hidden features (StackOverflow) : http://stackoverflow.com/questions/101268/hidden-features-of-python
@@ -825,6 +852,10 @@ class SQL(DatabaseLanguage):
 - Documentation :
 - Subreddit : http://www.reddit.com/r/SQL/
 - Tools online :
+    * SQL Fiddle http://sqlfiddle.com/
+    * SQL query visualisation http://queryviz.com/online/
+    * SQL Hands on http://www.headfirstlabs.com/sql_hands_on/
+    * SQL sandbox http://coderzone.org/sqlsandbox/
 - RosettaCode : http://rosettacode.org/wiki/Category:SQL
 ''')
 
@@ -842,6 +873,8 @@ class DOT(Language):
         http://graphviz-dev.appspot.com/
         http://sandbox.kidstrythisathome.com/erdos/index.html
         http://rise4fun.com/agl
+        http://ashitani.jp/gv/
+        http://oodavid.com/gviz/
 ''')
 
     @classmethod
@@ -932,6 +965,7 @@ class Clojure(Language):
 - Subreddit : http://www.reddit.com/r/Clojure/
 - Tools online :
     * Try Clojure http://tryclj.com/
+    * Clojure compiler http://closure-compiler.appspot.com/home
     * Interactive problems https://www.4clojure.com/
 - RosettaCode : http://rosettacode.org/wiki/Category:Clojure
 ''')
@@ -962,6 +996,30 @@ class Scheme(Lisp):
     """Scheme"""
     name = 'scheme'
     extensions = ['scm', 'ss']
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Scheme_%28programming_language%29
+- Official site :
+- Documentation :
+- Subreddit : http://www.reddit.com/r/scheme
+- Tools online :
+- RosettaCode : http://rosettacode.org/wiki/Category:Scheme
+''')
+
+
+class Racket(Scheme):
+    """Racket"""
+    name = 'racket'
+    extensions = ['rkt', 'rktl', 'rktd', 'plt', 'scrbl']
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Racket_%28programming_language%29
+- Official site : http://racket-lang.org/
+- Documentation : http://docs.racket-lang.org/index.html
+    * Guide http://docs.racket-lang.org/guide/
+    * Reference http://docs.racket-lang.org/reference/
+- Subreddit : http://www.reddit.com/r/Racket
+- Tools online :
+- RosettaCode : http://rosettacode.org/wiki/Category:Racket
+''')
 
 
 class Caml(Language):
@@ -989,6 +1047,8 @@ class Scala(Language):
 - Subreddit : http://www.reddit.com/r/scala/
 - Tools online :
     * Scala tutorials http://scalatutorials.com/tour/
+    * Scala fiddle http://scalafiddle.net/console
+    * Scala JS Fiddle http://www.scala-js-fiddle.com/
 - RosettaCode : http://rosettacode.org/wiki/Category:Scala
 ''')
 
