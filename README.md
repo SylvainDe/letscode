@@ -99,6 +99,10 @@ However, it calls a lot of other executables. Here's a non exhaustive list of th
  * ghc - sudo apt-get install ghc
  * julia - sudo apt-get install julia
  * lua - sudo apt-get install lua5.2
+ * pyflakes - sudo apt-get install pyflakes
+ * pylint - sudo apt-get install pylint
+ * pychecker - sudo apt-get install pychecker
+ * pep8 - sudo apt-get install pep8
 
 (I should have kept track of things as I was needing them but it is too late now).
 

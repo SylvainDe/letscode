@@ -80,11 +80,9 @@ def subprocess_call_wrapper(lst, stdin=None):
     print_debug('About to run "%s"' % ' '.join(lst))
     try:
         ret = subprocess.call(lst, stdin=stdin)
-    except FileNotFoundError:
+    except (OSError, IOError):
         ret = 127  # an error code
     except IndexError:
-        ret = 127  # an error code
-    except PermissionError:
         ret = 127  # an error code
     print_debug('Command "%s" returned %d' % (lst[0] if lst else '', ret))
     return ret == 0
