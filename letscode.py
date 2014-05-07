@@ -287,13 +287,36 @@ class CLanguage(CompiledLanguages):
         # Different file content for implementations files and headers
         realfilename = os.path.split(filename)[1]
         base, ext = os.path.splitext(realfilename)
-        print(ext, cls.header_extensions, cls.code_extensions)
         if ext in ('.' + e for e in cls.header_extensions):
             return cls.get_header_content(
                 '__%s__' % re.sub('[^A-Z]', '_', base.upper()))
         else:
             assert ext in ('.' + e for e in cls.code_extensions)
             return cls.get_code_content(base + '.' + cls.header_extensions[0])
+
+    @classmethod
+    def check(cls, args):
+        """Calls static checker"""
+        filename = cls.get_actual_filename_to_use(args)
+        commands = {
+            'cppcheck': ['--enable=all']
+        }
+        return_values = [
+            subprocess_call_wrapper([c] + opt + [filename])
+            for c, opt in commands.items()]
+        return all(return_values)
+
+    @classmethod
+    def metrics(cls, args):
+        """Gets metrics for code"""
+        # to be done
+        filename = cls.get_actual_filename_to_use(args)
+        commands = {
+            'cppncss': [],
+            'cccc': [],
+            'sloccount': [],
+        }
+        return True
 
 
 class Cpp(CLanguage):
