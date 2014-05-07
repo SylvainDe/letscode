@@ -75,11 +75,11 @@ def print_debug(*objs):
     print('DEBUG: %s' % (objs))
 
 
-def subprocess_call_wrapper(lst):
+def subprocess_call_wrapper(lst, stdin=None):
     """Wrapper around the subprocess.call functions."""
     print_debug('About to run "%s"' % ' '.join(lst))
     try:
-        ret = subprocess.call(lst)
+        ret = subprocess.call(lst, stdin=stdin)
     except FileNotFoundError:
         ret = 127  # an error code
     except IndexError:
@@ -697,6 +697,8 @@ class Php(ScriptingLanguage):
         return all(return_values)
 
 
+# Maybe this should inherit from scripting language and compiled
+# language but I am too scared at the moment. Let's write tests first
 class Python(ScriptingLanguage):
     """Python"""
     name = 'python'
@@ -1018,7 +1020,9 @@ class Clojure(Language):
 ''')
 
 
-class Lisp(Language):
+# Maybe this should inherit from scripting language and compiled
+# language but I am too scared at the moment. Let's write tests first
+class Lisp(ScriptingLanguage):
     """Lisp"""
     name = 'lisp'
     extensions = ['lisp']
@@ -1038,8 +1042,19 @@ class Lisp(Language):
     * http://rosettacode.org/wiki/Common_Lisp
 ''')
 
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            (princ "Hello, world!")
+            ''')
 
-class Scheme(Lisp):
+    @classmethod
+    def get_interpreter_name(cls):
+        """Gets the name of the interpreter"""
+        return 'clisp'
+
+class Scheme(ScriptingLanguage):
     """Scheme"""
     name = 'scheme'
     extensions = ['scm', 'ss']
@@ -1051,6 +1066,29 @@ class Scheme(Lisp):
 - Tools online :
 - RosettaCode : http://rosettacode.org/wiki/Category:Scheme
 ''')
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            (display "Hello, world!")
+            ''')
+
+    @classmethod
+    def run(cls, args):
+        """Runs the code"""
+        filename = cls.get_actual_filename_to_use(args)
+        try:
+            with open(filename) as infile:
+                return subprocess_call_wrapper([cls.get_interpreter_name()], stdin=infile)
+        except IOError:
+            return False
+
+    @classmethod
+    def interactive(cls, args):
+        """Executes the script and enters interactive mode"""
+        filename = cls.get_actual_filename_to_use(args)
+        return subprocess_call_wrapper([cls.get_interpreter_name(), '--load', filename])
 
 
 class Racket(Scheme):
@@ -1289,6 +1327,14 @@ class TestInterpretedLanguage(unittest.TestCase):
     def test_perl(self):
         """Tests stuff"""
         self.interpreter_flow(Perl)
+
+    def test_lisp(self):
+        """Tests stuff"""
+        self.interpreter_flow(Lisp)
+
+    def test_scheme(self):
+        """Tests stuff"""
+        self.interpreter_flow(Scheme)
 
 
 class TestCompiledLanguage(unittest.TestCase):
