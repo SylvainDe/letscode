@@ -663,6 +663,23 @@ class Php(ScriptingLanguage):
 - RosettaCode : http://rosettacode.org/wiki/Category:PHP
     ''')
 
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''<?php print("Hello, world!\\n");?>''')
+
+    @classmethod
+    def check(cls, args):
+        """Calls static checker"""
+        filename = cls.get_actual_filename_to_use(args)
+        commands = {
+            cls.get_interpreter_name(): ['-l']
+        }
+        return_values = [
+            subprocess_call_wrapper([c] + opt + [filename])
+            for c, opt in commands.items()]
+        return all(return_values)
+
 
 class Python(ScriptingLanguage):
     """Python"""
@@ -1221,6 +1238,9 @@ class TestInterpretedLanguage(unittest.TestCase):
         self.interpreter_flow(Python)
         self.interpreter_flow(Python2)
         self.interpreter_flow(Python3)
+    
+    def test_php(self):
+        self.interpreter_flow(Php)
 
 class TestCompiledLanguage(unittest.TestCase):
     """Unit tests for compiled languages"""
