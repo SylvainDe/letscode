@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+# -*- coding: utf-8
 """Letscode is just a language-aware tool to quickly perform a bunch of usual
 actions on a piece of code.
 
@@ -139,7 +140,7 @@ class Language(object):
         corner, side, top = '+', '|', '-'
         title = ' Information about ' + cls.name + ' '
         line = corner + top*len(title) + corner
-        print('\n'.join([line,side + title + side, line, cls.information]))
+        print('\n'.join([line, side + title + side, line, cls.information]))
         return True
 
     @classmethod
@@ -511,6 +512,12 @@ class Shell(ScriptingLanguage):
     """A generic class for shell scripts"""
     name = 'sh'
     extensions = ['sh']
+    information = dedent('''
+- Wikipedia page :
+- Official site :
+- Documentation :
+- Subreddit :
+''')
 
 
 class Bash(Shell):
@@ -532,6 +539,15 @@ class Zsh(Shell):
     """Zsh"""
     name = 'zsh'
     extensions = ['sh']
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Z_shell
+- Official site : http://zsh.sourceforge.net/
+- Documentation : http://zsh.sourceforge.net/Doc/Release/zsh_toc.html
+- Wiki : http://zshwiki.org/home/
+- Subreddit : http://www.reddit.com/r/zsh
+- Tools online :
+- RosettaCode :
+''')
 
 
 class Ruby(ScriptingLanguage):
@@ -766,6 +782,14 @@ class SQL(DatabaseLanguage):
     """SQL"""
     name = 'sql'
     extensions = ['sql']
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/SQL
+- Official site :
+- Documentation :
+- Subreddit : http://www.reddit.com/r/SQL/
+- Tools online :
+- RosettaCode : http://rosettacode.org/wiki/Category:SQL
+''')
 
 
 class DOT(Language):
@@ -1078,8 +1102,8 @@ class TestLanguageDetection(unittest.TestCase):
 
 class TestCompiledLanguage(unittest.TestCase):
     """Unit tests for compiled languages"""
-    def code_runs_if_created_and_compiled(self, klass):
-        """Unit tests for compiled languages"""
+    def compilation_flow(self, klass):
+        """Tests stuff"""
         namespace = namedtuple('Namespace', 'filename action failure extension_mode override_file')
         filename = tempfile.mkdtemp(prefix=klass.name + '_') + "filename"
         args = namespace(
@@ -1107,22 +1131,22 @@ class TestCompiledLanguage(unittest.TestCase):
         self.assertTrue(klass.perform_actions(args))
 
     def test_cpp(self):
-        self.code_runs_if_created_and_compiled(Cpp)
+        self.compilation_flow(Cpp)
 
     def test_c(self):
-        self.code_runs_if_created_and_compiled(CLanguage)
+        self.compilation_flow(CLanguage)
 
     def test_java(self):
-        self.code_runs_if_created_and_compiled(Java)
+        self.compilation_flow(Java)
 
     def test_rust(self):
-        self.code_runs_if_created_and_compiled(Rust)
+        self.compilation_flow(Rust)
 
     def test_haskell(self):
-        self.code_runs_if_created_and_compiled(Haskell)
+        self.compilation_flow(Haskell)
 
     def test_go(self):
-        self.code_runs_if_created_and_compiled(Go)
+        self.compilation_flow(Go)
 
 
 def main():
