@@ -46,13 +46,12 @@ Other actions can be/are defined.
 
 Programming languages (partially) supported:
 --------------------------------------------
- 
+
  * C
  * C++
  * Java
  * Haskell
- * HTML
- * XML
+ * Python (2 & 3)
  * Shell
  * Bash
  * Zsh
@@ -60,20 +59,21 @@ Programming languages (partially) supported:
  * Javascript
  * Perl
  * PHP
- * Python (2 & 3)
  * Julia
  * Lua
- * SQL
  * DOT
- * Latex
  * Go
  * Clojure
  * Lisp
  * Scheme
+ * Racket
  * Caml
  * Scala
  * Rust
-
+ * LaTeX
+ * SQL
+ * HTML
+ * XML
 
 Implementation:
 ---------------

@@ -25,7 +25,7 @@ CompiledLanguages.
 # Ideas : Add option to tell whether we want to build stuff when
 # we want to run and output file does not exist
 
-# When code can be run or compiler, check if compiled version exists and if
+# When code can be run or compiled, check if compiled version exists and if
 # it is older or newer
 
 # Use meta-stuff to get the list of actions automatically
@@ -687,9 +687,9 @@ class Python(ScriptingLanguage):
     * PEP 8 online : http://pep8online.com/
     * Python tutor - visualisation : http://www.pythontutor.com/visualize.html
     * Python shell : http://shell.appspot.com/
-    * Python interpretet : http://mathcs.holycross.edu/~kwalsh/python/
+    * Python interpreter : http://mathcs.holycross.edu/~kwalsh/python/
     * Learn Python with interactive console : http://www.learnpython.org/
-    * Client side Python interpretet http://www.skulpt.org/
+    * Client side Python interpreter http://www.skulpt.org/
     * Python checker http://pych.atomidata.com/
 - RosettaCode : http://rosettacode.org/wiki/Category:Python
 - Misc ressources :
@@ -706,7 +706,7 @@ class Python(ScriptingLanguage):
 
             def main():
                 """Main function"""
-                pass
+                print("Hello, world!")
 
 
             if __name__ == "__main__":
@@ -1197,6 +1197,31 @@ class TestLanguageDetection(unittest.TestCase):
         self.assertEqual(detect_language_from_filename('/b/a.cpp'), 'cpp')
 
 
+class TestInterpretedLanguage(unittest.TestCase):
+    """Unit tests for interpreted languages"""
+    def interpreter_flow(self, klass):
+        """Tests stuff"""
+        namespace = namedtuple('Namespace', 'filename extension_mode override_file')
+        filename = tempfile.mkdtemp(prefix=klass.name + '_') + "filename"
+        args = namespace(filename, 'auto', 'n')
+
+        # Cannot run if file does not exist
+        self.assertFalse(klass.perform_action('run', args))
+
+        # Can create and run
+        self.assertTrue(klass.perform_action('create', args))
+        self.assertTrue(klass.perform_action('run', args))
+
+        # Removing file -> code does not run 
+        real_file = filename + "." + klass.extensions[0]
+        os.remove(real_file)
+        self.assertFalse(klass.perform_action('run', args))
+
+    def test_python(self):
+        self.interpreter_flow(Python)
+        self.interpreter_flow(Python2)
+        self.interpreter_flow(Python3)
+
 class TestCompiledLanguage(unittest.TestCase):
     """Unit tests for compiled languages"""
     def compilation_flow(self, klass):
@@ -1209,7 +1234,7 @@ class TestCompiledLanguage(unittest.TestCase):
         self.assertFalse(klass.perform_action('compile', args))
         self.assertFalse(klass.perform_action('run', args))
 
-        # Cannot create before compilation
+        # Cannot run before compilation
         self.assertTrue(klass.perform_action('create', args))
         self.assertFalse(klass.perform_action('run', args))
 
