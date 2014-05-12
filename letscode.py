@@ -886,6 +886,48 @@ class Julia(ScriptingLanguage):
             ''')
 
 
+class VimScript(ScriptingLanguage):
+    """VimScript"""
+    name = 'vimscript'
+    extensions = ['vim']
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Vim_script
+- Official site : http://www.vim.org/
+- Documentation :
+    * http://vimdoc.sourceforge.net/htmldoc/usr_41.html
+    * http://learnvimscriptthehardway.stevelosh.com/
+    * Examples http://www.vim.org/scripts/
+- Subreddit : http://www.reddit.com/r/vim/
+- RosettaCode : http://rosettacode.org/wiki/Category:Vim_Script
+''')
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            echo "Hello, world!"
+        ''')
+
+    @classmethod
+    def get_interpreter_name(cls):
+        """Gets the name of the interpreter"""
+        return 'vim'
+
+    @classmethod
+    def run(cls, args):
+        """Runs the code"""
+        filename = cls.get_actual_filename_to_use(args)
+        return subprocess_call_wrapper(
+            [cls.get_interpreter_name(), '-u', filename, '-c', ':q'])
+
+    @classmethod
+    def debug(cls, args):
+        """Launches the debugger"""
+        filename = cls.get_actual_filename_to_use(args)
+        return subprocess_call_wrapper(
+            [cls.get_interpreter_name(), '-D', '-u', filename, '-c', ':q'])
+
+
 class Lua(ScriptingLanguage):
     """Lua"""
     name = 'lua'

@@ -59,6 +59,7 @@ Programming languages (partially) supported:
  * Javascript
  * Perl
  * PHP
+ * Vim Script
  * Julia
  * Lua
  * DOT
