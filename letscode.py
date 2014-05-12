@@ -641,6 +641,25 @@ class Tcl(Shell):
         return subprocess_call_wrapper(['tcl_count', filename])
 
 
+class Awk(Language):
+    """Awk"""
+    name = 'awk'
+    extensions = ['awk']
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/AWK
+- Official site : http://www.cs.bell-labs.com/cm/cs/awkbook/index.html
+- Documentation :
+    * http://awk.info/
+    * http://www.grymoire.com/Unix/Awk.html
+    * http://www.gnu.org/software/gawk/manual/gawk.html
+    * http://www.pement.org/awk/awk1line.txt
+- Subreddit : http://www.reddit.com/r/awk
+- Tools online :
+    * http://www.compileonline.com/execute_awk_online.php
+- RosettaCode : http://rosettacode.org/wiki/Category:AWK
+''')
+
+
 class Ruby(ScriptingLanguage):
     """Ruby"""
     name = 'ruby'
@@ -714,8 +733,9 @@ class Perl(ScriptingLanguage):
     * http://www.cpan.org/
     * www.perlfoundation.org
     * http://www.perlmonks.org/
+    * http://www.catonmat.net/blog/perl-one-liners-explained-part-one/
 - Subreddit : http://www.reddit.com/r/perl/
-- RosettaCode : http://rosettacode.org/wiki/Category:Java
+- RosettaCode : http://rosettacode.org/wiki/Category:Perl
     ''')
 
     @classmethod
@@ -788,6 +808,7 @@ class Python(ScriptingLanguage):
         # Library Reference : https://docs.python.org/release/2.7.6/library/index.html
     * Python 3.4 : https://docs.python.org/release/3.4.0
         # Library Reference : https://docs.python.org/release/3.4.0/library/index.html
+    * The Hitchhiker’s Guide to Python : http://docs.python-guide.org/
 - Wiki : https://wiki.python.org/moin/
 - Videos : http://www.pyvideo.org/
 - Subreddit : http://www.reddit.com/r/Python/
