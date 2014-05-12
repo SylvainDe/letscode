@@ -331,11 +331,11 @@ class Cpp(CLanguage):
 
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/C++
-- Official site :
-- Documentation :
+- Official site : http://isocpp.org/
+- Documentation : http://en.cppreference.com/
 - Misc :
     * Guru of the week http://www.gotw.ca/gotw/
-- Subreddit :
+- Subreddit : http://www.reddit.com/r/cpp/
 - Tools online :
     * Compiler (with ASM output - no run) http://gcc.godbolt.org/
     * Compiler (with ASM output - no run) http://assembly.ynh.io/
@@ -484,6 +484,28 @@ class XML(MarkupLanguage):
         """Makes the code prettier"""
         filename = cls.get_actual_filename_to_use(args)
         return subprocess_call_wrapper(['xmllint', '--format', filename])
+
+
+class Markdown(Language):
+    """Markdown"""
+    name = 'markdown'
+    extensions = ['md']
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Markdown
+- Official site : http://daringfireball.net/projects/markdown/
+- Misc :
+    * Github flavored markdown : https://help.github.com/articles/github-flavored-markdown
+- Documentation :
+    * Basic https://help.github.com/articles/markdown-basics
+- Tools online :
+    * Markdown editors/viewers:
+        http://daringfireball.net/projects/markdown/dingus
+        http://www.markdownviewer.com/
+        http://markable.in/editor/
+        http://dillinger.io/
+        https://stackedit.io/
+    * HTML to text http://www.aaronsw.com/2002/html2text/
+''')
 
 
 class ScriptingLanguage(Language):
@@ -722,6 +744,7 @@ class Python(ScriptingLanguage):
     * Python shell : http://shell.appspot.com/
     * Python interpreter : http://mathcs.holycross.edu/~kwalsh/python/
     * Learn Python with interactive console : http://www.learnpython.org/
+    * Python Anywhere https://www.pythonanywhere.com/try-ipython/
     * Client side Python interpreter http://www.skulpt.org/
     * Python checker http://pych.atomidata.com/
 - RosettaCode : http://rosettacode.org/wiki/Category:Python
