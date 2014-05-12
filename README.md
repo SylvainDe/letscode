@@ -55,6 +55,7 @@ Programming languages (partially) supported:
  * Shell
  * Bash
  * Zsh
+ * Tcl
  * Ruby
  * Javascript
  * Perl

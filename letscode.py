@@ -607,6 +607,40 @@ class Zsh(Shell):
 ''')
 
 
+class Tcl(Shell):
+    """Tcl"""
+    name = 'tcl'
+    extensions = ['tcl']
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Tcl
+- Official site : http://www.tcl.tk/
+- Documentation :
+    * http://www.tcl.tk/doc/
+    * http://www.tkdocs.com/
+- Subreddit : http://www.reddit.com/r/tcl
+- Tools online :
+- RosettaCode : http://rosettacode.org/wiki/Category:Tcl
+''')
+
+    @classmethod
+    def get_interpreter_name(cls):
+        """Gets the name of the interpreter"""
+        return 'tclsh'
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            puts "Hello, world!"
+            ''')
+
+    @classmethod
+    def metrics(cls, args):
+        """Gets metrics for code"""
+        filename = cls.get_actual_filename_to_use(args)
+        return subprocess_call_wrapper(['tcl_count', filename])
+
+
 class Ruby(ScriptingLanguage):
     """Ruby"""
     name = 'ruby'
@@ -1438,6 +1472,10 @@ class TestInterpretedLanguage(unittest.TestCase):
     def test_ruby(self):
         """Tests stuff"""
         self.interpreter_flow(Ruby)
+
+    def test_tcl(self):
+        """Tests stuff"""
+        self.interpreter_flow(Tcl)
 
     def test_perl(self):
         """Tests stuff"""
