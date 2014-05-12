@@ -310,14 +310,9 @@ class CLanguage(CompiledLanguages):
     @classmethod
     def metrics(cls, args):
         """Gets metrics for code"""
-        _ = cls.get_actual_filename_to_use(args)
-        # to be done
-        #commands = {
-        #    'cppncss': [],
-        #    'cccc': [],
-        #    'sloccount': [],
-        #}
-        return True
+        # to be done cppncss and cccc
+        filename = cls.get_actual_filename_to_use(args)
+        return subprocess_call_wrapper(['c_count', filename])
 
 
 class Cpp(CLanguage):
@@ -445,6 +440,12 @@ class Haskell(CompiledLanguages):
         return dedent('''
             main = putStrLn "Hello, world!"
             ''')
+
+    @classmethod
+    def metrics(cls, args):
+        """Gets metrics for code"""
+        filename = cls.get_actual_filename_to_use(args)
+        return subprocess_call_wrapper(['haskell_count', filename])
 
 
 class MarkupLanguage(Language):
@@ -680,6 +681,12 @@ class Perl(ScriptingLanguage):
             print "Hello, world!\n";
             ''')
 
+    @classmethod
+    def metrics(cls, args):
+        """Gets metrics for code"""
+        filename = cls.get_actual_filename_to_use(args)
+        return subprocess_call_wrapper(['perl_count', filename])
+
 
 class Php(ScriptingLanguage):
     """Php"""
@@ -848,6 +855,12 @@ class Python(ScriptingLanguage):
             subprocess_call_wrapper([c] + opt + [filename])
             for c, opt in commands.items()]
         return all(return_values)
+
+    @classmethod
+    def metrics(cls, args):
+        """Gets metrics for code"""
+        filename = cls.get_actual_filename_to_use(args)
+        return subprocess_call_wrapper(['python_count', filename])
 
 
 class Python2(Python):
@@ -1037,6 +1050,12 @@ class Latex(Language):
     def man(cls, _):
         """Gets the manual"""
         return subprocess_call_wrapper(['man', cls.name])
+
+    @classmethod
+    def metrics(cls, args):
+        """Gets metrics for code"""
+        filename = cls.get_actual_filename_to_use(args)
+        return subprocess_call_wrapper(['lex_count', filename])
 
 
 class Go(CompiledLanguages):
@@ -1507,7 +1526,7 @@ def main():
             'debug', 'info', 'upload', 'minify', 'pretty',
             'obfuscate', 'doctest', 'interactive', 'pydoc',
             'to_py3', 'uml', 'man', 'unittest', 'functionlist',
-            'profile'],
+            'profile', 'metrics'],
         # this list could be generated
         default=[])
     parser.add_argument(

@@ -105,6 +105,7 @@ However, it calls a lot of other executables. Here's a non exhaustive list of th
  * pychecker - sudo apt-get install pychecker
  * pep8 - sudo apt-get install pep8
  * clojure - wget http://central.maven.org/maven2/org/clojure/clojure/1.6.0/clojure-1.6.0.jar
+ * sloccount (for asm_count, c_count, cobol_count, f90_count, fortran_count, haskell_count, lex_count, ml_count, modula3_count, objc_count, perl_count, python_count)- sudo apt-get install sloccount
 
 (I should have kept track of things as I was needing them but it is too late now).
 
