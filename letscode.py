@@ -570,6 +570,12 @@ class Shell(ScriptingLanguage):
 - Subreddit :
 ''')
 
+    @classmethod
+    def metrics(cls, args):
+        """Gets metrics for code"""
+        filename = cls.get_actual_filename_to_use(args)
+        return subprocess_call_wrapper(['sh_count', filename])
+
 
 class Bash(Shell):
     """Bash"""
@@ -631,6 +637,12 @@ class Ruby(ScriptingLanguage):
         # irb does not look in '.' by default, let's give it the abs path
         filename = os.path.abspath(cls.get_actual_filename_to_use(args))
         return subprocess_call_wrapper(['irb', '-r', filename])
+
+    @classmethod
+    def metrics(cls, args):
+        """Gets metrics for code"""
+        filename = cls.get_actual_filename_to_use(args)
+        return subprocess_call_wrapper(['ruby_count', filename])
 
 
 class Javascript(ScriptingLanguage):
