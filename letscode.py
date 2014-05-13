@@ -152,7 +152,8 @@ class Language(object):
         # if extension mode is auto, we check if the extension is required
         # (if it is not in the list of extensions) and fallback to always/never
         if extmode == 'auto':
-            extmode = 'never' if (os.path.splitext(filename)[1].lower() in ("." + e for e in cls.extensions)) else 'always'
+            extmode = 'never' if (os.path.splitext(filename)[1].lower() in
+                            ("." + e for e in cls.extensions)) else 'always'
         assert extmode in ['never', 'always']
 
         # if extension is required, add the first one
@@ -524,6 +525,7 @@ class HTML(MarkupLanguage):
 - Subreddit : http://www.reddit.com/r/html
 - Tools online :
     * W3C Validator : http://validator.w3.org/
+    * HTML Obfuscator : http://htmlobfuscator.com/
 ''')
 
     @classmethod
@@ -547,6 +549,61 @@ class XML(MarkupLanguage):
         """Makes the code prettier"""
         filename = cls.get_actual_filename_to_use(args)
         return subprocess_call_wrapper(['xmllint', '--format', filename])
+
+
+class CSS(Language):
+    """CSS"""
+    name = 'css'
+    extensions = ['css']
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Cascading_Style_Sheets
+- Official site : http://www.w3.org/Style/CSS/Overview.en.html
+- Documentation :
+- Tools online :
+    * CSS Lint : http://csslint.net/
+''')
+
+
+class JSON(Language):
+    """JSON"""
+    name = 'json'
+    extensions = ['json']
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/JSON
+- Official site : http://www.json.org/
+- Documentation :
+- Tools online :
+    * JSON Lint : http://jsonlint.com/
+    * JSON Schema Lint : http://jsonschemalint.com
+    * Geo JSON Lint : http://geojsonlint.com/
+''')
+
+
+class YAML(Language):
+    """YAML"""
+    name = 'yaml'
+    extensions = ['yaml']
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/YAML
+- Official site : http://yaml.org/
+- Documentation : http://www.yaml.org/spec/1.2/spec.html
+- Tools online :
+    * YAML Lint : http://yamllint.com/
+''')
+
+
+class CoffeeScript(Language):
+    """CoffeeScript"""
+    name = 'coffeescript'
+    extensions = ['coffee']
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/CoffeeScript
+- Official site : http://coffeescript.org/
+- Documentation :
+- Tools online :
+    * JS to Coffee : http://js2coffee.org/
+    * Coffee Lint : http://www.coffeelint.org/
+''')
 
 
 class Markdown(Language):
@@ -629,6 +686,8 @@ class Shell(ScriptingLanguage):
 - Wikipedia page :
 - Official site :
 - Documentation :
+- Tool online:
+    * Explain shell http://explainshell.com/
 - Subreddit :
 ''')
 
@@ -742,6 +801,7 @@ class Ruby(ScriptingLanguage):
 - Wikipedia page : http://en.wikipedia.org/wiki/Ruby_%28programming_language%29
 - Official site : https://www.ruby-lang.org/fr/
 - Subreddit : http://www.reddit.com/r/ruby/
+- RosettaCode : http://rosettacode.org/wiki/Category:Ruby
     ''')
 
     @classmethod
@@ -790,8 +850,15 @@ class Javascript(ScriptingLanguage):
     * JS Perf http://jsperf.com/
     * JS Fiddle http://jsfiddle.net/
     * JS Compress http://jscompress.com/
+    * JS Compressor http://www.jscompressor.com/
+    * JS Minifier http://javascript-minifier.com/
+    * JS Mini http://www.jsmini.com/
+    * JS Obfuscator http://packer.50x.eu/
+    * JS Obfuscator http://javascriptobfuscator.com/
+    * JS Obfuscate http://www.jsobfuscate.com/
     * Javascript interpreter (with pause and undo) http://wthimbleby.github.io/tailspin/
     * Fun : Sound of JS http://soundofjs.com
+- RosettaCode : http://rosettacode.org/wiki/Category:JavaScript
     ''')
 
 
@@ -863,6 +930,12 @@ class Php(ScriptingLanguage):
             for c, opt in commands.items()]
         return all(return_values)
 
+    @classmethod
+    def metrics(cls, args):
+        """Gets metrics for code"""
+        filename = cls.get_actual_filename_to_use(args)
+        return subprocess_call_wrapper(['php_count', filename])
+
 
 # Maybe this should inherit from scripting language and compiled
 # language but I am too scared at the moment. Let's write tests first
@@ -895,6 +968,7 @@ class Python(ScriptingLanguage):
     * Python Anywhere https://www.pythonanywhere.com/try-ipython/
     * Client side Python interpreter http://www.skulpt.org/
     * Python checker http://pych.atomidata.com/
+    * Python Obfuscator http://pyobf.herokuapp.com/
 - RosettaCode : http://rosettacode.org/wiki/Category:Python
 - Misc ressources :
     * Hidden features (StackOverflow) : http://stackoverflow.com/questions/101268/hidden-features-of-python
@@ -1200,6 +1274,9 @@ class Latex(CompiledDescriptionLanguages):
     * Online collaborative LaTeX editor : https://www.writelatex.com/
     * Equation editor : http://www.codecogs.com/latex/eqneditor.php
     * Detexify (symbol classifier) : http://detexify.kirelabs.org/classify.html
+    * Texify http://www.texify.com/
+    * BibTeX Concerter http://www.bibtex.org/Convert/
+    * Compile Latex Online : http://www.compileonline.com/try_latex_online.php
 - RosettaCode : http://rosettacode.org/wiki/Category:LaTeX
 ''')
 
@@ -1330,6 +1407,32 @@ class Clojure(Language):
     def man(cls, _):
         """Gets the manual"""
         return subprocess_call_wrapper(cls.cmd_launch_jar + ['--help'])
+
+
+class Erlang(Language):
+    """Erlang"""
+    name = 'erlang'
+    extensions = ['erl', 'hrl']
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Erlang_%28programming_language%29
+- Official site : http://www.erlang.org/
+- Documentation :
+    * http://www.erlang.org/doc.html
+    * http://erldocs.com/
+    * http://learnyousomeerlang.com/content
+    * http://www.erlang.org/course/course.html
+- Subreddit : http://www.reddit.com/r/erlang/
+- Tools online :
+    * Try Erlang http://www.tryerlang.org/
+    * Compile Erlang Online http://www.compileonline.com/compile_erlang_online.php
+- RosettaCode : http://rosettacode.org/wiki/Category:Erlang
+''')
+
+    @classmethod
+    def metrics(cls, args):
+        """Gets metrics for code"""
+        filename = cls.get_actual_filename_to_use(args)
+        return subprocess_call_wrapper(['erlang_count', filename])
 
 
 # Maybe this should inherit from scripting language and compiled
