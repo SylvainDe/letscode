@@ -438,6 +438,48 @@ class Java(CompiledLanguages):
             ['jdb', '-classpath', classpath, classname])
 
 
+class Ada(CompiledLanguages):
+    """Ada"""
+    name = 'ada'
+    extensions = ['adb', 'ads']
+    compiler = 'gnat'
+    compiler_options = ['make']  # other options can do a lot more - documentation with 'html' for instance
+
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Ada_(programming_language)
+- Official site : http://www.adaic.org/
+- Documentation :
+- Subreddit : http://www.reddit.com/r/ada/
+- RosettaCode : http://rosettacode.org/wiki/Category:Ada
+    ''')
+
+    @classmethod
+    def compile(cls, args):
+        """Compiles the file"""
+        # TODO : update the definition in CompiledLanguages to move options before and check that running tests are still passing. If they are, this function can be removed
+        filename = cls.get_actual_filename_to_use(args)
+        output = cls.get_output_filename(filename)
+        return subprocess_call_wrapper(
+            [cls.compiler] + cls.compiler_options + [filename, '-o', output])
+
+    @classmethod
+    def get_procname(cls, filename):
+        """Gets the name of the file without extensions (name of the procedure)"""
+        return os.path.splitext(filename)[0]
+
+    @classmethod
+    def get_file_content(cls, filename):
+        """Returns the content to be put in the file."""
+        procname = os.path.split(cls.get_procname(filename))[1]
+        return dedent('''
+            with Ada.Text_IO; use Ada.Text_IO;
+            procedure %s is
+            begin
+                Put_Line ("Hello, world!");
+            end %s;
+            ''') % (procname, procname)
+
+
 class Fortran(CompiledLanguages):
     """Fortran"""
     name = 'fortran'
@@ -1816,6 +1858,10 @@ class TestCompiledLanguage(unittest.TestCase):
     def test_fortran(self):
         """Tests stuff"""
         self.compilation_flow(Fortran)
+
+    def test_ada(self):
+        """Tests stuff"""
+        self.compilation_flow(Ada)
 
     def test_rust(self):
         """Tests stuff"""
