@@ -481,6 +481,13 @@ class Haskell(CompiledLanguages):
             ''')
 
     @classmethod
+    def debug(cls, args):
+        """Launches the debugger"""
+        # Another option is to use GHCi
+        output = cls.get_output_filename(cls.get_actual_filename_to_use(args))
+        return subprocess_call_wrapper(['gdb', output])
+
+    @classmethod
     def metrics(cls, args):
         """Gets metrics for code"""
         filename = cls.get_actual_filename_to_use(args)
