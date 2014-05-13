@@ -359,7 +359,7 @@ class Java(CompiledLanguages):
     """Java"""
     name = 'java'
     extensions = ['java', 'class', 'jar']
-    compiler = 'javac'
+    compiler = 'javac'  # support for gcj could be added if needed
 
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Java_%28programming_language%29
@@ -370,6 +370,7 @@ class Java(CompiledLanguages):
     * Visualiser : http://cscircles.cemc.uwaterloo.ca/java_visualize/
     * Demangler : http://demangler.com/
     * REPL : http://www.javarepl.com/console.html
+- RosettaCode : http://rosettacode.org/wiki/Category:Java
 - Misc ressources :
     * Hidden features (StackOverflow) : http://stackoverflow.com/questions/15496/hidden-features-of-java
     ''')
@@ -418,6 +419,31 @@ class Java(CompiledLanguages):
         return subprocess_call_wrapper(
             ['jdb', '-classpath', classpath, classname])
 
+
+class Fortran(CompiledLanguages):
+    """Fortran"""
+    name = 'fortran'
+    extensions = ['f', 'for', 'f90', 'f95']
+    compiler = 'gfortran'
+    compiler_options = ['--free-form']
+
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Fortran
+- Official site : 
+- Documentation : http://www.fortran90.org/
+- Subreddit : http://www.reddit.com/r/fortran/ 
+- Tools online :
+- RosettaCode : http://rosettacode.org/wiki/Category:Fortran
+    ''')
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            program helloworld
+            print *, "Hello, world!"
+            end program helloworld
+            ''')
 
 class Haskell(CompiledLanguages):
     """Haskell"""
@@ -1578,6 +1604,10 @@ class TestCompiledLanguage(unittest.TestCase):
     def test_java(self):
         """Tests stuff"""
         self.compilation_flow(Java)
+
+    def test_fortran(self):
+        """Tests stuff"""
+        self.compilation_flow(Fortran)
 
     def test_rust(self):
         """Tests stuff"""
