@@ -445,6 +445,19 @@ class Fortran(CompiledLanguages):
             end program helloworld
             ''')
 
+    @classmethod
+    def debug(cls, args):
+        """Launches the debugger"""
+        output = cls.get_output_filename(cls.get_actual_filename_to_use(args))
+        return subprocess_call_wrapper(['gdb', output])
+
+    @classmethod
+    def metrics(cls, args):
+        """Gets metrics for code"""
+        filename = cls.get_actual_filename_to_use(args)
+        return subprocess_call_wrapper(['fortran_count', filename])
+
+
 class Haskell(CompiledLanguages):
     """Haskell"""
     name = 'haskell'
