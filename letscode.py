@@ -641,7 +641,7 @@ class Tcl(Shell):
         return subprocess_call_wrapper(['tcl_count', filename])
 
 
-class Awk(Language):
+class Awk(ScriptingLanguage):
     """Awk"""
     name = 'awk'
     extensions = ['awk']
@@ -658,6 +658,18 @@ class Awk(Language):
     * http://www.compileonline.com/execute_awk_online.php
 - RosettaCode : http://rosettacode.org/wiki/Category:AWK
 ''')
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return cls.get_shebang_line() + \
+            " -f\nBEGIN { print \"Hello, world!\" }"
+
+    @classmethod
+    def run(cls, args):
+        """Runs the code"""
+        filename = cls.get_actual_filename_to_use(args)
+        return subprocess_call_wrapper([cls.get_interpreter_name(), '-f', filename])
 
 
 class Ruby(ScriptingLanguage):
@@ -1497,6 +1509,10 @@ class TestInterpretedLanguage(unittest.TestCase):
     def test_tcl(self):
         """Tests stuff"""
         self.interpreter_flow(Tcl)
+
+    def test_awk(self):
+        """Tests stuff"""
+        self.interpreter_flow(Awk)
 
     def test_perl(self):
         """Tests stuff"""
