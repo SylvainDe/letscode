@@ -116,8 +116,9 @@ class Language(object):
         redcross = '\033[91m✘'
         undocolor = '\033[0m'
         for action, ret in results:
-            print_info((greentick if ret else redcross) + undocolor +
-                ' ' + action)
+            print_info(
+                (greentick if ret else redcross) +
+                undocolor + ' ' + action)
         return all(res for _, res in results)
 
     @classmethod
@@ -221,6 +222,22 @@ class CompiledLanguages(Language):
             cls.get_output_filename(
                 cls.get_actual_filename_to_use(args)))
         return subprocess_call_wrapper([output])
+
+
+class CompiledDescriptionLanguages(CompiledLanguages):
+    """A generic class for compiled descriptions languages : a compiler is used
+    but there is nothing to run, just files to open."""
+
+    @classmethod
+    def run(cls, args):
+        """Checks that the output file exists"""
+        output = cls.get_output_filename(cls.get_actual_filename_to_use(args))
+        if os.path.isfile(output):
+            print_info("File %s can be open" % output)
+            return True
+        else:
+            print_error("File %s does not exist" % output)
+            return False
 
 
 class CLanguage(CompiledLanguages):
@@ -429,10 +446,9 @@ class Fortran(CompiledLanguages):
 
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Fortran
-- Official site : 
+- Official site :
 - Documentation : http://www.fortran90.org/
-- Subreddit : http://www.reddit.com/r/fortran/ 
-- Tools online :
+- Subreddit : http://www.reddit.com/r/fortran/
 - RosettaCode : http://rosettacode.org/wiki/Category:Fortran
     ''')
 
@@ -1110,10 +1126,20 @@ class SQL(DatabaseLanguage):
 ''')
 
 
-class DOT(Language):
+class Dot(CompiledDescriptionLanguages):
     """Graph description language"""
     name = "dot"
     extensions = ['gv', 'dot']
+    compilers = [  # change order of compilers for other types of graph
+        'dot',    # directed graphs
+        'neato',  # undirected graphs
+        'twopi',  # radial layouts of graphs
+        'circo',  # circular layouts of graphs
+        'fdp',    # undirected graphs
+        'sfdp',   # large undirected graphs
+    ]
+    compiler = compilers[0]
+    compiler_options = []
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/DOT_%28graph_description_language%29
 - Official site : http://www.graphviz.org/
@@ -1128,33 +1154,39 @@ class DOT(Language):
 ''')
 
     @classmethod
-    def man(cls, _):
-        """Gets the manual"""
-        return subprocess_call_wrapper(['man', cls.name])
+    def get_output_filename(cls, filename):
+        """Gets the name of the output file"""
+        return os.path.splitext(filename)[0] + '_' + cls.compiler + '.png'
 
     @classmethod
-    def run(cls, args):
-        """Runs the code"""
+    def compile(cls, args):
+        """Compiles the code"""
         filename = cls.get_actual_filename_to_use(args)
-        basename = os.path.splitext(filename)[0]
-        commands = [
-            'dot',    # directed graphs
-            'neato',  # undirected graphs
-            'twopi',  # radial layouts of graphs
-            'circo',  # circular layouts of graphs
-            'fdp',    # undirected graphs
-            'sfdp',   # large undirected graphs
-            ]
-        results = [subprocess_call_wrapper(
-            [c, '-Tpng', filename, '-o', basename + '_' + c + '.png'])
-            for c in commands]
-        return all(results)
+        return subprocess_call_wrapper([
+            cls.compiler,
+            '-Tpng',
+            filename,
+            '-o',
+            cls.get_output_filename(filename)])
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            digraph G
+            {
+                Hello->World
+            }
+            ''')
 
 
-class Latex(Language):
+class Latex(CompiledDescriptionLanguages):
     """LaTeX (or TeX - it doesn't really matter here, does it?)"""
     name = 'latex'
     extensions = ['tex']
+    compiler = None
+    compiler_options = []
+
     information = dedent('''
 - Wikipedia page :
     * http://en.wikipedia.org/wiki/TeX
@@ -1181,6 +1213,59 @@ class Latex(Language):
         """Gets metrics for code"""
         filename = cls.get_actual_filename_to_use(args)
         return subprocess_call_wrapper(['lex_count', filename])
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            % LaTeX example
+            \\documentclass{article}
+            \\begin{document}
+            Hello, world!
+            \\end{document}
+            ''')
+
+    @classmethod
+    def call_pdflatex(cls, basename):
+        """Calls pdflatex."""
+        filedir = os.path.split(basename)[0]
+        return subprocess_call_wrapper([
+            'pdflatex',
+            '-interaction=nonstopmode',  # trying to avoid prompts
+            '-halt-on-error',            # as it makes unittest tedious
+            '-output-directory',
+            filedir,
+            basename])
+
+    @classmethod
+    def call_latex(cls, basename):
+        """Calls latex."""
+        return subprocess_call_wrapper(['latex', basename])
+
+    @classmethod
+    def call_bibtex(cls, basename):
+        """Calls bibtex."""
+        return subprocess_call_wrapper(['bibtex', basename])
+
+    @classmethod
+    def compile(cls, args):
+        """Compiles the file"""
+        # Things are a bit more complicated for latex because multiple
+        # compilations might be required. Also, the default compiler
+        # should be latex but PDFs are usually more convenient.
+        basename = os.path.splitext(cls.get_actual_filename_to_use(args))[0]
+        print(basename)
+        status = cls.call_pdflatex(basename) and \
+            cls.call_pdflatex(basename)
+        if status and cls.call_bibtex(basename):
+            # If bibtex is successful, we need yet another compilation
+            status = cls.call_pdflatex(basename)
+        return status
+
+    @classmethod
+    def get_output_filename(cls, filename):
+        """Gets the name of the output file"""
+        return os.path.splitext(filename)[0] + '.pdf'
 
 
 class Go(CompiledLanguages):
@@ -1582,7 +1667,7 @@ class TestCompiledLanguage(unittest.TestCase):
     def compilation_flow(self, klass):
         """Tests stuff"""
         namespace = namedtuple('Namespace', 'filename extension_mode override_file')
-        filename = tempfile.mkdtemp(prefix=klass.name + '_') + "filename"
+        filename = os.path.join(tempfile.mkdtemp(prefix=klass.name + '_'), "filename")
         args = namespace(filename, 'auto', 'n')
 
         # Cannot compile or run if file does not exist
@@ -1640,6 +1725,14 @@ class TestCompiledLanguage(unittest.TestCase):
     def test_go(self):
         """Tests stuff"""
         self.compilation_flow(Go)
+
+    def test_latex(self):
+        """Tests stuff"""
+        self.compilation_flow(Latex)
+
+    def test_dot(self):
+        """Tests stuff"""
+        self.compilation_flow(Dot)
 
 
 def main():
