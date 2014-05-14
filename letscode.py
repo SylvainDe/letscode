@@ -213,7 +213,7 @@ class CompiledLanguages(Language):
         filename = cls.get_actual_filename_to_use(args)
         output = cls.get_output_filename(filename)
         return subprocess_call_wrapper(
-            [cls.compiler, filename, '-o', output] + cls.compiler_options)
+            [cls.compiler] + cls.compiler_options + [filename, '-o', output])
 
     @classmethod
     def run(cls, args):
@@ -452,15 +452,6 @@ class Ada(CompiledLanguages):
 - Subreddit : http://www.reddit.com/r/ada/
 - RosettaCode : http://rosettacode.org/wiki/Category:Ada
     ''')
-
-    @classmethod
-    def compile(cls, args):
-        """Compiles the file"""
-        # TODO : update the definition in CompiledLanguages to move options before and check that running tests are still passing. If they are, this function can be removed
-        filename = cls.get_actual_filename_to_use(args)
-        output = cls.get_output_filename(filename)
-        return subprocess_call_wrapper(
-            [cls.compiler] + cls.compiler_options + [filename, '-o', output])
 
     @classmethod
     def get_procname(cls, filename):
