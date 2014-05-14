@@ -438,6 +438,48 @@ class Java(CompiledLanguages):
             ['jdb', '-classpath', classpath, classname])
 
 
+class Pascal(CompiledLanguages):
+    """Pascal"""
+    name = 'pascal'
+    extensions = ['pas']
+    compiler = 'fpc'
+
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Pascal_%28programming_language%29
+- Official site :
+- Documentation :
+- Subreddit :
+    * http://www.reddit.com/r/pascal/
+    * http://www.reddit.com/r/delphi/
+- RosettaCode : http://rosettacode.org/wiki/Category:Pascal
+    ''')
+
+    @classmethod
+    def get_file_content(cls, filename):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            program HelloWorld;
+
+            begin
+                writeln('Hello, world!');
+            end.
+            ''')
+
+    @classmethod
+    def compile(cls, args):
+        """Compiles the file"""
+        filename = cls.get_actual_filename_to_use(args)
+        output = cls.get_output_filename(filename)
+        return subprocess_call_wrapper(
+            [cls.compiler] + cls.compiler_options + [filename, '-o' + output])
+
+    @classmethod
+    def debug(cls, args):
+        """Launches the debugger"""
+        output = cls.get_output_filename(cls.get_actual_filename_to_use(args))
+        return subprocess_call_wrapper(['gdb', output])
+
+
 class Ada(CompiledLanguages):
     """Ada"""
     name = 'ada'
@@ -1849,6 +1891,10 @@ class TestCompiledLanguage(unittest.TestCase):
     def test_fortran(self):
         """Tests stuff"""
         self.compilation_flow(Fortran)
+
+    def test_pascal(self):
+        """Tests stuff"""
+        self.compilation_flow(Pascal)
 
     def test_ada(self):
         """Tests stuff"""
