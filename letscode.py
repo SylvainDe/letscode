@@ -455,7 +455,7 @@ class Pascal(CompiledLanguages):
     ''')
 
     @classmethod
-    def get_file_content(cls, filename):
+    def get_file_content(cls, _):
         """Returns the content to be put in the file."""
         return dedent('''
             program HelloWorld;
@@ -584,6 +584,43 @@ class Haskell(CompiledLanguages):
         """Gets metrics for code"""
         filename = cls.get_actual_filename_to_use(args)
         return subprocess_call_wrapper(['haskell_count', filename])
+
+
+class DLanguage(CompiledLanguages):
+    """D"""
+    name = 'd'
+    extensions = ['d']
+    compiler = 'gdc'
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/D_%28programming_language%29
+- Official site : http://dlang.org/
+- Documentation :
+    * Language reference : http://dlang.org/spec.html
+    * Library reference : dlang.org/phobos/index.html
+- Subreddit :
+    * D Paste : http://dpaste.dzfl.pl/
+    * Compile Online : http://www.compileonline.com/compile_d_online.php
+- Tools online : http://www.reddit.com/r/d_language/
+- RosettaCode : http://rosettacode.org/wiki/Category:D
+''')
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            import std.stdio;
+
+            void main()
+            {
+                writeln("Hello, world!");
+            }
+            ''')
+
+    @classmethod
+    def debug(cls, args):
+        """Launches the debugger"""
+        output = cls.get_output_filename(cls.get_actual_filename_to_use(args))
+        return subprocess_call_wrapper(['gdb', output])
 
 
 class MarkupLanguage(Language):
