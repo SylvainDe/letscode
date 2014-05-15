@@ -1945,6 +1945,10 @@ class TestCompiledLanguage(unittest.TestCase):
         """Tests stuff"""
         self.compilation_flow(Haskell)
 
+    def test_d(self):
+        """Tests stuff"""
+        self.compilation_flow(DLanguage)
+
     def test_go(self):
         """Tests stuff"""
         self.compilation_flow(Go)
