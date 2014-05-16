@@ -439,6 +439,31 @@ class Java(CompiledLanguages):
             ['jdb', '-classpath', classpath, classname])
 
 
+class Vala(CompiledLanguages):
+    """Vala"""
+    name = 'vala'
+    extensions = ['vala', 'vapi']
+    compiler = 'valac'
+
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Vala_%28programming_language%29
+- Official site : https://wiki.gnome.org/Projects/Vala
+- Documentation : https://wiki.gnome.org/Projects/Vala/Documentation
+- Subreddit : http://www.reddit.com/r/vala
+- RosettaCode : http://rosettacode.org/wiki/Category:Vala
+    ''')
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            int main () {
+                print ("Hello, world!\\n");
+                return 0;
+            }
+            ''')
+
+
 class Pascal(CompiledLanguages):
     """Pascal"""
     name = 'pascal'
@@ -1930,6 +1955,10 @@ class TestCompiledLanguage(unittest.TestCase):
     def test_java(self):
         """Tests stuff"""
         self.compilation_flow(Java)
+
+    def test_vala(self):
+        """Tests stuff"""
+        self.compilation_flow(Vala)
 
     def test_fortran(self):
         """Tests stuff"""
