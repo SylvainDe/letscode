@@ -386,6 +386,7 @@ class Java(CompiledLanguages):
 - Subreddit : http://www.reddit.com/r/java/
 - Tools online :
     * Visualiser : http://cscircles.cemc.uwaterloo.ca/java_visualize/
+    * Visualiser : http://visualize.learneroo.com/
     * Demangler : http://demangler.com/
     * REPL : http://www.javarepl.com/console.html
 - RosettaCode : http://rosettacode.org/wiki/Category:Java
@@ -912,6 +913,10 @@ class Ruby(ScriptingLanguage):
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Ruby_%28programming_language%29
 - Official site : https://www.ruby-lang.org/fr/
+- Online tools :
+    * Visualise Ruby : http://www.onlinerubytutor.com/exercise/D000
+    * Execute Ruby online : http://www.compileonline.com/execute_ruby_online.php
+    * Try Ruby : http://tryruby.org/
 - Subreddit : http://www.reddit.com/r/ruby/
 - RosettaCode : http://rosettacode.org/wiki/Category:Ruby
     ''')
@@ -968,7 +973,9 @@ class Javascript(ScriptingLanguage):
     * JS Obfuscator http://packer.50x.eu/
     * JS Obfuscator http://javascriptobfuscator.com/
     * JS Obfuscate http://www.jsobfuscate.com/
+    * Visualise Javascript http://jstutor.herokuapp.com/
     * Javascript interpreter (with pause and undo) http://wthimbleby.github.io/tailspin/
+    * Google playground (Google APIs) http://code.google.com/apis/ajax/playground/
     * Fun : Sound of JS http://soundofjs.com
 - RosettaCode : http://rosettacode.org/wiki/Category:JavaScript
     ''')
