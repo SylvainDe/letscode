@@ -743,6 +743,7 @@ class Markdown(Language):
 
 class ScriptingLanguage(Language):
     """A generic class for scripting languages"""
+    interpreter_options = []
     vim_modeline = '# vim: tabstop=8 expandtab shiftwidth=4 softtabstop=4'
     comment_begin = '#'
     comment_end = ''
@@ -761,7 +762,10 @@ class ScriptingLanguage(Language):
     def run(cls, args):
         """Runs the code"""
         filename = cls.get_actual_filename_to_use(args)
-        return subprocess_call_wrapper([cls.get_interpreter_name(), filename])
+        return subprocess_call_wrapper(
+            [cls.get_interpreter_name()] +
+            cls.interpreter_options +
+            [filename])
 
     @classmethod
     def real_create(cls, filename):
@@ -783,7 +787,7 @@ class ScriptingLanguage(Language):
         path = shutil.which(interpreter)
         if path is None:
             return '# interpreter "%s" not found' % interpreter
-        return '#!' + path
+        return '#!' + ' '.join([path] + cls.interpreter_options)
 
     @staticmethod
     def give_exec_rights(filename):
@@ -879,6 +883,7 @@ class Awk(ScriptingLanguage):
     """Awk"""
     name = 'awk'
     extensions = ['awk']
+    interpreter_options = ['-f']
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/AWK
 - Official site : http://www.cs.bell-labs.com/cm/cs/awkbook/index.html
@@ -897,13 +902,7 @@ class Awk(ScriptingLanguage):
     def get_file_content(cls, _):
         """Returns the content to be put in the file."""
         return cls.get_shebang_line() + \
-            " -f\nBEGIN { print \"Hello, world!\" }"
-
-    @classmethod
-    def run(cls, args):
-        """Runs the code"""
-        filename = cls.get_actual_filename_to_use(args)
-        return subprocess_call_wrapper([cls.get_interpreter_name(), '-f', filename])
+            "\nBEGIN { print \"Hello, world!\" }"
 
 
 class Ruby(ScriptingLanguage):
