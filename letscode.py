@@ -972,6 +972,18 @@ class Ruby(ScriptingLanguage):
         filename = cls.get_actual_filename_to_use(args)
         return subprocess_call_wrapper(['ruby_count', filename])
 
+    @classmethod
+    def check(cls, args):
+        """Calls static checker"""
+        filename = cls.get_actual_filename_to_use(args)
+        commands = {
+            cls.get_interpreter_name(): ['-c']
+        }
+        return_values = [
+            subprocess_call_wrapper([c] + opt + [filename])
+            for c, opt in commands.items()]
+        return all(return_values)
+
 
 class Javascript(ScriptingLanguage):
     """Javascript"""
