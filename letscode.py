@@ -352,6 +352,7 @@ class ObjectiveC(CLanguage):
 - RosettaCode : http://rosettacode.org/wiki/Category:Objective-C
 ''')
 
+
 class Cpp(CLanguage):
     """Cpp"""
     name = 'cpp'
@@ -1166,6 +1167,11 @@ class Python(ScriptingLanguage):
             ''')
 
     @classmethod
+    def get_module_name(cls, filename):
+        """Gets the name of the file without extensions (name of the module)"""
+        return os.path.splitext(filename)[0]
+
+    @classmethod
     def unittest(cls, args):
         """Runs the unit tests"""
         filename = cls.get_actual_filename_to_use(args)
@@ -1205,11 +1211,11 @@ class Python(ScriptingLanguage):
             [cls.get_interpreter_name(), '-m', 'pdb', filename])
 
     @classmethod
-    def pydoc(cls, args):
+    def gendoc(cls, args):
         """Generates the documentation"""
-        filename = cls.get_actual_filename_to_use(args)
+        module = cls.get_module_name(cls.get_actual_filename_to_use(args))
         return subprocess_call_wrapper(
-            [cls.get_interpreter_name(), '-m', 'pydoc', filename])
+            [cls.get_interpreter_name(), '-m', 'pydoc', module])
 
     @classmethod
     def interactive(cls, args):
@@ -2051,7 +2057,7 @@ def main():
         choices=[
             'create', 'edit', 'run', 'check', 'compile', 'coverage',
             'debug', 'info', 'upload', 'minify', 'pretty',
-            'obfuscate', 'doctest', 'interactive', 'pydoc',
+            'obfuscate', 'doctest', 'interactive', 'gendoc',
             'to_py3', 'uml', 'man', 'unittest', 'functionlist',
             'profile', 'metrics'],
         # this list could be generated
