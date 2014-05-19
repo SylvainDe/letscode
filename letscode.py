@@ -333,6 +333,25 @@ class CLanguage(CompiledLanguages):
         return subprocess_call_wrapper(['c_count', filename])
 
 
+class ObjectiveC(CLanguage):
+    """ObjectiveC"""
+    name = 'objectivec'
+    code_extensions = ['m', 'mm']
+    header_extensions = ['h']
+    extensions = code_extensions + header_extensions
+    compiler_options = ['-Wall', '-Wextra']
+
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Objective-C
+- Official site : https://developer.apple.com/library/mac/documentation/cocoa/conceptual/ProgrammingWithObjectiveC/Introduction/Introduction.html
+- Documentation :
+- Tools online :
+    * Try Objective C: http://tryobjectivec.codeschool.com/
+    * Compile online : http://www.compileonline.com/compile_objective-c_online.php
+- Subreddit : http://www.reddit.com/r/ObjectiveC/
+- RosettaCode : http://rosettacode.org/wiki/Category:Objective-C
+''')
+
 class Cpp(CLanguage):
     """Cpp"""
     name = 'cpp'
@@ -1959,6 +1978,10 @@ class TestCompiledLanguage(unittest.TestCase):
     def test_cpp(self):
         """Tests stuff"""
         self.compilation_flow(Cpp)
+
+    def test_objc(self):
+        """Tests stuff"""
+        self.compilation_flow(ObjectiveC)
 
     def test_c(self):
         """Tests stuff"""
