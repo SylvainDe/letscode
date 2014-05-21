@@ -78,6 +78,7 @@ Programming languages (partially) supported:
  * Caml
  * Scala
  * Rust
+ * Elm
  * LaTeX
  * SQL
  * HTML

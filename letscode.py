@@ -1801,6 +1801,24 @@ class Rust(CompiledLanguages):
         return subprocess_call_wrapper(['gdb', output])
 
 
+class Elm(Language):
+    """Elm"""
+    name = 'elm'
+    extensions = ['elm']
+    comments = ('-- ', '')
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Elm_%28programming_language%29
+- Official site : http://elm-lang.org/
+- Documentation :
+    * Syntax http://elm-lang.org/learn/Syntax.elm
+    * Librairies http://elm-lang.org/Libraries.elm
+- Subreddit : http://www.reddit.com/r/elm
+- Tools online :
+    * Try Elm : http://elm-lang.org/try
+- RosettaCode : http://rosettacode.org/wiki/Category:Elm
+''')
+
+
 class ExampleLanguage(Language):
     """Example"""
     name = None
