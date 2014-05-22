@@ -29,7 +29,7 @@ Examples:
 
 
 **Compilation**
- * `letscode.py hello.cpp -a compile` compiles with the relevant compiler (`g++` for C++) 
+ * `letscode.py hello.cpp -a compile` compiles with the relevant compiler (`g++` for C++)
  * `letscode.py hello.go -a compile` compiles with the Go compiler
 
 **Run**
@@ -37,7 +37,7 @@ Examples:
  * `letscode.py hello.py -a run` runs the hello world with the relevant Python interpreter
 
 Actions can be combined:
- * `letscode.py hello.cpp -a compile -a run` compiles the helo world and runs the corresponding code
+ * `letscode.py hello.cpp -a compile -a run` compiles the hello world and runs the corresponding code
 
 **Other actions**
 
@@ -81,13 +81,14 @@ Programming languages (partially) supported:
  * Elm
  * LaTeX
  * SQL
+ * PostScript
  * HTML
  * XML
 
 Implementation:
 ---------------
 
-In the current implementation, all programming languages inherit from a common `Language` class used for common code. All languages inherit from `Language` either directly or through other abtsract classes (`CompiledLanguage`, `ScriptingLanguage`). The organisation is not so much based on the paradigms (functionnal, OOP, logic) but on the actions that one can perform on the code (such as compilation). Also, at the moment C++ "inherits" from C not because it makes sense from a historical/theoretical point of view but just because they have so much in common - the inheritance could have been done the other way round without any problem.
+In the current implementation, all programming languages inherit from a common `Language` class used for common code. All languages inherit from `Language` either directly or through other abstract classes (`CompiledLanguage`, `ScriptingLanguage`). The organisation is not so much based on the paradigms (functionnal, OOP, logic) but on the actions that one can perform on the code (such as compilation). Also, at the moment C++ "inherits" from C not because it makes sense from a historical/theoretical point of view but just because they have so much in common - the inheritance could have been done the other way round without any problem.
 
 Next steps :
 ------------

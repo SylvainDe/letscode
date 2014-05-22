@@ -1819,6 +1819,23 @@ class Elm(Language):
 ''')
 
 
+class PostScript(Language):
+    """PostScript"""
+    name = 'postscript'
+    extensions = ['ps']
+    comments = ('% ', '')
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/PostScript
+- Official site : http://www.adobe.com/products/postscript/
+- Documentation :
+    * http://www.adobe.com/products/postscript/pdfs/PLRM.pdf
+- Subreddit : http://www.reddit.com/r/PostScript
+- Tools online :
+    * PS 2 PDF http://www.ps2pdf.com/convert.htm
+- RosettaCode : http://rosettacode.org/wiki/Category:PostScript
+''')
+
+
 class ExampleLanguage(Language):
     """Example"""
     name = None
