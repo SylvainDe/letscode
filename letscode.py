@@ -44,7 +44,7 @@ import argparse
 import subprocess
 import os
 import stat
-import shutil
+import myshutil as shutil
 import unittest
 import re
 import tempfile
