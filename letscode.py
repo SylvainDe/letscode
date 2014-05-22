@@ -1822,6 +1822,25 @@ class Elm(Language):
 ''')
 
 
+class Dart(Language):
+    """Dart"""
+    name = 'dart'
+    extensions = ['dart']
+    comments = ('//', '')
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Dart_%28programming_language%29
+- Official site : https://www.dartlang.org/
+- Documentation :
+    * Programmer's guide https://www.dartlang.org/docs/
+    * API http://api.dartlang.org/
+    * Language specifications https://www.dartlang.org/docs/spec/
+- Subreddit : http://www.reddit.com/r/dartlang/
+- Tools online :
+    * Try Dart : http://try.dartlang.org/
+- RosettaCode : http://rosettacode.org/wiki/Category:Dart
+''')
+
+
 class PostScript(Language):
     """PostScript"""
     name = 'postscript'
@@ -1843,6 +1862,7 @@ class ExampleLanguage(Language):
     """Example"""
     name = None
     extensions = None
+    comments = (None, None)
     information = dedent('''
 - Wikipedia page :
 - Official site :
