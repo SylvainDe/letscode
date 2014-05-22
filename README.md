@@ -29,10 +29,12 @@ Examples:
 
 
 **Compilation**
+
  * `letscode.py hello.cpp -a compile` compiles with the relevant compiler (`g++` for C++)
  * `letscode.py hello.go -a compile` compiles with the Go compiler
 
 **Run**
+
  * `letscode.py hello.cpp -a run` runs the hello world previously compiled
  * `letscode.py hello.py -a run` runs the hello world with the relevant Python interpreter
 
@@ -46,6 +48,10 @@ Other actions can be/are defined.
 
 Programming languages (partially) supported:
 --------------------------------------------
+
+[//]: # (I should add a distinction between merely supported languages with)
+[//]: # (basic features -language detection, basic information- and more)
+[//]: # (supported languages - hello world, compilation, run, etc.)
 
  * C
  * C++
@@ -83,6 +89,7 @@ Programming languages (partially) supported:
  * LaTeX
  * SQL
  * PostScript
+ * Markdown
  * HTML
  * XML
 

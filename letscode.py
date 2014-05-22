@@ -793,7 +793,8 @@ class Markdown(Language):
     """Markdown"""
     name = 'markdown'
     extensions = ['md']
-    comments = (None, None)  # It seems to be a bit more complicated than that
+    # From http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax
+    comments = ('[//]: # (', ')')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Markdown
 - Official site : http://daringfireball.net/projects/markdown/
