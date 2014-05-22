@@ -1979,7 +1979,8 @@ class TestInterpretedLanguage(unittest.TestCase):
     def interpreter_flow(self, klass):
         """Tests stuff"""
         namespace = namedtuple('Namespace', 'filename extension_mode override_file')
-        filename = os.path.join(tempfile.mkdtemp(prefix=klass.name + '_'), "filename")
+        filename = os.path.join(tempfile.mkdtemp(
+            prefix='letscode' + klass.name + '_'), "filename")
         args = namespace(filename, 'auto', 'n')
 
         # Cannot run if file does not exist
@@ -2046,7 +2047,8 @@ class TestCompiledLanguage(unittest.TestCase):
     def compilation_flow(self, klass):
         """Tests stuff"""
         namespace = namedtuple('Namespace', 'filename extension_mode override_file')
-        filename = os.path.join(tempfile.mkdtemp(prefix=klass.name + '_'), "filename")
+        filename = os.path.join(tempfile.mkdtemp(
+            prefix='letscode' + klass.name + '_'), "filename")
         args = namespace(filename, 'auto', 'n')
 
         # Cannot compile or run if file does not exist
