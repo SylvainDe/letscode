@@ -204,8 +204,11 @@ class Language(object):
         if beg is None or end is None:
             print_warning('Cannot comment string for %s' % (cls.name))
             return ''  # Empty string is safe and shoudn't cause troubles
-        # TODO: This is a bit naive as the string might contain the end comment
-        return '\n'.join(beg + s + end for s in string.split('\n')) + '\n'
+        assert beg  # beg is mandatory, end is conditionnal
+        return '\n'.join(beg + ' ' +
+                         s.strip().replace(end, '') +  # safety substitution
+                         (' ' + end if end else '')
+                         for s in string.split('\n')) + '\n'
 
 
 class CompiledLanguages(Language):
@@ -265,7 +268,7 @@ class CLanguage(CompiledLanguages):
     extensions = code_extensions + header_extensions
     compiler = 'gcc'
     compiler_options = ['-Wall', '-Wextra', '-std=c99']
-    comments = ('// ', '')  # or ('/*', '*/') but it's a bit more complicated
+    comments = ('//', '')  # or ('/*', '*/') but it's a bit more complicated
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/C_%28programming_language%29
 - Official site :
@@ -413,7 +416,7 @@ class Java(CompiledLanguages):
     name = 'java'
     extensions = ['java', 'class', 'jar']
     compiler = 'javac'  # support for gcj could be added if needed
-    comments = ('// ', '')
+    comments = ('//', '')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Java_%28programming_language%29
 - Official site : http://www.java.com/
@@ -479,7 +482,7 @@ class Vala(CompiledLanguages):
     name = 'vala'
     extensions = ['vala', 'vapi']
     compiler = 'valac'
-    comments = ('// ', '')
+    comments = ('//', '')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Vala_%28programming_language%29
 - Official site : https://wiki.gnome.org/Projects/Vala
@@ -504,7 +507,7 @@ class Pascal(CompiledLanguages):
     name = 'pascal'
     extensions = ['pas']
     compiler = 'fpc'
-    comments = ('// ', '')  # or ('(* ', ' *)') or ('{ ', ' }')
+    comments = ('//', '')  # or ('(*', '*)') or ('{', '}')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Pascal_%28programming_language%29
 - Official site :
@@ -547,7 +550,7 @@ class Ada(CompiledLanguages):
     extensions = ['adb', 'ads']
     compiler = 'gnat'  # many options - documentation with 'html' for instance
     compiler_options = ['make']
-    comments = ('-- ', '')
+    comments = ('--', '')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Ada_(programming_language)
 - Official site : http://www.adaic.org/
@@ -580,7 +583,7 @@ class Fortran(CompiledLanguages):
     extensions = ['f', 'for', 'f90', 'f95']
     compiler = 'gfortran'
     compiler_options = ['--free-form']
-    comments = ('! ', '')
+    comments = ('!', '')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Fortran
 - Official site :
@@ -616,7 +619,7 @@ class Haskell(CompiledLanguages):
     name = 'haskell'
     extensions = ['hs', 'lhs']
     compiler = 'ghc'
-    comments = ('-- ', '')
+    comments = ('--', '')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Haskell_%28programming_language%29
 - Official site : http://www.haskell.org/
@@ -653,7 +656,7 @@ class DLanguage(CompiledLanguages):
     name = 'd'
     extensions = ['d']
     compiler = 'gdc'
-    comments = ('// ', '')
+    comments = ('//', '')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/D_%28programming_language%29
 - Official site : http://dlang.org/
@@ -688,7 +691,7 @@ class DLanguage(CompiledLanguages):
 
 class MarkupLanguage(Language):
     """A generic class for markup languages"""
-    comments = ('<!-- ', ' -->')
+    comments = ('<!--', '-->')
 
 
 class HTML(MarkupLanguage):
@@ -731,7 +734,7 @@ class CSS(Language):
     """CSS"""
     name = 'css'
     extensions = ['css']
-    comments = ('/* ', ' */')
+    comments = ('/*', '*/')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Cascading_Style_Sheets
 - Official site : http://www.w3.org/Style/CSS/Overview.en.html
@@ -745,7 +748,7 @@ class JSON(Language):
     """JSON"""
     name = 'json'
     extensions = ['json']
-    comments = None  # No comment in JSON
+    comments = (None, None)  # No comment in JSON
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/JSON
 - Official site : http://www.json.org/
@@ -761,7 +764,7 @@ class YAML(Language):
     """YAML"""
     name = 'yaml'
     extensions = ['yaml']
-    comments = ('# ', '')
+    comments = ('#', '')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/YAML
 - Official site : http://yaml.org/
@@ -775,7 +778,7 @@ class CoffeeScript(Language):
     """CoffeeScript"""
     name = 'coffeescript'
     extensions = ['coffee']
-    comments = ('# ', '')
+    comments = ('#', '')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/CoffeeScript
 - Official site : http://coffeescript.org/
@@ -790,7 +793,7 @@ class Markdown(Language):
     """Markdown"""
     name = 'markdown'
     extensions = ['md']
-    comments = None  # It seems to be a bit more complicated than that
+    comments = (None, None)  # It seems to be a bit more complicated than that
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Markdown
 - Official site : http://daringfireball.net/projects/markdown/
@@ -812,7 +815,7 @@ class Markdown(Language):
 class ScriptingLanguage(Language):
     """A generic class for scripting languages"""
     interpreter_options = []
-    comments = ('# ', '')
+    comments = ('#', '')
 
     @classmethod
     def get_interpreter_name(cls):
@@ -1026,7 +1029,7 @@ class Javascript(ScriptingLanguage):
     """Javascript"""
     name = 'javascript'
     extensions = ['js']
-    comments = ('// ', '')
+    comments = ('//', '')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/JavaScript
 - "Official" sites :
@@ -1316,7 +1319,7 @@ class VimScript(ScriptingLanguage):
     """VimScript"""
     name = 'vimscript'
     extensions = ['vim']
-    comments = ('" ', '')
+    comments = ('"', '')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Vim_script
 - Official site : http://www.vim.org/
@@ -1359,7 +1362,7 @@ class Lua(ScriptingLanguage):
     """Lua"""
     name = 'lua'
     extensions = ['lua']
-    comments = ('-- ', '')
+    comments = ('--', '')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Lua_%28programming_language%29
 - Official site : http://www.lua.org/
@@ -1386,7 +1389,7 @@ class SQL(DatabaseLanguage):
     """SQL"""
     name = 'sql'
     extensions = ['sql']
-    comments = ('-- ', '')
+    comments = ('--', '')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/SQL
 - Official site :
@@ -1415,7 +1418,7 @@ class Dot(CompiledDescriptionLanguages):
     ]
     compiler = compilers[0]
     compiler_options = []
-    comments = ('// ', '')
+    comments = ('//', '')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/DOT_%28graph_description_language%29
 - Official site : http://www.graphviz.org/
@@ -1462,7 +1465,7 @@ class Latex(CompiledDescriptionLanguages):
     extensions = ['tex']
     compiler = None
     compiler_options = []
-    comments = ('% ', '')
+    comments = ('%', '')
     information = dedent('''
 - Wikipedia page :
     * http://en.wikipedia.org/wiki/TeX
@@ -1553,7 +1556,7 @@ class Go(CompiledLanguages):
     extensions = ['go']
     compiler = 'gccgo'
     compiler_options = ['-g']
-    comments = ('// ', '')
+    comments = ('//', '')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Go_%28programming_language%29
 - Official site : http://golang.org/
@@ -1579,7 +1582,7 @@ class Clojure(Language):
     """Clojure"""
     name = 'clojure'
     extensions = ['clj', 'edn']
-    comments = ('; ', '')
+    comments = (';', '')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Clojure
 - Official site : http://clojure.org/
@@ -1617,7 +1620,7 @@ class Erlang(Language):
     """Erlang"""
     name = 'erlang'
     extensions = ['erl', 'hrl']
-    comments = ('% ', '')
+    comments = ('%', '')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Erlang_%28programming_language%29
 - Official site : http://www.erlang.org/
@@ -1646,7 +1649,7 @@ class Lisp(ScriptingLanguage):
     """Lisp"""
     name = 'lisp'
     extensions = ['lisp']
-    comments = ('; ', '')
+    comments = (';', '')
     information = dedent('''
 - Wikipedia page :
     * http://en.wikipedia.org/wiki/Lisp_%28programming_language%29
@@ -1680,7 +1683,7 @@ class Scheme(ScriptingLanguage):
     """Scheme"""
     name = 'scheme'
     extensions = ['scm', 'ss']
-    comments = ('; ', '')
+    comments = (';', '')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Scheme_%28programming_language%29
 - Official site :
@@ -1723,7 +1726,7 @@ class Racket(Scheme):
     """Racket"""
     name = 'racket'
     extensions = ['rkt', 'rktl', 'rktd', 'plt', 'scrbl']
-    comments = ('@; ', '')
+    comments = ('@;', '')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Racket_%28programming_language%29
 - Official site : http://racket-lang.org/
@@ -1740,7 +1743,7 @@ class Caml(Language):
     """Caml"""
     name = 'caml'
     extensions = ['ml', 'mli']
-    comments = ('(* ', ' *)')
+    comments = ('(*', '*)')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Caml
 - Official site : http://caml.inria.fr/
@@ -1755,7 +1758,7 @@ class Scala(Language):
     """Scala"""
     name = 'scala'
     extensions = ['scala']
-    comments = ('/* ', ' */')
+    comments = ('/*', '*/')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Scala_%28programming_language%29
 - Official site : http://www.scala-lang.org/
@@ -1775,7 +1778,7 @@ class Rust(CompiledLanguages):
     extensions = ['rs']
     compiler = 'rustc'
     compiler_options = ['-g']
-    comments = ('// ', '')
+    comments = ('//', '')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Rust_%28programming_language%29
 - Official site : http://www.rust-lang.org/
@@ -1805,7 +1808,7 @@ class Elm(Language):
     """Elm"""
     name = 'elm'
     extensions = ['elm']
-    comments = ('-- ', '')
+    comments = ('--', '')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Elm_%28programming_language%29
 - Official site : http://elm-lang.org/
@@ -1823,7 +1826,7 @@ class PostScript(Language):
     """PostScript"""
     name = 'postscript'
     extensions = ['ps']
-    comments = ('% ', '')
+    comments = ('%', '')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/PostScript
 - Official site : http://www.adobe.com/products/postscript/
