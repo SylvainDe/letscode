@@ -1940,6 +1940,53 @@ class PostScript(Language):
 ''')
 
 
+class Scilab(ScriptingLanguage):
+    """Scilab"""
+    name = 'scilab'
+    extensions = [
+        'sce',  # Executable statements
+        'sci',  # Scilab or user defined functions
+        ]
+    comments = ('//', '')
+    interpreter_options = ['-nwni', '-f']
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Scilab
+- Official site : http://www.scilab.org/
+- Documentation : http://www.scilab.org/resources/documentation
+- Tools online :
+    * http://cloud.scilab.in/
+    * http://hotcalcul.com/on-line-calculator/scilab
+- RosettaCode : http://rosettacode.org/wiki/Category:Scilab
+''')
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            mprintf('Hello, world!\\n');
+            quit
+            ''')
+
+    @classmethod
+    def get_shebang_line(cls):
+        """Return the shebang line"""
+        return ''  # to be fixed
+
+    @classmethod
+    def run(cls, args):
+        """Runs the code"""
+        filename = cls.get_actual_filename_to_use(args)
+        # Check that file exists not to get stuck during unit tests
+        if os.path.isfile(filename):
+            return subprocess_call_wrapper(
+                [cls.get_interpreter_name()] +
+                cls.interpreter_options +
+                [filename])
+        else:
+            print_error("File %s does not exist" % filename)
+            return False
+
+
 class ExampleLanguage(Language):
     """Example"""
     name = None
@@ -2129,6 +2176,10 @@ class TestInterpretedLanguage(unittest.TestCase):
     def test_clojure(self):
         """Tests stuff"""
         self.interpreter_flow(Clojure, False)
+
+    def test_scilab(self):
+        """Tests stuff"""
+        self.interpreter_flow(Scilab, False)
 
     def test_prolog(self):
         """Tests stuff"""
