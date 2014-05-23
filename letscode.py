@@ -1887,9 +1887,10 @@ class Prolog(ScriptingLanguage):
     def get_file_content(cls, _):
         """Returns the content to be put in the file."""
         return dedent('''
-            goal :- write('Hello World'), nl, 
+            goal :- write('Hello World'), nl,
                     halt.
             ''')
+
 
 class PostScript(Language):
     """PostScript"""
@@ -2025,7 +2026,7 @@ class TestLanguageDetection(unittest.TestCase):
 # Idea - maybe interpreted language itself should inherit from unittest...
 class TestInterpretedLanguage(unittest.TestCase):
     """Unit tests for interpreted languages"""
-    def interpreter_flow(self, klass):
+    def interpreter_flow(self, klass, executable_file=True):
         """Tests stuff"""
         namespace = namedtuple('Namespace', 'filename extension_mode override_file')
         filename = os.path.join(tempfile.mkdtemp(
@@ -2035,12 +2036,19 @@ class TestInterpretedLanguage(unittest.TestCase):
         # Cannot run if file does not exist
         self.assertFalse(klass.perform_action('run', args))
 
-        # Can create and run
+        # Can create
         self.assertTrue(klass.perform_action('create', args))
+        real_file = filename + "." + klass.extensions[0]
+        self.assertTrue(os.path.isfile(real_file))
+
+        # Can run
         self.assertTrue(klass.perform_action('run', args))
 
+        # Can run on its own
+        if executable_file:
+            self.assertTrue(subprocess_call_wrapper([real_file]))
+
         # Removing file -> code does not run
-        real_file = filename + "." + klass.extensions[0]
         os.remove(real_file)
         self.assertFalse(klass.perform_action('run', args))
 
@@ -2084,11 +2092,11 @@ class TestInterpretedLanguage(unittest.TestCase):
 
     def test_scheme(self):
         """Tests stuff"""
-        self.interpreter_flow(Scheme)
+        self.interpreter_flow(Scheme, False)
 
     def test_clojure(self):
         """Tests stuff"""
-        self.interpreter_flow(Clojure)
+        self.interpreter_flow(Clojure, False)
 
     def test_prolog(self):
         """Tests stuff"""
@@ -2114,11 +2122,12 @@ class TestCompiledLanguage(unittest.TestCase):
 
         # Can create, compile and run
         self.assertTrue(klass.perform_action('create', args))
+        real_file = filename + "." + klass.extensions[0]
+        self.assertTrue(os.path.isfile(real_file))
         self.assertTrue(klass.perform_action('compile', args))
         self.assertTrue(klass.perform_action('run', args))
 
         # Removing output file -> cannot run
-        real_file = filename + "." + klass.extensions[0]
         output_file = klass.get_output_filename(filename)
         os.remove(output_file)
         self.assertFalse(klass.perform_action('run', args))
