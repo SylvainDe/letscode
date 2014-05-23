@@ -85,6 +85,8 @@ Programming languages (partially) supported:
  * Scala
  * Rust
  * Elm
+ * Erlang
+ * Elixir
  * Dart
  * LaTeX
  * SQL

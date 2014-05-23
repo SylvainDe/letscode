@@ -1644,6 +1644,22 @@ class Erlang(Language):
         return subprocess_call_wrapper(['erlang_count', filename])
 
 
+class Elixir(Language):
+    """Elixir"""
+    name = 'elixir'
+    extensions = ['ex', 'exs']
+    comments = ('#', '')
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Elixir_%28programming_language%29
+- Official site : http://elixir-lang.org/
+- Documentation : http://elixir-lang.org/docs.html
+- Subreddit : http://www.reddit.com/r/elixir
+- Tools online :
+    * Try Elixir : http://try-elixir.herokuapp.com/
+- RosettaCode : http://rosettacode.org/wiki/Category:Elixir
+''')
+
+
 # Maybe this should inherit from scripting language and compiled
 # language but I am too scared at the moment. Let's write tests first
 class Lisp(ScriptingLanguage):
