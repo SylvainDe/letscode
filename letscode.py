@@ -281,6 +281,7 @@ class CLanguage(CompiledLanguages):
     * C gibberish <-> English http://cdecl.org/
     * Demangler : http://demangler.com/
     * Online compiler (run) http://coliru.stacked-crooked.com/
+- Learn in Y minutes : http://learnxinyminutes.com/docs/c/
 - RosettaCode : http://rosettacode.org/wiki/Category:C
 ''')
 
@@ -368,6 +369,7 @@ class ObjectiveC(CLanguage):
     * Try Objective C: http://tryobjectivec.codeschool.com/
     * Compile online : http://www.compileonline.com/compile_objective-c_online.php
 - Subreddit : http://www.reddit.com/r/ObjectiveC/
+- Learn in Y minutes : http://learnxinyminutes.com/docs/objective-c/
 - RosettaCode : http://rosettacode.org/wiki/Category:Objective-C
 ''')
 
@@ -427,6 +429,7 @@ class Java(CompiledLanguages):
     * Visualiser : http://visualize.learneroo.com/
     * Demangler : http://demangler.com/
     * REPL : http://www.javarepl.com/console.html
+- Learn in Y minutes : http://learnxinyminutes.com/docs/java/
 - RosettaCode : http://rosettacode.org/wiki/Category:Java
 - Misc ressources :
     * Hidden features (StackOverflow) : http://stackoverflow.com/questions/15496/hidden-features-of-java
@@ -627,6 +630,7 @@ class Haskell(CompiledLanguages):
 - Subreddit : http://www.reddit.com/r/haskell/
 - Tools online :
     * Try Haskell : http://tryhaskell.org/
+- Learn in Y minutes : http://learnxinyminutes.com/docs/haskell/
 - RosettaCode : http://rosettacode.org/wiki/Category:Haskell
 ''')
 
@@ -721,6 +725,7 @@ class XML(MarkupLanguage):
     extensions = ['xml']
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/XML
+- Learn in Y minutes : http://learnxinyminutes.com/docs/xml/
 ''')
 
     @classmethod
@@ -741,6 +746,7 @@ class CSS(Language):
 - Documentation :
 - Tools online :
     * CSS Lint : http://csslint.net/
+- Learn in Y minutes : http://learnxinyminutes.com/docs/css/
 ''')
 
 
@@ -757,6 +763,7 @@ class JSON(Language):
     * JSON Lint : http://jsonlint.com/
     * JSON Schema Lint : http://jsonschemalint.com
     * Geo JSON Lint : http://geojsonlint.com/
+- Learn in Y minutes : http://learnxinyminutes.com/docs/json/
 ''')
 
 
@@ -771,6 +778,7 @@ class YAML(Language):
 - Documentation : http://www.yaml.org/spec/1.2/spec.html
 - Tools online :
     * YAML Lint : http://yamllint.com/
+- Learn in Y minutes : http://learnxinyminutes.com/docs/yaml/
 ''')
 
 
@@ -786,6 +794,7 @@ class CoffeeScript(Language):
 - Tools online :
     * JS to Coffee : http://js2coffee.org/
     * Coffee Lint : http://www.coffeelint.org/
+- Learn in Y minutes : http://learnxinyminutes.com/docs/coffeescript/
 ''')
 
 
@@ -894,6 +903,7 @@ class Bash(Shell):
     * Bash scripting guide www.tldp.org/LDP/abs/html/
     * Bash guide http://mywiki.wooledge.org/BashGuide
 - Subreddit : http://www.reddit.com/r/bash/
+- Learn in Y minutes : http://learnxinyminutes.com/docs/bash/
 ''')
 
 
@@ -983,6 +993,7 @@ class Ruby(ScriptingLanguage):
     * Execute Ruby online : http://www.compileonline.com/execute_ruby_online.php
     * Try Ruby : http://tryruby.org/
 - Subreddit : http://www.reddit.com/r/ruby/
+- Learn in Y minutes : http://learnxinyminutes.com/docs/ruby/
 - RosettaCode : http://rosettacode.org/wiki/Category:Ruby
     ''')
 
@@ -1056,6 +1067,7 @@ class Javascript(ScriptingLanguage):
     * Javascript interpreter (with pause and undo) http://wthimbleby.github.io/tailspin/
     * Google playground (Google APIs) http://code.google.com/apis/ajax/playground/
     * Fun : Sound of JS http://soundofjs.com
+- Learn in Y minutes : http://learnxinyminutes.com/docs/javascript/
 - RosettaCode : http://rosettacode.org/wiki/Category:JavaScript
     ''')
 
@@ -1074,6 +1086,7 @@ class Perl(ScriptingLanguage):
     * http://www.perlmonks.org/
     * http://www.catonmat.net/blog/perl-one-liners-explained-part-one/
 - Subreddit : http://www.reddit.com/r/perl/
+- Learn in Y minutes : http://learnxinyminutes.com/docs/perl/
 - RosettaCode : http://rosettacode.org/wiki/Category:Perl
     ''')
 
@@ -1108,6 +1121,7 @@ class Php(ScriptingLanguage):
     * PHP Fiddle http://phpfiddle.org/
     * PHP Sandbox http://www.exorithm.com/algorithm/sandbox
     * PHP Lint www.icosaedro.it/phplint/phplint-on-line.html
+- Learn in Y minutes : http://learnxinyminutes.com/docs/php/
 - RosettaCode : http://rosettacode.org/wiki/Category:PHP
     ''')
 
@@ -1166,6 +1180,9 @@ class Python(ScriptingLanguage):
     * Client side Python interpreter http://www.skulpt.org/
     * Python checker http://pych.atomidata.com/
     * Python Obfuscator http://pyobf.herokuapp.com/
+- Learn in Y minutes :
+    * http://learnxinyminutes.com/docs/python/
+    * http://learnxinyminutes.com/docs/python3/
 - RosettaCode : http://rosettacode.org/wiki/Category:Python
 - Misc ressources :
     * Hidden features (StackOverflow) : http://stackoverflow.com/questions/101268/hidden-features-of-python
@@ -1305,6 +1322,7 @@ class Julia(ScriptingLanguage):
 - Official site : http://julialang.org/
 - Documentation : http://docs.julialang.org/en/latest
 - Subreddit : http://www.reddit.com/r/Julia/
+- Learn in Y minutes : http://learnxinyminutes.com/docs/julia/
 - RosettaCode : http://rosettacode.org/wiki/Category:Julia
 ''')
 
@@ -1371,6 +1389,7 @@ class Lua(ScriptingLanguage):
 - Subreddit : http://www.reddit.com/r/lua/
 - Tools online :
     * Demo http://www.lua.org/demo.html
+- Learn in Y minutes : http://learnxinyminutes.com/docs/lua/
 - RosettaCode : http://rosettacode.org/wiki/Category:Lua
 ''')
 
@@ -1565,6 +1584,7 @@ class Go(CompiledLanguages):
 - Subreddit : http://www.reddit.com/r/golang/
 - Tools online :
     * Playground : http://play.golang.org/
+- Learn in Y minutes : http://learnxinyminutes.com/docs/go/
 - RosettaCode : http://rosettacode.org/wiki/Category:Go
 ''')
 
@@ -1594,6 +1614,9 @@ class Clojure(Language):
     * Clojure compiler http://closure-compiler.appspot.com/home
     * Clojure REPL http://himera.herokuapp.com/index.html
     * Interactive problems https://www.4clojure.com/
+- Learn in Y minutes :
+    * http://learnxinyminutes.com/docs/clojure/
+    * http://learnxinyminutes.com/docs/clojure-macros/
 - RosettaCode : http://rosettacode.org/wiki/Category:Clojure
 ''')
     cmd_launch_jar = ['java', '-cp', 'clojure-1.6.0.jar', 'clojure.main']
@@ -1634,6 +1657,7 @@ class Erlang(Language):
 - Tools online :
     * Try Erlang http://www.tryerlang.org/
     * Compile Erlang Online http://www.compileonline.com/compile_erlang_online.php
+- Learn in Y minutes : http://learnxinyminutes.com/docs/erlang/
 - RosettaCode : http://rosettacode.org/wiki/Category:Erlang
 ''')
 
@@ -1656,6 +1680,7 @@ class Elixir(Language):
 - Subreddit : http://www.reddit.com/r/elixir
 - Tools online :
     * Try Elixir : http://try-elixir.herokuapp.com/
+- Learn in Y minutes : http://learnxinyminutes.com/docs/elixir/
 - RosettaCode : http://rosettacode.org/wiki/Category:Elixir
 ''')
 
@@ -1678,6 +1703,9 @@ class Lisp(ScriptingLanguage):
     * http://www.reddit.com/r/lisp/
     * http://www.reddit.com/r/common_lisp
 - Tools online :
+- Learn in Y minutes :
+    * http://learnxinyminutes.com/docs/common-lisp/
+    * http://learnxinyminutes.com/docs/elisp/
 - RosettaCode :
     * http://rosettacode.org/wiki/Category:Lisp
     * http://rosettacode.org/wiki/Common_Lisp
@@ -1752,6 +1780,7 @@ class Racket(Scheme):
     * Reference http://docs.racket-lang.org/reference/
 - Subreddit : http://www.reddit.com/r/Racket
 - Tools online :
+- Learn in Y minutes : http://learnxinyminutes.com/docs/racket/
 - RosettaCode : http://rosettacode.org/wiki/Category:Racket
 ''')
 
@@ -1785,6 +1814,7 @@ class Scala(Language):
     * Scala tutorials http://scalatutorials.com/tour/
     * Scala fiddle http://scalafiddle.net/console
     * Scala JS Fiddle http://www.scala-js-fiddle.com/
+- Learn in Y minutes : http://learnxinyminutes.com/docs/scala/
 - RosettaCode : http://rosettacode.org/wiki/Category:Scala
 ''')
 
@@ -1854,6 +1884,7 @@ class Dart(Language):
 - Subreddit : http://www.reddit.com/r/dartlang/
 - Tools online :
     * Try Dart : http://try.dartlang.org/
+- Learn in Y minutes : http://learnxinyminutes.com/docs/dart/
 - RosettaCode : http://rosettacode.org/wiki/Category:Dart
 ''')
 
@@ -1920,6 +1951,7 @@ class ExampleLanguage(Language):
 - Documentation :
 - Subreddit :
 - Tools online :
+- Learn in Y minutes :
 - RosettaCode :
 ''')
 
