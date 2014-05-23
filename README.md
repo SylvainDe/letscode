@@ -91,6 +91,7 @@ Programming languages (partially) supported:
  * LaTeX
  * SQL
  * PostScript
+ * Prolog
  * Markdown
  * HTML
  * XML

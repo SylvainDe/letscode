@@ -1858,6 +1858,26 @@ class Dart(Language):
 ''')
 
 
+class Prolog(Language):
+    """Prolog"""
+    name = 'prolog'
+    extensions = ['pl', 'pro', 'p']
+    comments = ('%', '')
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Prolog
+- Official sites (different implementations) :
+    * http://www.swi-prolog.org/
+    * http://www.gprolog.org/
+- Documentation :
+    * http://www.swi-prolog.org/pldoc/doc_for?object=manual
+    * http://www.gprolog.org/manual/gprolog.html
+- Subreddit : http://www.reddit.com/r/prolog/
+- Tools online :
+    * http://ioctl.org/logic/prolog-latest
+- RosettaCode : http://rosettacode.org/wiki/Category:Prolog
+''')
+
+
 class PostScript(Language):
     """PostScript"""
     name = 'postscript'
