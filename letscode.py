@@ -1858,9 +1858,10 @@ class Dart(Language):
 ''')
 
 
-class Prolog(Language):
+class Prolog(ScriptingLanguage):
     """Prolog"""
     name = 'prolog'
+    interpreter_options = ['-t', 'goal', '-s']
     extensions = ['pl', 'pro', 'p']
     comments = ('%', '')
     information = dedent('''
@@ -1877,6 +1878,18 @@ class Prolog(Language):
 - RosettaCode : http://rosettacode.org/wiki/Category:Prolog
 ''')
 
+    @classmethod
+    def get_interpreter_name(cls):
+        """Gets the name of the interpreter"""
+        return 'swipl'
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            goal :- write('Hello World'), nl, 
+                    halt.
+            ''')
 
 class PostScript(Language):
     """PostScript"""
@@ -2076,6 +2089,10 @@ class TestInterpretedLanguage(unittest.TestCase):
     def test_clojure(self):
         """Tests stuff"""
         self.interpreter_flow(Clojure)
+
+    def test_prolog(self):
+        """Tests stuff"""
+        self.interpreter_flow(Prolog)
 
 
 class TestCompiledLanguage(unittest.TestCase):
