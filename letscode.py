@@ -875,6 +875,7 @@ class Shell(ScriptingLanguage):
     """A generic class for shell scripts"""
     name = 'sh'
     extensions = ['sh']
+    comments = ('#', '')
     information = dedent('''
 - Wikipedia page :
 - Official site :
@@ -883,6 +884,12 @@ class Shell(ScriptingLanguage):
     * Explain shell http://explainshell.com/
 - Subreddit :
 ''')
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            echo "Hello, world!"
+            ''')
 
     @classmethod
     def metrics(cls, args):
@@ -2176,10 +2183,18 @@ class TestInterpretedLanguage(unittest.TestCase):
     def test_ruby(self):
         """Tests stuff"""
         self.interpreter_flow(Ruby)
-
+ 
     def test_tcl(self):
         """Tests stuff"""
         self.interpreter_flow(Tcl)
+
+    def test_shell(self):
+        """Tests stuff"""
+        self.interpreter_flow(Shell)
+
+    def test_bash(self):
+        """Tests stuff"""
+        self.interpreter_flow(Bash)
 
     def test_awk(self):
         """Tests stuff"""
