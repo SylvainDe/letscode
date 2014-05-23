@@ -1987,6 +1987,30 @@ class Scilab(ScriptingLanguage):
             return False
 
 
+class Octave(ScriptingLanguage):
+    """Octave"""
+    name = 'octave'
+    extensions = ['m']
+    comments = ('#', '')
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/GNU_Octave
+- Official site : https://gnu.org/software/octave/
+- Documentation : http://www.gnu.org/software/octave/doc/interpreter/index.html
+- Subreddit : http://www.reddit.com/r/octave
+- Tools online :
+    * Octave Online : http://octave-online.net/
+    * Execute Matlab/Octave online : http://www.compileonline.com/execute_matlab_online.php
+- RosettaCode : http://rosettacode.org/wiki/Category:Octave
+''')
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            printf ("Hello, world!\\n");
+            ''')
+
+
 class ExampleLanguage(Language):
     """Example"""
     name = None
@@ -2180,6 +2204,10 @@ class TestInterpretedLanguage(unittest.TestCase):
     def test_scilab(self):
         """Tests stuff"""
         self.interpreter_flow(Scilab, False)
+
+    def test_octave(self):
+        """Tests stuff"""
+        self.interpreter_flow(Octave)
 
     def test_prolog(self):
         """Tests stuff"""

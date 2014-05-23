@@ -93,6 +93,7 @@ Programming languages (partially) supported:
  * PostScript
  * Prolog
  * Scilab
+ * Octave
  * Markdown
  * HTML
  * XML
@@ -135,6 +136,7 @@ However, it calls a lot of other executables. Here's a non exhaustive list of th
  * dot - sudo apt-get install graphviz
  * swipl - sudo apt-get install swi-prolog
  * scilab - sudo apt-get install scilab
+ * octave - sudo apt-get install octave
  * clojure - wget http://central.maven.org/maven2/org/clojure/clojure/1.6.0/clojure-1.6.0.jar
  * sloccount (for asm_count, c_count, cobol_count, f90_count, fortran_count, haskell_count, lex_count, ml_count, modula3_count, objc_count, perl_count, python_count, ada_count, awk_count, csh_count, erlang_count, exp_count, lisp_count, makefile_count, ruby_count, sed_count, sh_count, tcl_count)- sudo apt-get install sloccount
 
