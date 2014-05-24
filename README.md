@@ -94,6 +94,7 @@ Programming languages (partially) supported:
  * Prolog
  * Scilab
  * Octave
+ * Nimrod
  * Markdown
  * HTML
  * XML

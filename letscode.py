@@ -2038,6 +2038,27 @@ class Octave(ScriptingLanguage):
             ''')
 
 
+class Nimrod(Language):
+    """Nimrod"""
+    name = 'nimrod'
+    extensions = ['nim']
+    comments = ('#', '')
+    information = dedent('''
+- Wikipedia page : Not yet?
+- Official site : http://nimrod-lang.org/
+- Documentation : http://nimrod-lang.org/documentation.html
+- Subreddit : http://www.reddit.com/r/nimrod
+- RosettaCode : http://rosettacode.org/wiki/Category:Nimrod
+''')
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            echo("Hello, world!")
+            ''')
+
+
 class ExampleLanguage(Language):
     """Example"""
     name = None
