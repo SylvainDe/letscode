@@ -2162,13 +2162,14 @@ class TestInterpretedLanguage(unittest.TestCase):
         filename = os.path.join(tempfile.mkdtemp(
             prefix='letscode' + klass.name + '_'), "filename")
         args = namespace(filename, 'auto', 'n')
+        real_file = klass.get_actual_filename_to_use(args)
 
         # Cannot run if file does not exist
+        self.assertFalse(os.path.isfile(real_file))
         self.assertFalse(klass.perform_action('run', args))
 
         # Can create
         self.assertTrue(klass.perform_action('create', args))
-        real_file = filename + "." + klass.extensions[0]
         self.assertTrue(os.path.isfile(real_file))
 
         # Can run
@@ -2261,8 +2262,12 @@ class TestCompiledLanguage(unittest.TestCase):
         filename = os.path.join(tempfile.mkdtemp(
             prefix='letscode' + klass.name + '_'), "filename")
         args = namespace(filename, 'auto', 'n')
+        real_file = klass.get_actual_filename_to_use(args)
+        output_file = klass.get_output_filename(real_file)
 
         # Cannot compile or run if file does not exist
+        self.assertFalse(os.path.isfile(real_file))
+        self.assertFalse(os.path.isfile(output_file))
         self.assertFalse(klass.perform_action('compile', args))
         self.assertFalse(klass.perform_action('run', args))
 
@@ -2272,18 +2277,20 @@ class TestCompiledLanguage(unittest.TestCase):
 
         # Can create, compile and run
         self.assertTrue(klass.perform_action('create', args))
-        real_file = filename + "." + klass.extensions[0]
         self.assertTrue(os.path.isfile(real_file))
+        self.assertFalse(os.path.isfile(output_file))
         self.assertTrue(klass.perform_action('compile', args))
+        self.assertTrue(os.path.isfile(output_file))
         self.assertTrue(klass.perform_action('run', args))
 
         # Removing output file -> cannot run
-        output_file = klass.get_output_filename(filename)
         os.remove(output_file)
+        self.assertFalse(os.path.isfile(output_file))
         self.assertFalse(klass.perform_action('run', args))
 
         # Can run after re-compilation
         self.assertTrue(klass.perform_action('compile', args))
+        self.assertTrue(os.path.isfile(output_file))
         self.assertTrue(klass.perform_action('run', args))
 
         # Removing file -> code is still running and compilation fails
