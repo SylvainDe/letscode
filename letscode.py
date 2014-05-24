@@ -5,10 +5,10 @@ actions on a piece of code.
 
 Letscode provides some kind of convenient abstraction over the different
 languages you are working with and the related tools (compiler, interpreter,
-etc). You might not want to remember how to write a simple hello-world, compile,
-build the documentation, launch your tests, start the static analysis or just
-run your code for all the languages you are working with. Also, it provides a
-quick access to the relevant offline/online documents.
+etc). You might not want to remember how to write a simple hello-world, launch
+your tests, compile, build the documentation, start the static analysis or
+just run your code for all the languages you are working with. Also, it
+provides a quick access to the relevant offline/online documents.
 
 Letscode will guess what your code file is all about and do things for you.
 For instance, in Vim, "letscode.py % -a compile" will launch letscode on the
@@ -199,7 +199,7 @@ class Language(object):
 
     @classmethod
     def comment_string(cls, string):
-        """Comment string. Method can be overriden for escaping for instance."""
+        """Comment string."""
         beg, end = cls.comments
         if beg is None or end is None:
             print_warning('Cannot comment string for %s' % (cls.name))
