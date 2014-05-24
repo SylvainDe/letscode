@@ -884,6 +884,7 @@ class Shell(ScriptingLanguage):
     * Explain shell http://explainshell.com/
 - Subreddit :
 ''')
+
     @classmethod
     def get_file_content(cls, _):
         """Returns the content to be put in the file."""
@@ -1044,8 +1045,8 @@ class Ruby(ScriptingLanguage):
         return all(return_values)
 
 
-class Javascript(ScriptingLanguage):
-    """Javascript"""
+class JavaScript(ScriptingLanguage):
+    """JavaScript"""
     name = 'javascript'
     extensions = ['js']
     comments = ('//', '')
@@ -1077,6 +1078,25 @@ class Javascript(ScriptingLanguage):
 - Learn in Y minutes : http://learnxinyminutes.com/docs/javascript/
 - RosettaCode : http://rosettacode.org/wiki/Category:JavaScript
     ''')
+
+    @classmethod
+    def get_interpreter_name(cls):
+        """Gets the name of the interpreter"""
+        return 'rhino'
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        interpreter = cls.get_interpreter_name()
+        if interpreter == 'rhino':
+            return "print('Hello, world!');"
+        elif interpreter == 'console':
+            return "console.log('Hello, world!');"
+        elif interpreter == 'html':
+            return "document.write('Hello, world!');"
+        elif interpreter == 'alert':
+            return "alert('Hello, world!');"
+        assert False
 
 
 class Perl(ScriptingLanguage):
@@ -2183,7 +2203,7 @@ class TestInterpretedLanguage(unittest.TestCase):
     def test_ruby(self):
         """Tests stuff"""
         self.interpreter_flow(Ruby)
- 
+
     def test_tcl(self):
         """Tests stuff"""
         self.interpreter_flow(Tcl)
@@ -2203,6 +2223,10 @@ class TestInterpretedLanguage(unittest.TestCase):
     def test_perl(self):
         """Tests stuff"""
         self.interpreter_flow(Perl)
+
+    def test_javascript(self):
+        """Tests stuff"""
+        self.interpreter_flow(JavaScript)
 
     def test_lisp(self):
         """Tests stuff"""
