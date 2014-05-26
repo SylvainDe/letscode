@@ -656,6 +656,12 @@ class Cobol(CompilableLanguage):
            STOP RUN.
         '''
 
+    @classmethod
+    def metrics(cls, args):
+        """Gets metrics for code"""
+        filename = cls.get_actual_filename_to_use(args)
+        return subprocess_call_wrapper(['cobol_count', filename])
+
 
 class Haskell(CompilableLanguage):
     """Haskell"""
