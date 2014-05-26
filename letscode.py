@@ -646,6 +646,7 @@ class Cobol(CompiledLanguages):
            STOP RUN.
         '''
 
+
 class Haskell(CompiledLanguages):
     """Haskell"""
     name = 'haskell'
