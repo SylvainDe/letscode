@@ -619,6 +619,33 @@ class Fortran(CompiledLanguages):
         return subprocess_call_wrapper(['fortran_count', filename])
 
 
+class Cobol(CompiledLanguages):
+    """Cobol"""
+    name = 'cobol'
+    extensions = ['cob', 'cbl']
+    comments = ('       *', '')
+    compiler = 'cobc'
+    compiler_options = ['-x']
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/COBOL
+- Subreddit : http://www.reddit.com/r/cobol
+- Tools online :
+    * Compile online : http://www.compileonline.com/compile_cobol_online.php
+- RosettaCode : http://rosettacode.org/wiki/Category:COBOL
+    ''')
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        # No dedent here - leading spaces matter
+        return '''
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. HELLO-WORLD.
+       PROCEDURE DIVISION.
+           DISPLAY 'Hello world!'.
+           STOP RUN.
+        '''
+
 class Haskell(CompiledLanguages):
     """Haskell"""
     name = 'haskell'
@@ -2404,6 +2431,10 @@ class TestCompiledLanguage(unittest.TestCase):
     def test_c(self):
         """Tests stuff"""
         self.compilation_flow(CLanguage)
+
+    def test_cobol(self):
+        """Tests stuff"""
+        self.compilation_flow(Cobol)
 
     def test_java(self):
         """Tests stuff"""
