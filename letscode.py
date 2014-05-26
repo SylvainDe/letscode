@@ -84,6 +84,8 @@ def subprocess_call_wrapper(lst, stdin=None):
         ret = 127  # an error code
     except IndexError:
         ret = 127  # an error code
+    except KeyboardInterrupt:
+        ret = 127  # an error code
     print_debug('Command "%s" returned %d' % (lst[0] if lst else '', ret))
     return ret == 0
 
@@ -852,6 +854,7 @@ class ScriptingLanguage(Language):
         execution rights, etc)."""
         with open(filename, 'w') as filed:
             filed.write(cls.get_shebang_line() +
+                        cls.get_closing_shebang_line() +
                         cls.get_header_info() +
                         cls.get_file_content(filename))
         ScriptingLanguage.give_exec_rights(filename)
@@ -864,6 +867,11 @@ class ScriptingLanguage(Language):
         if path is None:
             return cls.comment_string('interpreter "%s" not found' % interpreter)
         return '#!' + ' '.join([path] + cls.interpreter_options) + '\n'
+
+    @classmethod
+    def get_closing_shebang_line(cls):
+        """Return the tag to close the shebang line"""
+        return ''
 
     @staticmethod
     def give_exec_rights(filename):
@@ -1835,11 +1843,11 @@ class Caml(Language):
 ''')
 
 
-class Scala(Language):
+class Scala(ScriptingLanguage):  # it can be compiled too but that's for later
     """Scala"""
     name = 'scala'
     extensions = ['scala']
-    comments = ('/*', '*/')
+    comments = ('//', '')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Scala_%28programming_language%29
 - Official site : http://www.scala-lang.org/
@@ -1852,6 +1860,29 @@ class Scala(Language):
 - Learn in Y minutes : http://learnxinyminutes.com/docs/scala/
 - RosettaCode : http://rosettacode.org/wiki/Category:Scala
 ''')
+
+    @classmethod
+    def get_closing_shebang_line(cls):
+        """Return the tag to close the shebang line"""
+        return '!#\n'
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        # Apparently, there are many ways to write an hello-world in Scala
+        return dedent('''
+            object HelloWorld {
+                def main(args: Array[String]) {
+                    println("Hello, world!")
+                }
+            }''')
+
+    @classmethod
+    def interactive(cls, args):
+        """Executes the script and enters interactive mode"""
+        filename = cls.get_actual_filename_to_use(args)
+        return subprocess_call_wrapper(
+            [cls.get_interpreter_name(), '-i', filename])
 
 
 class Rust(CompiledLanguages):
@@ -2276,6 +2307,10 @@ class TestInterpretedLanguage(unittest.TestCase):
     def test_awk(self):
         """Tests stuff"""
         self.interpreter_flow(Awk)
+
+    def test_scala(self):
+        """Tests stuff"""
+        self.interpreter_flow(Scala)
 
     def test_perl(self):
         """Tests stuff"""
