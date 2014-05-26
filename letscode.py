@@ -1794,11 +1794,11 @@ class Scheme(ScriptingLanguage):
         return subprocess_call_wrapper([cls.get_interpreter_name(), '--load', filename])
 
 
-class Racket(Scheme):
+class Racket(ScriptingLanguage):
     """Racket"""
     name = 'racket'
     extensions = ['rkt', 'rktl', 'rktd', 'plt', 'scrbl']
-    comments = ('@;', '')
+    comments = (';', '')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Racket_%28programming_language%29
 - Official site : http://racket-lang.org/
@@ -1810,6 +1810,14 @@ class Racket(Scheme):
 - Learn in Y minutes : http://learnxinyminutes.com/docs/racket/
 - RosettaCode : http://rosettacode.org/wiki/Category:Racket
 ''')
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+                #lang racket
+                "Hello, World!"
+            ''')
 
 
 class Caml(Language):
@@ -2272,6 +2280,10 @@ class TestInterpretedLanguage(unittest.TestCase):
     def test_perl(self):
         """Tests stuff"""
         self.interpreter_flow(Perl)
+
+    def test_racket(self):
+        """Tests stuff"""
+        self.interpreter_flow(Racket)
 
     def test_javascript(self):
         """Tests stuff"""
