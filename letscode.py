@@ -19,7 +19,7 @@ language is pretty straightforward, one just need to inherit from Language
 and override the different attributes (name, extensions, information, etc).
 Then, the different actions can be defined via class methods. Code can be
 re-used by inheriting from classes implementing usual behaviors such as
-ScriptingLanguage or CompiledLanguages.
+InterpretableLanguage or CompilableLanguage.
 """
 
 # Ideas : Add option to tell whether we want to build stuff when
@@ -91,7 +91,13 @@ def subprocess_call_wrapper(lst, stdin=None):
 
 
 class Language(object):
-    """A generic class for programming languages"""
+    """A generic class for programming languages.
+
+    Attributes:
+        name        Name of the language (alphanumerical lowercase string)
+        extensions  Extensions (list of string without leading dot)
+        information Additional information about the language (useful links)
+        comments    Pair of string defining how to begin and end comments."""
     name = None
     extensions = None
     information = None
@@ -213,8 +219,12 @@ class Language(object):
                          for s in string.split('\n')) + '\n'
 
 
-class CompiledLanguages(Language):
-    """A generic class for compiled languages"""
+class CompilableLanguage(Language):
+    """A generic class for compilable languages.
+
+    Attributes:
+        compiler            Command to use to compile
+        compiler_options    Options to give to the compiler."""
     compiler = None
     compiler_options = []
 
@@ -246,7 +256,7 @@ class CompiledLanguages(Language):
         return subprocess_call_wrapper([output])
 
 
-class CompiledDescriptionLanguages(CompiledLanguages):
+class CompiledDescriptionLanguages(CompilableLanguage):
     """A generic class for compiled descriptions languages : a compiler is used
     but there is nothing to run, just files to open."""
 
@@ -262,7 +272,7 @@ class CompiledDescriptionLanguages(CompiledLanguages):
             return False
 
 
-class CLanguage(CompiledLanguages):
+class CLanguage(CompilableLanguage):
     """C"""
     name = 'c'
     code_extensions = ['c']
@@ -415,7 +425,7 @@ class Cpp(CLanguage):
             ''') % included
 
 
-class Java(CompiledLanguages):
+class Java(CompilableLanguage):
     """Java"""
     name = 'java'
     extensions = ['java', 'class', 'jar']
@@ -482,7 +492,7 @@ class Java(CompiledLanguages):
             ['jdb', '-classpath', classpath, classname])
 
 
-class Vala(CompiledLanguages):
+class Vala(CompilableLanguage):
     """Vala"""
     name = 'vala'
     extensions = ['vala', 'vapi']
@@ -507,7 +517,7 @@ class Vala(CompiledLanguages):
             ''')
 
 
-class Pascal(CompiledLanguages):
+class Pascal(CompilableLanguage):
     """Pascal"""
     name = 'pascal'
     extensions = ['pas']
@@ -549,7 +559,7 @@ class Pascal(CompiledLanguages):
         return subprocess_call_wrapper(['gdb', output])
 
 
-class Ada(CompiledLanguages):
+class Ada(CompilableLanguage):
     """Ada"""
     name = 'ada'
     extensions = ['adb', 'ads']
@@ -582,7 +592,7 @@ class Ada(CompiledLanguages):
             ''') % (procname, procname)
 
 
-class Fortran(CompiledLanguages):
+class Fortran(CompilableLanguage):
     """Fortran"""
     name = 'fortran'
     extensions = ['f', 'for', 'f90', 'f95']
@@ -619,7 +629,7 @@ class Fortran(CompiledLanguages):
         return subprocess_call_wrapper(['fortran_count', filename])
 
 
-class Cobol(CompiledLanguages):
+class Cobol(CompilableLanguage):
     """Cobol"""
     name = 'cobol'
     extensions = ['cob', 'cbl']
@@ -647,7 +657,7 @@ class Cobol(CompiledLanguages):
         '''
 
 
-class Haskell(CompiledLanguages):
+class Haskell(CompilableLanguage):
     """Haskell"""
     name = 'haskell'
     extensions = ['hs', 'lhs']
@@ -685,7 +695,7 @@ class Haskell(CompiledLanguages):
         return subprocess_call_wrapper(['haskell_count', filename])
 
 
-class DLanguage(CompiledLanguages):
+class DLanguage(CompilableLanguage):
     """D"""
     name = 'd'
     extensions = ['d']
@@ -852,8 +862,12 @@ class Markdown(Language):
 ''')
 
 
-class ScriptingLanguage(Language):
-    """A generic class for scripting languages"""
+class InterpretableLanguage(Language):
+    """A generic class for interpretable languages.
+
+    Attributes:
+        interpreter (via get_interpreter_name) Name of the interpreter
+        interpreter_options Options for the interpreter."""
     interpreter_options = []
     comments = ('#', '')
 
@@ -885,7 +899,7 @@ class ScriptingLanguage(Language):
                         cls.get_closing_shebang_line() +
                         cls.get_header_info() +
                         cls.get_file_content(filename))
-        ScriptingLanguage.give_exec_rights(filename)
+        InterpretableLanguage.give_exec_rights(filename)
 
     @classmethod
     def get_shebang_line(cls):
@@ -907,7 +921,7 @@ class ScriptingLanguage(Language):
         os.chmod(filename, os.stat(filename).st_mode | stat.S_IEXEC)
 
 
-class Shell(ScriptingLanguage):
+class Shell(InterpretableLanguage):
     """A generic class for shell scripts"""
     name = 'sh'
     extensions = ['sh']
@@ -1000,7 +1014,7 @@ class Tcl(Shell):
         return subprocess_call_wrapper(['tcl_count', filename])
 
 
-class Awk(ScriptingLanguage):
+class Awk(InterpretableLanguage):
     """Awk"""
     name = 'awk'
     extensions = ['awk']
@@ -1025,7 +1039,7 @@ class Awk(ScriptingLanguage):
         return "BEGIN { print \"Hello, world!\" }"
 
 
-class Ruby(ScriptingLanguage):
+class Ruby(InterpretableLanguage):
     """Ruby"""
     name = 'ruby'
     extensions = ['rb', 'rbw']
@@ -1081,7 +1095,7 @@ class Ruby(ScriptingLanguage):
         return all(return_values)
 
 
-class JavaScript(ScriptingLanguage):
+class JavaScript(InterpretableLanguage):
     """JavaScript"""
     name = 'javascript'
     extensions = ['js']
@@ -1135,7 +1149,7 @@ class JavaScript(ScriptingLanguage):
         assert False
 
 
-class Perl(ScriptingLanguage):
+class Perl(InterpretableLanguage):
     """Perl"""
     name = 'perl'
     extensions = ['pl']
@@ -1169,7 +1183,7 @@ class Perl(ScriptingLanguage):
         return subprocess_call_wrapper(['perl_count', filename])
 
 
-class Php(ScriptingLanguage):
+class Php(InterpretableLanguage):
     """Php"""
     name = 'php'
     extensions = ['php', 'php3', 'php4', 'php5', 'phtml']
@@ -1212,9 +1226,9 @@ class Php(ScriptingLanguage):
         return subprocess_call_wrapper(['php_count', filename])
 
 
-# Maybe this should inherit from scripting language and compiled
+# Maybe this should inherit from interpretable language and compilable
 # language but I am too scared at the moment. Let's write tests first
-class Python(ScriptingLanguage):
+class Python(InterpretableLanguage):
     """Python"""
     name = 'python'
     extensions = ['py', 'pyc', 'pyo']
@@ -1376,7 +1390,7 @@ class Python3(Python):
     name = 'python3'
 
 
-class Julia(ScriptingLanguage):
+class Julia(InterpretableLanguage):
     """Julia"""
     name = 'julia'
     extensions = ['jl']
@@ -1397,7 +1411,7 @@ class Julia(ScriptingLanguage):
             ''')
 
 
-class VimScript(ScriptingLanguage):
+class VimScript(InterpretableLanguage):
     """VimScript"""
     name = 'vimscript'
     extensions = ['vim']
@@ -1440,7 +1454,7 @@ class VimScript(ScriptingLanguage):
             [cls.get_interpreter_name(), '-D', '-u', filename, '-c', ':q'])
 
 
-class Lua(ScriptingLanguage):
+class Lua(InterpretableLanguage):
     """Lua"""
     name = 'lua'
     extensions = ['lua']
@@ -1633,7 +1647,7 @@ class Latex(CompiledDescriptionLanguages):
         return os.path.splitext(filename)[0] + '.pdf'
 
 
-class Go(CompiledLanguages):
+class Go(CompilableLanguage):
     """Go"""
     name = 'go'
     extensions = ['go']
@@ -1748,9 +1762,9 @@ class Elixir(Language):
 ''')
 
 
-# Maybe this should inherit from scripting language and compiled
+# Maybe this should inherit from interpretable and compilable
 # language but I am too scared at the moment. Let's write tests first
-class Lisp(ScriptingLanguage):
+class Lisp(InterpretableLanguage):
     """Lisp"""
     name = 'lisp'
     extensions = ['lisp']
@@ -1787,7 +1801,7 @@ class Lisp(ScriptingLanguage):
         return 'clisp'
 
 
-class Scheme(ScriptingLanguage):
+class Scheme(InterpretableLanguage):
     """Scheme"""
     name = 'scheme'
     extensions = ['scm', 'ss']
@@ -1830,7 +1844,7 @@ class Scheme(ScriptingLanguage):
         return subprocess_call_wrapper([cls.get_interpreter_name(), '--load', filename])
 
 
-class Racket(ScriptingLanguage):
+class Racket(InterpretableLanguage):
     """Racket"""
     name = 'racket'
     extensions = ['rkt', 'rktl', 'rktd', 'plt', 'scrbl']
@@ -1871,7 +1885,7 @@ class Caml(Language):
 ''')
 
 
-class Scala(ScriptingLanguage):  # it can be compiled too but that's for later
+class Scala(InterpretableLanguage):  # it can be compiled too but that's for later
     """Scala"""
     name = 'scala'
     extensions = ['scala']
@@ -1913,7 +1927,7 @@ class Scala(ScriptingLanguage):  # it can be compiled too but that's for later
             [cls.get_interpreter_name(), '-i', filename])
 
 
-class Rust(CompiledLanguages):
+class Rust(CompilableLanguage):
     """Rust"""
     name = 'rust'
     extensions = ['rs']
@@ -1983,7 +1997,7 @@ class Dart(Language):
 ''')
 
 
-class Prolog(ScriptingLanguage):
+class Prolog(InterpretableLanguage):
     """Prolog"""
     name = 'prolog'
     interpreter_options = ['-t', 'goal', '-s']
@@ -2034,7 +2048,7 @@ class PostScript(Language):
 ''')
 
 
-class Scilab(ScriptingLanguage):
+class Scilab(InterpretableLanguage):
     """Scilab"""
     name = 'scilab'
     extensions = [
@@ -2081,7 +2095,7 @@ class Scilab(ScriptingLanguage):
             return False
 
 
-class Octave(ScriptingLanguage):
+class Octave(InterpretableLanguage):
     """Octave"""
     name = 'octave'
     extensions = ['m']
@@ -2269,7 +2283,7 @@ class TestLanguageDetection(unittest.TestCase):
 
 
 # Idea - maybe interpreted language itself should inherit from unittest...
-class TestInterpretedLanguage(unittest.TestCase):
+class TestableInterpretableLanguage(unittest.TestCase):
     """Unit tests for interpreted languages"""
     def interpreter_flow(self, klass, executable_file=True):
         """Tests stuff"""
@@ -2377,8 +2391,8 @@ class TestInterpretedLanguage(unittest.TestCase):
         self.interpreter_flow(Prolog)
 
 
-class TestCompiledLanguage(unittest.TestCase):
-    """Unit tests for compiled languages"""
+class TestableCompilableLanguage(unittest.TestCase):
+    """Unit tests for compilable languages"""
     def compilation_flow(self, klass):
         """Tests stuff"""
         namespace = namedtuple('Namespace', 'filename extension_mode override_file')

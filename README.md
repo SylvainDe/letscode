@@ -105,7 +105,7 @@ Programming languages (partially) supported:
 Implementation:
 ---------------
 
-In the current implementation, all programming languages inherit from a common `Language` class used for common code. All languages inherit from `Language` either directly or through other abstract classes (`CompiledLanguage`, `ScriptingLanguage`). The organisation is not so much based on the paradigms (functionnal, OOP, logic) but on the actions that one can perform on the code (such as compilation). Also, at the moment C++ "inherits" from C not because it makes sense from a historical/theoretical point of view but just because they have so much in common - the inheritance could have been done the other way round without any problem.
+In the current implementation, all programming languages inherit from a common `Language` class used for common code. All languages inherit from `Language` either directly or through other abstract classes (`CompilableLanguage`, `InterpretableLanguage`). The organisation is not so much based on the paradigms (functionnal, OOP, logic) but on the actions that one can perform on the code (such as compilation). Also, at the moment C++ "inherits" from C not because it makes sense from a historical/theoretical point of view but just because they have so much in common - the inheritance could have been done the other way round without any problem.
 
 Next steps :
 ------------
