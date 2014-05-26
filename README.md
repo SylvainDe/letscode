@@ -95,6 +95,8 @@ Programming languages (partially) supported:
  * Scilab
  * Octave
  * Nimrod
+ * EcmaScript
+ * ActionScript
  * Markdown
  * HTML
  * XML

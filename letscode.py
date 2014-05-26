@@ -2059,6 +2059,33 @@ class Nimrod(Language):
             ''')
 
 
+class ActionScript(Language):
+    """ActionScript"""
+    name = 'actionscript'
+    extensions = ['as']
+    comments = ('//', '')
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/ActionScript
+- Official site :
+    * http://www.adobe.com/devnet/actionscript.html
+- Documentation :
+- Subreddit : http://www.reddit.com/r/actionscript
+- RosettaCode : http://rosettacode.org/wiki/Category:ActionScript
+''')
+
+
+class EcmaScript(Language):
+    """EcmaScript"""
+    name = 'ecmascript'
+    extensions = ['es']
+    comments = ('//', '')
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/ECMAScript
+- Official site :
+- Documentation :
+''')
+
+
 class ExampleLanguage(Language):
     """Example"""
     name = None
