@@ -2352,6 +2352,10 @@ class TestableInterpretableLanguage(unittest.TestCase):
         """Tests stuff"""
         self.interpreter_flow(Bash)
 
+    def test_zsh(self):
+        """Tests stuff"""
+        self.interpreter_flow(Zsh)
+
     def test_awk(self):
         """Tests stuff"""
         self.interpreter_flow(Awk)

@@ -119,6 +119,7 @@ Installation :
 The installation of the script itself is as simple as it could be : get it and you are done.
 However, it calls a lot of other executables. Here's a non exhaustive list of them :
 
+ * zsh - sudo apt-get install zsh
  * clisp - sudo apt-get install clisp
  * scheme / mit-scheme - sudo apt-get install mit-scheme
  * golang - sudo apt-get install golang
