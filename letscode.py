@@ -95,7 +95,8 @@ class Language(object):
 
     Attributes:
         name        Name of the language (alphanumerical lowercase string)
-        extensions  Extensions (list of string without leading dot)
+        extensions  Extensions (list of string without leading dot). First
+                        extension will be used by default for file creation
         information Additional information about the language (useful links)
         comments    Pair of string defining how to begin and end comments."""
     name = None
@@ -874,9 +875,11 @@ class InterpretableLanguage(Language):
 
     Attributes:
         interpreter (via get_interpreter_name) Name of the interpreter
-        interpreter_options Options for the interpreter."""
+        interpreter_options Options for the interpreter
+        nb_line_shebang     Number of lines of shebang."""
     interpreter_options = []
     comments = ('#', '')
+    nb_line_shebang = 1  # 0 is no shebang, 1 is normal, 2 is multiline
 
     @classmethod
     def get_interpreter_name(cls):
@@ -903,7 +906,6 @@ class InterpretableLanguage(Language):
         execution rights, etc)."""
         with open(filename, 'w') as filed:
             filed.write(cls.get_shebang_line() +
-                        cls.get_closing_shebang_line() +
                         cls.get_header_info() +
                         cls.get_file_content(filename))
         InterpretableLanguage.give_exec_rights(filename)
@@ -911,15 +913,13 @@ class InterpretableLanguage(Language):
     @classmethod
     def get_shebang_line(cls):
         """Return the shebang line"""
-        interpreter = cls.get_interpreter_name()
-        path = shutil.which(interpreter)
-        if path is None:
-            return cls.comment_string('interpreter "%s" not found' % interpreter)
-        return '#!' + ' '.join([path] + cls.interpreter_options) + '\n'
-
-    @classmethod
-    def get_closing_shebang_line(cls):
-        """Return the tag to close the shebang line"""
+        if cls.nb_line_shebang:
+            interpreter = cls.get_interpreter_name()
+            path = shutil.which(interpreter)
+            if path is None:
+                return cls.comment_string('interpreter "%s" not found' % interpreter)
+            return '#!' + ' '.join([path] + cls.interpreter_options) + '\n' + \
+                ('!#\n' if cls.nb_line_shebang > 1 else '')
         return ''
 
     @staticmethod
@@ -982,6 +982,36 @@ class Zsh(Shell):
 - Documentation : http://zsh.sourceforge.net/Doc/Release/zsh_toc.html
 - Wiki : http://zshwiki.org/home/
 - Subreddit : http://www.reddit.com/r/zsh
+- Tools online :
+- RosettaCode :
+''')
+
+
+class Csh(Shell):
+    """Csh"""
+    name = 'csh'
+    extensions = ['sh']
+    information = dedent('''
+- Wikipedia page :
+- Official site :
+- Documentation :
+- Wiki :
+- Subreddit :
+- Tools online :
+- RosettaCode :
+''')
+
+
+class Tcsh(Shell):
+    """Tcsh"""
+    name = 'tcsh'
+    extensions = ['sh']
+    information = dedent('''
+- Wikipedia page :
+- Official site :
+- Documentation :
+- Wiki :
+- Subreddit :
 - Tools online :
 - RosettaCode :
 ''')
@@ -1683,11 +1713,12 @@ class Go(CompilableLanguage):
             }''')
 
 
-class Clojure(Language):
+class Clojure(InterpretableLanguage):
     """Clojure"""
     name = 'clojure'
     extensions = ['clj', 'edn']
     comments = (';', '')
+    nb_line_shebang = 0
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Clojure
 - Official site : http://clojure.org/
@@ -1703,7 +1734,15 @@ class Clojure(Language):
     * http://learnxinyminutes.com/docs/clojure-macros/
 - RosettaCode : http://rosettacode.org/wiki/Category:Clojure
 ''')
-    cmd_launch_jar = ['java', '-cp', 'clojure-1.6.0.jar', 'clojure.main']
+    interpreter_options = [
+        '-cp',
+        '/home/sylvaindesodt/TmpCode/.tmp/letscode/clojure-1.6.0.jar',
+        'clojure.main']
+
+    @classmethod
+    def get_interpreter_name(cls):
+        """Gets the name of the interpreter"""
+        return 'java'
 
     @classmethod
     def get_file_content(cls, _):
@@ -1713,15 +1752,12 @@ class Clojure(Language):
             ''')
 
     @classmethod
-    def run(cls, args):
-        """Runs the code"""
-        filename = cls.get_actual_filename_to_use(args)
-        return subprocess_call_wrapper(cls.cmd_launch_jar + [filename])
-
-    @classmethod
     def man(cls, _):
         """Gets the manual"""
-        return subprocess_call_wrapper(cls.cmd_launch_jar + ['--help'])
+        return subprocess_call_wrapper(
+            [cls.get_interpreter_name()] +
+            cls.interpreter_options +
+            ['--help'])
 
 
 class Erlang(Language):
@@ -1813,6 +1849,7 @@ class Scheme(InterpretableLanguage):
     name = 'scheme'
     extensions = ['scm', 'ss']
     comments = (';', '')
+    nb_line_shebang = 0
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Scheme_%28programming_language%29
 - Official site :
@@ -1828,11 +1865,6 @@ class Scheme(InterpretableLanguage):
         return dedent('''
             (display "Hello, world!")
             ''')
-
-    @classmethod
-    def get_shebang_line(cls):
-        """Return the shebang line"""
-        return ''  # Something is different with Scheme
 
     @classmethod
     def run(cls, args):
@@ -1897,6 +1929,7 @@ class Scala(InterpretableLanguage):  # it can be compiled too but that's for lat
     name = 'scala'
     extensions = ['scala']
     comments = ('//', '')
+    nb_line_shebang = 2
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Scala_%28programming_language%29
 - Official site : http://www.scala-lang.org/
@@ -1909,11 +1942,6 @@ class Scala(InterpretableLanguage):  # it can be compiled too but that's for lat
 - Learn in Y minutes : http://learnxinyminutes.com/docs/scala/
 - RosettaCode : http://rosettacode.org/wiki/Category:Scala
 ''')
-
-    @classmethod
-    def get_closing_shebang_line(cls):
-        """Return the tag to close the shebang line"""
-        return '!#\n'
 
     @classmethod
     def get_file_content(cls, _):
@@ -2064,6 +2092,7 @@ class Scilab(InterpretableLanguage):
         ]
     comments = ('//', '')
     interpreter_options = ['-nwni', '-f']
+    nb_line_shebang = 0
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Scilab
 - Official site : http://www.scilab.org/
@@ -2081,11 +2110,6 @@ class Scilab(InterpretableLanguage):
             mprintf('Hello, world!\\n');
             quit
             ''')
-
-    @classmethod
-    def get_shebang_line(cls):
-        """Return the shebang line"""
-        return ''  # to be fixed
 
     @classmethod
     def run(cls, args):
@@ -2289,10 +2313,10 @@ class TestLanguageDetection(unittest.TestCase):
         self.assertEqual(detect_language_from_filename('/b/a.cpp'), 'cpp')
 
 
-# Idea - maybe interpreted language itself should inherit from unittest...
+# Idea - maybe interpretable language itself should inherit from unittest...
 class TestableInterpretableLanguage(unittest.TestCase):
-    """Unit tests for interpreted languages"""
-    def interpreter_flow(self, klass, executable_file=True):
+    """Unit tests for interpretable languages"""
+    def interpreter_flow(self, klass):
         """Tests stuff"""
         namespace = namedtuple('Namespace', 'filename extension_mode override_file')
         filename = os.path.join(tempfile.mkdtemp(
@@ -2312,7 +2336,7 @@ class TestableInterpretableLanguage(unittest.TestCase):
         self.assertTrue(klass.perform_action('run', args))
 
         # Can run on its own
-        if executable_file:
+        if klass.nb_line_shebang:
             self.assertTrue(subprocess_call_wrapper([real_file]))
 
         # Removing file -> code does not run
@@ -2357,6 +2381,14 @@ class TestableInterpretableLanguage(unittest.TestCase):
         """Tests stuff"""
         self.interpreter_flow(Zsh)
 
+    def test_csh(self):
+        """Tests stuff"""
+        self.interpreter_flow(Csh)
+
+    def test_tcsh(self):
+        """Tests stuff"""
+        self.interpreter_flow(Tcsh)
+
     def test_awk(self):
         """Tests stuff"""
         self.interpreter_flow(Awk)
@@ -2383,15 +2415,15 @@ class TestableInterpretableLanguage(unittest.TestCase):
 
     def test_scheme(self):
         """Tests stuff"""
-        self.interpreter_flow(Scheme, False)
+        self.interpreter_flow(Scheme)
 
     def test_clojure(self):
         """Tests stuff"""
-        self.interpreter_flow(Clojure, False)
+        self.interpreter_flow(Clojure)
 
     def test_scilab(self):
         """Tests stuff"""
-        self.interpreter_flow(Scilab, False)
+        self.interpreter_flow(Scilab)
 
     def test_octave(self):
         """Tests stuff"""

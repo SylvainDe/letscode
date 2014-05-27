@@ -68,6 +68,8 @@ Programming languages (partially) supported:
  * Shell
  * Bash
  * Zsh
+ * Csh
+ * Tcsh
  * Tcl
  * Ruby
  * Javascript
@@ -120,6 +122,8 @@ The installation of the script itself is as simple as it could be : get it and y
 However, it calls a lot of other executables. Here's a non exhaustive list of them :
 
  * zsh - sudo apt-get install zsh
+ * csh - sudo apt-get install csh
+ * tcsh - sudo apt-get install tcsh
  * clisp - sudo apt-get install clisp
  * scheme / mit-scheme - sudo apt-get install mit-scheme
  * golang - sudo apt-get install golang
