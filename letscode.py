@@ -808,6 +808,7 @@ class JSON(Language):
 - Tools online :
     * JSON Lint : http://jsonlint.com/
     * JSON Schema Lint : http://jsonschemalint.com
+    * JSON Selector : http://jsonselector.com/
     * Geo JSON Lint : http://geojsonlint.com/
 - Learn in Y minutes : http://learnxinyminutes.com/docs/json/
 ''')
