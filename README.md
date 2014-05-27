@@ -48,61 +48,61 @@ Other actions can be/are defined.
 
 Programming languages (partially) supported:
 --------------------------------------------
+ * Languages with compiling (and running) Hello World :
+    * C
+    * C++
+    * Java
+    * Objective C
+    * Vala
+    * D
+    * Go
+    * Haskell
+    * Rust
+    * Fortran
+    * Cobol
+    * Ada
+    * Pascal
+    * LaTeX
+    * DOT
+ 
+ * Languages with running (interpreted) Hello World :
+    * Python (2 & 3)
+    * Ruby
+    * Julia
+    * Lua
+    * Perl
+    * PHP
+    * Lisp
+    * Javascript
+    * Vim Script
+    * Clojure
+    * Shell
+    * Bash
+    * Csh
+    * Tcsh
+    * Zsh
+    * Tcl
+    * Scala
+    * Scheme
+    * Racket
+    * Prolog
+    * Scilab
+    * Octave
 
-[//]: # (I should add a distinction between merely supported languages with)
-[//]: # (basic features -language detection, basic information- and more)
-[//]: # (supported languages - hello world, compilation, run, etc.)
-
- * C
- * C++
- * Objective C
- * Java
- * Fortran
- * Cobol
- * Ada
- * Pascal
- * D
- * Vala
- * Haskell
- * Python (2 & 3)
- * Shell
- * Bash
- * Zsh
- * Csh
- * Tcsh
- * Tcl
- * Ruby
- * Javascript
- * Perl
- * PHP
- * Vim Script
- * Julia
- * Lua
- * DOT
- * Go
- * Clojure
- * Lisp
- * Scheme
- * Racket
- * Caml
- * Scala
- * Rust
- * Elm
- * Erlang
- * Elixir
- * Dart
- * LaTeX
- * SQL
- * PostScript
- * Prolog
- * Scilab
- * Octave
- * Nimrod
- * EcmaScript
- * ActionScript
- * Markdown
- * HTML
- * XML
+ * Languages with minimal support at the moment (basic information about the language):
+    * Caml
+    * Elm
+    * Erlang
+    * Elixir
+    * Dart
+    * Nimrod
+    * SQL
+    * EcmaScript
+    * ActionScript
+    * PostScript
+    * Markdown
+    * HTML
+    * XML
 
 Implementation:
 ---------------

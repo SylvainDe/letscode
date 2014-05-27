@@ -1782,6 +1782,13 @@ class Erlang(Language):
 ''')
 
     @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            io:format("~s~n", ["Hello, world!"])
+            ''')
+
+    @classmethod
     def metrics(cls, args):
         """Gets metrics for code"""
         filename = cls.get_actual_filename_to_use(args)
