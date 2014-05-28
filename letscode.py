@@ -190,11 +190,23 @@ class Language(object):
         return True
 
     @classmethod
+    def display(cls, args):
+        """Show code that would be displayed when creating the file."""
+        filename = cls.get_actual_filename_to_use(args)
+        print(cls.get_content_to_write(filename))
+        return True
+
+    @classmethod
+    def get_content_to_write(cls, filename):
+        """Get content to be writen in the file - includes header and code."""
+        return cls.get_header_info() + cls.get_file_content(filename)
+
+    @classmethod
     def real_create(cls, filename):
         """Creates and ensures readiness of a file (shebang, boiler-plate code,
         execution rights, etc)."""
         with open(filename, 'w') as filed:
-            filed.write(cls.get_header_info() + cls.get_file_content(filename))
+            filed.write(cls.get_content_to_write())
 
     @classmethod
     def get_file_content(cls, _):
@@ -901,13 +913,18 @@ class InterpretableLanguage(Language):
             [filename])
 
     @classmethod
+    def get_content_to_write(cls, filename):
+        """Get content to be writen in the file - includes header and code."""
+        return cls.get_shebang_line() + \
+               cls.get_header_info() + \
+               cls.get_file_content(filename)
+
+    @classmethod
     def real_create(cls, filename):
         """Creates and ensures readiness of a file (shebang, boiler-plate code,
         execution rights, etc)."""
         with open(filename, 'w') as filed:
-            filed.write(cls.get_shebang_line() +
-                        cls.get_header_info() +
-                        cls.get_file_content(filename))
+            filed.write(cls.get_content_to_write())
         InterpretableLanguage.give_exec_rights(filename)
 
     @classmethod
@@ -1210,7 +1227,7 @@ class Perl(InterpretableLanguage):
         return dedent('''
             use strict;
             use warnings;
-            print "Hello, world!\n";
+            print "Hello, world!\\n";
             ''')
 
     @classmethod
@@ -2567,7 +2584,7 @@ def main():
             'debug', 'info', 'upload', 'minify', 'pretty',
             'obfuscate', 'doctest', 'interactive', 'gendoc',
             'to_py3', 'uml', 'man', 'unittest', 'functionlist',
-            'profile', 'metrics'],
+            'profile', 'metrics', 'display'],
         # this list could be generated
         default=[])
     parser.add_argument(
