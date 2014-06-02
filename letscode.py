@@ -2216,6 +2216,24 @@ class EcmaScript(Language):
 ''')
 
 
+class Ceylon(Language):
+    """Ceylon"""
+    name = 'ceylon'
+    extensions = ['ceylon']
+    comments = ('//', '')
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Ceylon_%28programming_language%29
+- Official site : http://ceylon-lang.org/
+- Documentation : http://ceylon-lang.org/documentation/current/
+- Subreddit :
+- Tools online :
+    * Try Ceylon : http://try.ceylon-lang.org/
+- Learn in Y minutes :
+- RosettaCode :
+''')
+    compiler = 'ceylonc'
+
+
 class ExampleLanguage(Language):
     """Example"""
     name = None
