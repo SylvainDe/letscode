@@ -493,6 +493,13 @@ class Java(CompilableLanguage):
             [cls.compiler, filename] + cls.compiler_options)
 
     @classmethod
+    def check(cls, args):
+        """Calls static checker"""
+        filename = cls.get_actual_filename_to_use(args)
+        return subprocess_call_wrapper(
+            [cls.compiler, filename] + cls.compiler_options + ['-Xlint:all'])
+
+    @classmethod
     def run(cls, args):
         """Runs the code"""
         classfile = cls.get_classfile(cls.get_actual_filename_to_use(args))
