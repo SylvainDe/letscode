@@ -64,7 +64,7 @@ Programming languages (partially) supported:
     * Pascal
     * LaTeX
     * DOT
- 
+
  * Languages with running (interpreted) Hello World :
     * Python (2 & 3)
     * Ruby
@@ -80,6 +80,7 @@ Programming languages (partially) supported:
     * Bash
     * Csh
     * Tcsh
+    * Ksh
     * Zsh
     * Tcl
     * Scala
@@ -123,6 +124,7 @@ However, it calls a lot of other executables. Here's a non exhaustive list of th
 
  * zsh - sudo apt-get install zsh
  * csh - sudo apt-get install csh
+ * ksh - sudo apt-get install ksh
  * tcsh - sudo apt-get install tcsh
  * clisp - sudo apt-get install clisp
  * scheme / mit-scheme - sudo apt-get install mit-scheme

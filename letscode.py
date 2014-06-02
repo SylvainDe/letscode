@@ -1009,13 +1009,7 @@ class Csh(Shell):
     name = 'csh'
     extensions = ['sh']
     information = dedent('''
-- Wikipedia page :
-- Official site :
-- Documentation :
-- Wiki :
-- Subreddit :
-- Tools online :
-- RosettaCode :
+- Wikipedia page : http://en.wikipedia.org/wiki/C_shell
 ''')
 
 
@@ -1024,13 +1018,21 @@ class Tcsh(Shell):
     name = 'tcsh'
     extensions = ['sh']
     information = dedent('''
-- Wikipedia page :
-- Official site :
-- Documentation :
-- Wiki :
-- Subreddit :
+- Wikipedia page : http://en.wikipedia.org/wiki/Tcsh
+- Official site : http://www.tcsh.org/Welcome
+''')
+
+
+class Ksh(Shell):
+    """Ksh"""
+    name = 'ksh'
+    extensions = ['sh']
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Korn_shell
+- Official site : www.kornshell.org
+- Documentation : http://www.kornshell.org/doc/
 - Tools online :
-- RosettaCode :
+    * Ksh online : http://www.compileonline.com/execute_ksh_online.php
 ''')
 
 
@@ -2412,6 +2414,10 @@ class TestableInterpretableLanguage(unittest.TestCase):
     def test_tcsh(self):
         """Tests stuff"""
         self.interpreter_flow(Tcsh)
+
+    def test_ksh(self):
+        """Tests stuff"""
+        self.interpreter_flow(Ksh)
 
     def test_awk(self):
         """Tests stuff"""
