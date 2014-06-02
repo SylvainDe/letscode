@@ -121,15 +121,7 @@ class Language(object):
             results.append((action, ret))
             if not ret and stop_on_failure:
                 break
-        # This should be moved outside the function - refactoring required
-        greentick = '\033[92m✔'
-        redcross = '\033[91m✘'
-        undocolor = '\033[0m'
-        for action, ret in results:
-            print_info(
-                (greentick if ret else redcross) +
-                undocolor + ' ' + action)
-        return all(res for _, res in results)
+        return results
 
     @classmethod
     def perform_action(cls, action, args):
@@ -2610,15 +2602,23 @@ def main():
         default='n')
     args = parser.parse_args()
 
-    filename = args.filename
     language = args.language
     if language == 'autodetect':
-        language = detect_language_from_filename(filename)
+        language = detect_language_from_filename(args.filename)
         print_info('Detected language is %s' % language)
         if language is None:
             return
     assert language in LANGUAGE_NAMES
-    return LANGUAGE_NAMES[language].perform_actions(args)
+    results = LANGUAGE_NAMES[language].perform_actions(args)
+    greentick = '\033[92m✔'
+    redcross = '\033[91m✘'
+    undocolor = '\033[0m'
+    for action, ret in results:
+        print_info(
+            (greentick if ret else redcross) +
+            undocolor + ' ' + action)
+    return all(res for _, res in results)
+
 
 if __name__ == '__main__':
     main()
