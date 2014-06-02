@@ -206,7 +206,7 @@ class Language(object):
         """Creates and ensures readiness of a file (shebang, boiler-plate code,
         execution rights, etc)."""
         with open(filename, 'w') as filed:
-            filed.write(cls.get_content_to_write())
+            filed.write(cls.get_content_to_write(filename))
 
     @classmethod
     def get_file_content(cls, _):
@@ -924,7 +924,7 @@ class InterpretableLanguage(Language):
         """Creates and ensures readiness of a file (shebang, boiler-plate code,
         execution rights, etc)."""
         with open(filename, 'w') as filed:
-            filed.write(cls.get_content_to_write())
+            filed.write(cls.get_content_to_write(filename))
         InterpretableLanguage.give_exec_rights(filename)
 
     @classmethod
