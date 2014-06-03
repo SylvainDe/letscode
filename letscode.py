@@ -1207,6 +1207,7 @@ class JavaScript(InterpretableLanguage):
     * JS Fiddle http://jsfiddle.net/
     * JS Compress http://jscompress.com/
     * JS Compressor http://www.jscompressor.com/
+    * JS Nice http://www.jsnice.org/
     * JS Minifier http://javascript-minifier.com/
     * JS Mini http://www.jsmini.com/
     * JS Obfuscator http://packer.50x.eu/
