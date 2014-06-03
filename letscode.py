@@ -1005,7 +1005,6 @@ class Shell(InterpretableLanguage):
 class Bash(Shell):
     """Bash"""
     name = 'bash'
-    extensions = ['sh']
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Bash_%28Unix_shell%29
 - Official site : https://www.gnu.org/software/bash/
@@ -1021,7 +1020,6 @@ class Bash(Shell):
 class Zsh(Shell):
     """Zsh"""
     name = 'zsh'
-    extensions = ['sh']
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Z_shell
 - Official site : http://zsh.sourceforge.net/
@@ -1034,7 +1032,6 @@ class Zsh(Shell):
 class Csh(Shell):
     """Csh"""
     name = 'csh'
-    extensions = ['sh']
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/C_shell
 ''')
@@ -1043,7 +1040,6 @@ class Csh(Shell):
 class Tcsh(Shell):
     """Tcsh"""
     name = 'tcsh'
-    extensions = ['sh']
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Tcsh
 - Official site : http://www.tcsh.org/Welcome
@@ -1053,13 +1049,32 @@ class Tcsh(Shell):
 class Ksh(Shell):
     """Ksh"""
     name = 'ksh'
-    extensions = ['sh']
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Korn_shell
 - Official site : www.kornshell.org
 - Documentation : http://www.kornshell.org/doc/
 - Tools online :
     * Ksh online : http://www.compileonline.com/execute_ksh_online.php
+''')
+
+
+class Ash(Shell):
+    """Ash"""
+    name = 'ash'
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Almquist_shell
+- Code samples :
+    * RosettaCode : http://rosettacode.org/wiki/Almquist_Shell
+''')
+
+
+class Dash(Shell):
+    """Dash"""
+    name = 'dash'
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Debian_Almquist_shell
+- Code samples :
+    * RosettaCode : http://rosettacode.org/wiki/Debian_Almquist_Shell
 ''')
 
 
@@ -2560,6 +2575,14 @@ class TestableInterpretableLanguage(unittest.TestCase):
     def test_ksh(self):
         """Tests stuff"""
         self.interpreter_flow(Ksh)
+
+    def test_ash(self):
+        """Tests stuff"""
+        self.interpreter_flow(Ash)
+
+    def test_dash(self):
+        """Tests stuff"""
+        self.interpreter_flow(Dash)
 
     def test_awk(self):
         """Tests stuff"""

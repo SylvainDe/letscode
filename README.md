@@ -81,6 +81,8 @@ Programming languages (partially) supported:
     * Csh
     * Tcsh
     * Ksh
+	* Ash
+	* Dash
     * Zsh
     * Tcl
     * Scala
@@ -125,6 +127,8 @@ However, it calls a lot of other executables. Here's a non exhaustive list of th
 
  * zsh - sudo apt-get install zsh
  * csh - sudo apt-get install csh
+ * ash - sudo apt-get install ash
+ * dash - sudo apt-get install dash
  * ksh - sudo apt-get install ksh
  * tcsh - sudo apt-get install tcsh
  * clisp - sudo apt-get install clisp
