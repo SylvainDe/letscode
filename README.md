@@ -88,6 +88,7 @@ Programming languages (partially) supported:
     * Scala
     * Scheme
     * Racket
+	* Swift (not the Apple one)
     * Prolog
     * Scilab
     * Octave
@@ -157,6 +158,7 @@ However, it calls a lot of other executables. Here's a non exhaustive list of th
  * racket - sudo apt-get install racket
  * scala - sudo apt-get install scala
  * cobc - sudo apt-get install open-cobol
+ * swift - wget http://swiftlang.org/packages/swift-0.94.1.tar.gz && tar xfz swift-0.94.1.tar.gz && export PATH=$PATH:/path/to/swift-0.94.1/bin
  * clojure - wget http://central.maven.org/maven2/org/clojure/clojure/1.6.0/clojure-1.6.0.jar
  * ceylon - wget wget http://staging.ceylon-lang.org/download/dist/1_0_Milestone1_deb && sudo dpkg -i 1_0_Milestone1_deb
  * sloccount (for asm_count, c_count, cobol_count, f90_count, fortran_count, haskell_count, lex_count, ml_count, modula3_count, objc_count, perl_count, python_count, ada_count, awk_count, csh_count, erlang_count, exp_count, lisp_count, makefile_count, ruby_count, sed_count, sh_count, tcl_count)- sudo apt-get install sloccount

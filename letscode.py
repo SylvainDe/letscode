@@ -2303,6 +2303,22 @@ class Octave(InterpretableLanguage):
             ''')
 
 
+class Swift(InterpretableLanguage):
+    """Swift - parallel scripting language"""
+    name = 'swift'
+    extensions = ['swift']
+    comments = ('#', '')
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Swift_%28parallel_scripting_language%29
+- Official site : http://swift-lang.org/
+''')
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return 'tracef("%s\\n", "Hello world!");\n'
+
+
 class Nimrod(Language):
     """Nimrod"""
     name = 'nimrod'
@@ -2603,6 +2619,10 @@ class TestableInterpretableLanguage(unittest.TestCase):
     def test_javascript(self):
         """Tests stuff"""
         self.interpreter_flow(JavaScript)
+
+    def test_swift(self):
+        """Tests stuff"""
+        self.interpreter_flow(Swift)
 
     def test_lisp(self):
         """Tests stuff"""
