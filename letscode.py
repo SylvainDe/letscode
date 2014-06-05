@@ -175,7 +175,7 @@ class Language(object):
                 print_info("File %s already exists" % filename)
                 return True
         try:
-            cls.real_create(filename)
+            cls.real_create(filename, args)
         except IOError:
             print_error("Error while creating file" % filename)
             return False
@@ -184,23 +184,23 @@ class Language(object):
     @classmethod
     def display(cls, args):
         """Show code that would be displayed when creating the file."""
-        filename = cls.get_actual_filename_to_use(args)
-        print(cls.get_content_to_write(filename))
+        print(cls.get_content_to_write(args))
         return True
 
     @classmethod
-    def get_content_to_write(cls, filename):
+    def get_content_to_write(cls, args):
         """Get content to be writen in the file - includes header and code."""
+        filename = cls.get_actual_filename_to_use(args)
         return cls.get_header_info() + \
             cls.get_file_content(filename) + \
             cls.get_footer_info()
 
     @classmethod
-    def real_create(cls, filename):
+    def real_create(cls, filename, args):
         """Creates and ensures readiness of a file (shebang, boiler-plate code,
         execution rights, etc)."""
         with open(filename, 'w') as filed:
-            filed.write(cls.get_content_to_write(filename))
+            filed.write(cls.get_content_to_write(args))
 
     @classmethod
     def get_file_content(cls, _):
@@ -959,11 +959,11 @@ class InterpretableLanguage(Language):
             [filename])
 
     @classmethod
-    def real_create(cls, filename):
+    def real_create(cls, filename, args):
         """Creates and ensures readiness of a file (shebang, boiler-plate code,
         execution rights, etc)."""
         with open(filename, 'w') as filed:
-            filed.write(cls.get_content_to_write(filename))
+            filed.write(cls.get_content_to_write(args))
         InterpretableLanguage.give_exec_rights(filename)
 
     @classmethod
