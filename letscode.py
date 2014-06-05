@@ -941,7 +941,7 @@ class JSON(Language):
 class YAML(Language):
     """YAML"""
     name = 'yaml'
-    extensions = ['yaml']
+    extensions = ['yaml', 'yml']
     comments = ('#', '')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/YAML
@@ -949,6 +949,9 @@ class YAML(Language):
 - Documentation : http://www.yaml.org/spec/1.2/spec.html
 - Tools online :
     * YAML Lint : http://yamllint.com/
+    * Online parser : http://yaml-online-parser.appspot.com/
+    * YAML to JSON : http://yamltojson.com/
+    * JSON to YAML : http://jsontoyaml.com/
 - Learn in Y minutes : http://learnxinyminutes.com/docs/yaml/
 ''')
 
