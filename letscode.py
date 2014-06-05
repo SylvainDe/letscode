@@ -770,7 +770,7 @@ class Cobol(CompilableLanguage):
        IDENTIFICATION DIVISION.
        PROGRAM-ID. HELLO-WORLD.
        PROCEDURE DIVISION.
-           DISPLAY 'Hello world!'.
+           DISPLAY 'Hello, world!'.
            STOP RUN.
         '''
 
@@ -1893,7 +1893,7 @@ class Go(CompilableLanguage):
             package main
             import "fmt"
             func main() {
-                    fmt.Printf("hello, world\\n")
+                    fmt.Printf("hello, world!\\n")
             }''')
 
 
@@ -1935,7 +1935,7 @@ class Clojure(InterpretableLanguage):
     def get_file_content(cls, _):
         """Returns the content to be put in the file."""
         return dedent('''
-            (println "Hello world!")
+            (println "Hello, world!")
             ''')
 
     @classmethod
@@ -2114,7 +2114,7 @@ class Racket(InterpretableLanguage):
         """Returns the content to be put in the file."""
         return dedent('''
                 #lang racket
-                "Hello, World!"
+                "Hello, world!"
             ''')
 
 
@@ -2288,7 +2288,7 @@ class Prolog(InterpretableLanguage):
     def get_file_content(cls, _):
         """Returns the content to be put in the file."""
         return dedent('''
-            goal :- write('Hello World'), nl,
+            goal :- write('Hello, world!'), nl,
                     halt.
             ''')
 
@@ -2399,7 +2399,7 @@ class Swift(InterpretableLanguage):
     @classmethod
     def get_file_content(cls, _):
         """Returns the content to be put in the file."""
-        return 'tracef("%s\\n", "Hello world!");\n'
+        return 'tracef("%s\\n", "Hello, world!");\n'
 
 
 class Nimrod(Language):
