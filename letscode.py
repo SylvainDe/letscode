@@ -368,6 +368,8 @@ class CLanguage(CompilableLanguage):
     compiler = 'gcc'
     compiler_options = ['-Wall', '-Wextra', '-std=c99']
     comments = ('//', '')  # or ('/*', '*/') but it's a bit more complicated
+    # Kernel https://www.kernel.org/doc/Documentation/CodingStyle
+    settings = {'indentation_level': 8, 'tab_width': 8}
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/C_%28programming_language%29
 - Official site :
@@ -527,6 +529,10 @@ class Java(CompilableLanguage):
     extensions = ['java', 'class', 'jar']
     compiler = 'javac'  # support for gcj could be added if needed
     comments = ('//', '')
+    # Google http://google-styleguide.googlecode.com/svn/trunk/javaguide.html
+    # settings = {'indentation_level': 2, 'tab_width': 2, 'expand_tab': True}
+    # Oracle http://www.oracle.com/technetwork/java/codeconventions-150003.pdf
+    settings = {'indentation_level': 4, 'tab_width': 8, 'expand_tab': True}
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Java_%28programming_language%29
 - Official site : http://www.java.com/
@@ -1060,6 +1066,8 @@ class Shell(InterpretableLanguage):
     name = 'sh'
     extensions = ['sh']
     comments = ('#', '')
+    # Google https://google-styleguide.googlecode.com/svn/trunk/shell.xml
+    settings = {'indentation_level': 2, 'tab_width': 2, 'expand_tab': True}
     information = dedent('''
 - Wikipedia page :
 - Official site :
@@ -1382,6 +1390,12 @@ class Php(InterpretableLanguage):
     """Php"""
     name = 'php'
     extensions = ['php', 'php3', 'php4', 'php5', 'phtml']
+    # Zend http://framework.zend.com/manual/1.12/en/coding-standard.html
+    settings = {'indentation_level': 4, 'tab_width': 4, 'expand_tab': True}
+    # Symfony http://trac.symfony-project.org/wiki/HowToContributeToSymfony#CodingStandards
+    # settings = {'indentation_level': 2, 'tab_width': 2, 'expand_tab': True}
+    # Pear http://pear.php.net/manual/en/standards.indenting.php
+    # settings = {'indentation_level': 4, 'tab_width': 4, 'expand_tab': True}
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/PHP
 - Official site : http://www.php.net/
@@ -1430,7 +1444,7 @@ class Python(InterpretableLanguage):
     """Python"""
     name = 'python'
     extensions = ['py', 'pyc', 'pyo']
-    # From http://legacy.python.org/dev/peps/pep-0008/
+    # PEP8 http://legacy.python.org/dev/peps/pep-0008/
     settings = {'indentation_level': 4, 'tab_width': 4, 'expand_tab': True}
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Python_%28programming_language%29
