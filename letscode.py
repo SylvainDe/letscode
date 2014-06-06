@@ -1743,7 +1743,6 @@ class Dot(CompiledDescriptionLanguages):
         'sfdp',   # large undirected graphs
     ]
     compiler = compilers[0]
-    compiler_options = []
     comments = ('//', '')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/DOT_%28graph_description_language%29
@@ -1790,7 +1789,6 @@ class Latex(CompiledDescriptionLanguages):
     name = 'latex'
     extensions = ['tex']
     compiler = None
-    compiler_options = []
     comments = ('%', '')
     information = dedent('''
 - Wikipedia page :
