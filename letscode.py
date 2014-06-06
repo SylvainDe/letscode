@@ -96,7 +96,7 @@ MODELINE_OPTIONS = {
         'link': ' ',
         'indentation_level': 'shiftwidth=',
         'tab_width': 'tabstop=',
-        'expand_tab': ('expandtab', 'noexpandtab'),
+        'expand_tab': ('noexpandtab', 'expandtab'),
     },
     'emacs': {
         'start': 'Local variables:\n',
@@ -104,7 +104,7 @@ MODELINE_OPTIONS = {
         'link': '\n',
         'indentation_level': 'c-basic-offset: ',
         'tab_width': 'tab-width: ',
-        'expand_tab': ('indent-tabs-mode: t', 'indent-tabs-mode: nil'),
+        'expand_tab': ('indent-tabs-mode: nil', 'indent-tabs-mode: t'),
     },
     'jedit': {
         'start': ':',
@@ -112,7 +112,7 @@ MODELINE_OPTIONS = {
         'link': ':',
         'indentation_level': 'indentSize=',
         'tab_width': 'tabSize=',
-        'expand_tab': ('noTabs=true', 'noTabs=false')
+        'expand_tab': ('noTabs=false', 'noTabs=true')
     },
     'kate': {
         'start': 'kate: ',
@@ -120,7 +120,7 @@ MODELINE_OPTIONS = {
         'link': '; ',
         'indentation_level': 'indent-width ',
         'tab_width': 'tab-width ',
-        'expand_tab': ('replace-tabs on', 'replace-tabs off')
+        'expand_tab': ('replace-tabs off', 'replace-tabs on')
     },
 }
 
