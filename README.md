@@ -81,21 +81,22 @@ Programming languages (partially) supported:
     * Csh
     * Tcsh
     * Ksh
-	* Ash
-	* Dash
+    * Ash
+    * Dash
     * Zsh
     * Tcl
     * Scala
     * Scheme
     * Racket
-	* Swift (not the Apple one)
+    * Forth
+    * Swift (not the Apple one)
     * Prolog
     * Scilab
     * Octave
 
  * Languages with minimal support at the moment (basic information about the language):
     * Caml
-	* Ceylon
+    * Ceylon
     * Elm
     * Erlang
     * Elixir
@@ -158,6 +159,7 @@ However, it calls a lot of other executables. Here's a non exhaustive list of th
  * racket - sudo apt-get install racket
  * scala - sudo apt-get install scala
  * cobc - sudo apt-get install open-cobol
+ * gforth - sudo apt-get install gforth
  * swift - wget http://swiftlang.org/packages/swift-0.94.1.tar.gz && tar xfz swift-0.94.1.tar.gz && export PATH=$PATH:/path/to/swift-0.94.1/bin
  * clojure - wget http://central.maven.org/maven2/org/clojure/clojure/1.6.0/clojure-1.6.0.jar
  * ceylon - wget wget http://staging.ceylon-lang.org/download/dist/1_0_Milestone1_deb && sudo dpkg -i 1_0_Milestone1_deb

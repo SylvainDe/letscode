@@ -1051,7 +1051,7 @@ class InterpretableLanguage(Language):
             path = shutil.which(interpreter)
             if path is None:
                 return cls.comment_string('interpreter "%s" not found' % interpreter)
-            return '#!' + ' '.join([path] + cls.interpreter_options) + '\n' + \
+            return '#! ' + ' '.join([path] + cls.interpreter_options) + '\n' + \
                 ('!#\n' if cls.nb_line_shebang > 1 else '')
         return ''
 
@@ -2414,6 +2414,39 @@ class Swift(InterpretableLanguage):
         return 'tracef("%s\\n", "Hello, world!");\n'
 
 
+class Forth(InterpretableLanguage):
+    """Forth"""
+    name = 'forth'
+    extensions = ['fs', 'fth']
+    comments = ('\\', '')
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Forth_%28programming_language%29
+- Official site : http://www.forth.org/
+- Documentation : http://www.forth.org/literature.html
+- Subreddit : http://www.reddit.com/r/Forth/
+- Tools online :
+    * JSForth (interpreter in JS) : http://www.forthfreak.net/jsforth.html
+    * Forth online : http://www.compileonline.com/execute_forth_online.php
+- Code samples :
+    * LiteratePrograms :
+    * Progopedia :
+    * RosettaCode :
+''')
+
+    @classmethod
+    def get_interpreter_name(cls):
+        """Gets the name of the interpreter"""
+        return 'gforth'
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            .( Hello World!) CR
+            bye
+            ''')
+
+
 class Nimrod(Language):
     """Nimrod"""
     name = 'nimrod'
@@ -2744,6 +2777,10 @@ class TestableInterpretableLanguage(unittest.TestCase):
     def test_swift(self):
         """Tests stuff"""
         self.interpreter_flow(Swift)
+
+    def test_forth(self):
+        """Tests stuff"""
+        self.interpreter_flow(Forth)
 
     def test_lisp(self):
         """Tests stuff"""
