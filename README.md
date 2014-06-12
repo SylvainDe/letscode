@@ -110,6 +110,11 @@ Programming languages (partially) supported:
     * HTML
     * XML
 
+Status:
+-------
+[![Build Status](https://travis-ci.org/SylvainDe/letscode.svg?branch=master)](https://travis-ci.org/SylvainDe/letscode)
+
+
 Implementation:
 ---------------
 
