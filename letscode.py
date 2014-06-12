@@ -342,6 +342,11 @@ class CompilableLanguage(Language):
                 cls.get_actual_filename_to_use(args)))
         return subprocess_call_wrapper([output])
 
+    @classmethod
+    def is_ready(cls):
+        """Check if language is 'ready' (as in compiler can be found)."""
+        return shutil.which(cls.compiler) is not None
+
 
 class CompiledDescriptionLanguages(CompilableLanguage):
     """A generic class for compiled descriptions languages : a compiler is used
@@ -1039,6 +1044,11 @@ class InterpretableLanguage(Language):
         with open(filename, 'w') as filed:
             filed.write(cls.get_content_to_write(args))
         InterpretableLanguage.give_exec_rights(filename)
+
+    @classmethod
+    def is_ready(cls):
+        """Check if language is 'ready' (as in interpreter can be found)."""
+        return shutil.which(cls.get_interpreter_name()) is not None
 
     @classmethod
     def get_shebang_line(cls):
@@ -1788,7 +1798,7 @@ class Latex(CompiledDescriptionLanguages):
     """LaTeX (or TeX - it doesn't really matter here, does it?)"""
     name = 'latex'
     extensions = ['tex']
-    compiler = None
+    compiler = 'pdflatex'
     comments = ('%', '')
     information = dedent('''
 - Wikipedia page :
@@ -1933,9 +1943,11 @@ class Clojure(InterpretableLanguage):
     * Progopedia :
     * RosettaCode :http://rosettacode.org/wiki/Category:Clojure
 ''')
+    path_to_clojure_jar = \
+        '/home/sylvaindesodt/TmpCode/.tmp/letscode/clojure-1.6.0.jar'
     interpreter_options = [
         '-cp',
-        '/home/sylvaindesodt/TmpCode/.tmp/letscode/clojure-1.6.0.jar',
+        path_to_clojure_jar,
         'clojure.main']
 
     @classmethod
@@ -1957,6 +1969,13 @@ class Clojure(InterpretableLanguage):
             [cls.get_interpreter_name()] +
             cls.interpreter_options +
             ['--help'])
+
+    @classmethod
+    def is_ready(cls):
+        """Check if language is 'ready'."""
+        return shutil.which(cls.get_interpreter_name()) is not None and \
+            os.path.isfile(cls.path_to_clojure_jar)
+
 
 
 class Erlang(Language):
@@ -2685,12 +2704,15 @@ class TestableInterpretableLanguage(unittest.TestCase):
         self.assertTrue(klass.perform_action('create', args))
         self.assertTrue(os.path.isfile(real_file))
 
-        # Can run
-        self.assertTrue(klass.perform_action('run', args))
+        if klass.is_ready():
+            # Can run
+            self.assertTrue(klass.perform_action('run', args))
 
-        # Can run on its own
-        if klass.nb_line_shebang:
-            self.assertTrue(subprocess_call_wrapper([real_file]))
+            # Can run on its own
+            if klass.nb_line_shebang:
+                self.assertTrue(subprocess_call_wrapper([real_file]))
+        else:
+            print_warning("%s is not ready to be run" % klass.name)
 
         # Removing file -> code does not run
         os.remove(real_file)
@@ -2830,28 +2852,35 @@ class TestableCompilableLanguage(unittest.TestCase):
         self.assertTrue(klass.perform_action('create', args))
         self.assertFalse(klass.perform_action('run', args))
 
-        # Can create, compile and run
+        # Can create
         self.assertTrue(klass.perform_action('create', args))
         self.assertTrue(os.path.isfile(real_file))
         self.assertFalse(os.path.isfile(output_file))
-        self.assertTrue(klass.perform_action('compile', args))
-        self.assertTrue(os.path.isfile(output_file))
-        self.assertTrue(klass.perform_action('run', args))
 
-        # Removing output file -> cannot run
-        os.remove(output_file)
-        self.assertFalse(os.path.isfile(output_file))
-        self.assertFalse(klass.perform_action('run', args))
+        if klass.is_ready():
+            # Can compile and run
+            self.assertTrue(klass.perform_action('compile', args))
+            self.assertTrue(os.path.isfile(output_file))
+            self.assertTrue(klass.perform_action('run', args))
 
-        # Can run after re-compilation
-        self.assertTrue(klass.perform_action('compile', args))
-        self.assertTrue(os.path.isfile(output_file))
-        self.assertTrue(klass.perform_action('run', args))
+            # Removing output file -> cannot run
+            os.remove(output_file)
+            self.assertFalse(os.path.isfile(output_file))
+            self.assertFalse(klass.perform_action('run', args))
 
-        # Removing file -> code is still running and compilation fails
+            # Can run after re-compilation
+            self.assertTrue(klass.perform_action('compile', args))
+            self.assertTrue(os.path.isfile(output_file))
+            self.assertTrue(klass.perform_action('run', args))
+        else:
+            print_warning("%s is not ready to be run" % klass.name)
+
         os.remove(real_file)
-        self.assertTrue(klass.perform_action('run', args))
-        self.assertFalse(klass.perform_action('compile', args))
+
+        if klass.is_ready():
+            # Removing file -> code is still running and compilation fails
+            self.assertTrue(klass.perform_action('run', args))
+            self.assertFalse(klass.perform_action('compile', args))
 
     def test_cpp(self):
         """Tests stuff"""
