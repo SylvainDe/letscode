@@ -868,8 +868,8 @@ class DLanguage(CompilableLanguage):
     * Compile Online : http://www.compileonline.com/compile_d_online.php
 - Tools online : http://www.reddit.com/r/d_language/
 - Code samples :
-    * LiteratePrograms :
-    * Progopedia :
+    * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:D
+    * Progopedia : http://progopedia.com/language/d/
     * RosettaCode :http://rosettacode.org/wiki/Category:D
 ''')
 
@@ -1208,8 +1208,8 @@ class Tcl(Shell):
 - Subreddit : http://www.reddit.com/r/tcl
 - Tools online :
 - Code samples :
-    * LiteratePrograms :
-    * Progopedia :
+    * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:Tcl
+    * Progopedia : http://progopedia.com/language/tcl/
     * RosettaCode :http://rosettacode.org/wiki/Category:Tcl
 ''')
 
@@ -1249,8 +1249,8 @@ class Awk(InterpretableLanguage):
 - Tools online :
     * http://www.compileonline.com/execute_awk_online.php
 - Code samples :
-    * LiteratePrograms :
-    * Progopedia :
+    * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:AWK
+    * Progopedia : http://progopedia.com/language/awk/
     * RosettaCode :http://rosettacode.org/wiki/Category:AWK
 ''')
 
@@ -1275,8 +1275,8 @@ class Ruby(InterpretableLanguage):
 - Subreddit : http://www.reddit.com/r/ruby/
 - Learn in Y minutes : http://learnxinyminutes.com/docs/ruby/
 - Code samples :
-    * LiteratePrograms :
-    * Progopedia :
+    * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:Ruby
+    * Progopedia : http://progopedia.com/language/ruby/
     * RosettaCode :http://rosettacode.org/wiki/Category:Ruby
     ''')
 
@@ -1353,8 +1353,8 @@ class JavaScript(InterpretableLanguage):
     * Fun : Sound of JS http://soundofjs.com
 - Learn in Y minutes : http://learnxinyminutes.com/docs/javascript/
 - Code samples :
-    * LiteratePrograms :
-    * Progopedia :
+    * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:JavaScript
+    * Progopedia : http://progopedia.com/dialect/javascript/
     * RosettaCode :http://rosettacode.org/wiki/Category:JavaScript
     ''')
 
@@ -1394,8 +1394,8 @@ class Perl(InterpretableLanguage):
 - Subreddit : http://www.reddit.com/r/perl/
 - Learn in Y minutes : http://learnxinyminutes.com/docs/perl/
 - Code samples :
-    * LiteratePrograms :
-    * Progopedia :
+    * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:Perl
+    * Progopedia : http://progopedia.com/language/perl/
     * RosettaCode :http://rosettacode.org/wiki/Category:Perl
     ''')
 
@@ -1438,8 +1438,8 @@ class Php(InterpretableLanguage):
     * PHP Lint www.icosaedro.it/phplint/phplint-on-line.html
 - Learn in Y minutes : http://learnxinyminutes.com/docs/php/
 - Code samples :
-    * LiteratePrograms :
-    * Progopedia :
+    * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:PHP
+    * Progopedia : http://progopedia.com/language/php/
     * RosettaCode :http://rosettacode.org/wiki/Category:PHP
     ''')
 
@@ -1504,8 +1504,8 @@ class Python(InterpretableLanguage):
     * http://learnxinyminutes.com/docs/python/
     * http://learnxinyminutes.com/docs/python3/
 - Code samples :
-    * LiteratePrograms :
-    * Progopedia :
+    * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:Python
+    * Progopedia : http://progopedia.com/language/python/
     * RosettaCode :http://rosettacode.org/wiki/Category:Python
 - Misc ressources :
     * Hidden features (StackOverflow) : http://stackoverflow.com/questions/101268/hidden-features-of-python
@@ -1647,8 +1647,6 @@ class Julia(InterpretableLanguage):
 - Subreddit : http://www.reddit.com/r/Julia/
 - Learn in Y minutes : http://learnxinyminutes.com/docs/julia/
 - Code samples :
-    * LiteratePrograms :
-    * Progopedia :
     * RosettaCode :http://rosettacode.org/wiki/Category:Julia
 ''')
 
@@ -1674,8 +1672,6 @@ class VimScript(InterpretableLanguage):
     * Examples http://www.vim.org/scripts/
 - Subreddit : http://www.reddit.com/r/vim/
 - Code samples :
-    * LiteratePrograms :
-    * Progopedia :
     * RosettaCode :http://rosettacode.org/wiki/Category:Vim_Script
 ''')
 
@@ -1720,8 +1716,8 @@ class Lua(InterpretableLanguage):
     * Demo http://www.lua.org/demo.html
 - Learn in Y minutes : http://learnxinyminutes.com/docs/lua/
 - Code samples :
-    * LiteratePrograms :
-    * Progopedia :
+    * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:Lua
+    * Progopedia : http://progopedia.com/language/lua/
     * RosettaCode :http://rosettacode.org/wiki/Category:Lua
 ''')
 
