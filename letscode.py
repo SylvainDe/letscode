@@ -547,6 +547,7 @@ class Java(CompilableLanguage):
     * Visualiser : http://cscircles.cemc.uwaterloo.ca/java_visualize/
     * Visualiser : http://visualize.learneroo.com/
     * Demangler : http://demangler.com/
+    * Javabytes (disassembler) : http://javabytes.herokuapp.com/
     * REPL : http://www.javarepl.com/console.html
 - Learn in Y minutes : http://learnxinyminutes.com/docs/java/
 - Code samples :
@@ -1253,6 +1254,7 @@ class Ruby(InterpretableLanguage):
     * Visualise Ruby : http://www.onlinerubytutor.com/exercise/D000
     * Execute Ruby online : http://www.compileonline.com/execute_ruby_online.php
     * Try Ruby : http://tryruby.org/
+    * RubyBytes (disassembler) : http://rubybytes.herokuapp.com/
 - Subreddit : http://www.reddit.com/r/ruby/
 - Learn in Y minutes : http://learnxinyminutes.com/docs/ruby/
 - Code samples :
