@@ -89,15 +89,22 @@ def subprocess_call_wrapper(lst, stdin=None):
     print_debug('Command "%s" returned %d' % (lst[0] if lst else '', ret))
     return ret == 0
 
+MODELINE_VIMLIKE_EDITORS = {
+    'vim',
+    'vi',
+}
+
 MODELINE_OPTIONS = {
+    # http://vimdoc.sourceforge.net/htmldoc/usr_21.html#21.6
     'vim': {
-        'start': 'vim: set ',
+        'start': ': set ', # there will be a hack here for vimlike editors
         'end': ':',
         'link': ' ',
         'indentation_level': 'shiftwidth=',
         'tab_width': 'tabstop=',
         'expand_tab': ('noexpandtab', 'expandtab'),
     },
+    # http://www.gnu.org/software/emacs/manual/html_node/emacs/File-Variables.html#File-Variables
     'emacs': {
         'start': 'Local variables:\n',
         'end': 'End:',
@@ -106,6 +113,7 @@ MODELINE_OPTIONS = {
         'tab_width': 'tab-width: ',
         'expand_tab': ('indent-tabs-mode: nil', 'indent-tabs-mode: t'),
     },
+    # http://www.jedit.org/users-guide/buffer-local.html
     'jedit': {
         'start': ':',
         'end': '',
@@ -114,6 +122,7 @@ MODELINE_OPTIONS = {
         'tab_width': 'tabSize=',
         'expand_tab': ('noTabs=false', 'noTabs=true')
     },
+    # http://docs.kde.org/stable/en/applications/kate/config-variables.html
     'kate': {
         'start': 'kate: ',
         'end': '',
@@ -122,14 +131,18 @@ MODELINE_OPTIONS = {
         'tab_width': 'tab-width ',
         'expand_tab': ('replace-tabs off', 'replace-tabs on')
     },
+    # Pending :
+    # Gedit : https://help.gnome.org/users/gedit/stable/gedit-plugins-modelines.html.en
+    # Komodo : http://community.activestate.com/forum/komode-modeline-support-komodo
 }
 
 
 def get_modeline(editor, settings):
     """Return modeline corresponding to the settings for an editor."""
     ret = ''
-    if editor in MODELINE_OPTIONS:
-        ed_opt = MODELINE_OPTIONS[editor]
+    ed_opt = MODELINE_OPTIONS.get(
+        'vim' if editor in MODELINE_VIMLIKE_EDITORS else editor)
+    if ed_opt is not None:
         link = ed_opt['link']
         for opt, val in settings.items():
             flag = ed_opt.get(opt)
@@ -137,7 +150,9 @@ def get_modeline(editor, settings):
                 ret += (flag[val] if isinstance(flag, tuple)
                     else flag+str(val)) + link
         if ret:
-            ret = ed_opt['start'] + ret + ed_opt['end']
+            ret = (editor if editor in MODELINE_VIMLIKE_EDITORS else '') + \
+                ed_opt['start'] + \
+                ret + ed_opt['end']
     return ret
 
 
@@ -253,7 +268,9 @@ class Language(object):
         assert mod_pos in ['none', 'top', 'bottom', 'both']
         top = mod_pos in ['both', 'top']
         bottom = mod_pos in ['both', 'bottom']
-        modeline = get_modelines(MODELINE_OPTIONS.keys(), cls.settings) if top or bottom else ''
+        # a better list of editors could be retrieved
+        editors = set(MODELINE_OPTIONS.keys()) | MODELINE_VIMLIKE_EDITORS
+        modeline = get_modelines(editors, cls.settings) if top or bottom else ''
         commented_modeline = cls.comment_string(modeline) if modeline else ''
         return cls.get_header_info(commented_modeline if top else '') + \
             cls.get_file_content(filename) + \
