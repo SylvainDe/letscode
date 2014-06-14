@@ -15,7 +15,10 @@ install:
   - sudo apt-get install -y ksh
   - sudo apt-get install -y racket
   - sudo apt-get install -y scala
-  - sudo apt-get install graphviz
-# sudo apt-get install julia
+  - sudo apt-get install -y graphviz
+  - sudo apt-get install -y php
+  - sudo apt-get install -y swi-prolog
+  - sudo apt-get install -y valac
+# sudo apt-get install -y julia
 
 script: python3 -m unittest letscode.py
