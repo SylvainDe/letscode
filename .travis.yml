@@ -8,5 +8,13 @@ before_install:
 
 install:
   - sudo apt-get install -y gfortran
+  - sudo apt-get install -y gnat
+  - sudo apt-get install -y fpc
+  - sudo apt-get install -y ash
+  - sudo apt-get install -y csh
+  - sudo apt-get install -y ksh
+  - sudo apt-get install -y julia
+  - sudo apt-get install -y racket
+  - sudo apt-get install -y scala
 
 script: python3 -m unittest letscode.py
