@@ -18,6 +18,9 @@ install:
   - sudo apt-get install -y graphviz
   - sudo apt-get install -y swi-prolog
   - sudo apt-get install -y valac
+  - sudo apt-get install -y lua
+  - sudo apt-get install -y tcsh
+  - sudo apt-get install -y zsh
 # sudo apt-get install -y julia
 # sudo apt-get install -y php
 
