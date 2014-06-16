@@ -2556,6 +2556,39 @@ class Ceylon(Language):
     compiler = 'ceylonc'
 
 
+class Coq(Language):
+    """Coq"""
+    name = 'coq'
+    extensions = ['v']
+    comments = ('(*', '*)')
+    compiler = 'coqc'  # interpreter is coqtop
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Coq
+- Official site : http://coq.inria.fr/
+- Documentation : http://coq.inria.fr/documentation
+- Wiki : http://coq.inria.fr/cocorico
+- Subreddit : http://www.reddit.com/r/Coq
+- Code samples :
+    * RosettaCode : http://rosettacode.org/wiki/Category:Coq
+''')
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            Require Import ssreflect.
+
+            Variable P:Prop.
+
+            Theorem helloworld: P -> P.
+            Proof.
+              done.
+              Qed.
+
+              Check helloworld.
+            ''')
+
+
 class ExampleLanguage(Language):
     """Example"""
     name = None

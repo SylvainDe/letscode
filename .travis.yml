@@ -20,6 +20,7 @@ install:
   - sudo apt-get install -y valac
   - sudo apt-get install -y tcsh
   - sudo apt-get install -y zsh
+  - sudo apt-get install -y coq
 # sudo apt-get install -y julia
 # sudo apt-get install -y php
 # sudo apt-get install -y lua
