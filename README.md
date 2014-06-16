@@ -172,4 +172,12 @@ However, it calls a lot of other executables. Here's a non exhaustive list of th
 
 (I should have kept track of things as I was needing them but it is too late now).
 
+Related projects :
+------------------
+
+A few projects that are doing somewhat related tasks and are much more developped (had I known about them before, I probably wouldn't have worked on letscode) :
+
+ * Syntastic : https://github.com/scrooloose/syntastic : integration of different syntax checkers in Vim
+ * SingleCompile : https://github.com/xuhdev/SingleCompile : integration of multiple compilers/interpreters in Vim
+ * CookieCutter : https://github.com/audreyr/cookiecutter : command line tool to create project from templates (I haven't look at it much yet).
 
