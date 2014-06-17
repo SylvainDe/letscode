@@ -228,7 +228,8 @@ class Language(object):
         # (if it is not in the list of extensions) and fallback to always/never
         if extmode == 'auto':
             extmode = 'never' if (os.path.splitext(filename)[1].lower() in
-                            ("." + e for e in cls.extensions)) else 'always'
+                            ("." + e.lower() for e in cls.extensions)
+                            ) else 'always'
         assert extmode in ['never', 'always']
 
         # if extension is required, add the first one
@@ -453,11 +454,11 @@ class CLanguage(CompilableLanguage):
         # Different file content for implementations files and headers
         realfilename = os.path.split(filename)[1]
         base, ext = os.path.splitext(realfilename)
-        if ext in ('.' + e for e in cls.header_extensions):
+        if ext.lower() in ('.' + e for e in cls.header_extensions):
             return cls.get_header_content(
                 '__%s__' % re.sub('[^A-Z]', '_', base.upper()))
         else:
-            assert ext in ('.' + e for e in cls.code_extensions)
+            assert ext.lower() in ('.' + e for e in cls.code_extensions)
             return cls.get_code_content(base + '.' + cls.header_extensions[0])
 
     @classmethod
@@ -2601,6 +2602,37 @@ class Coq(Language):
             ''')
 
 
+class RLanguage(InterpretableLanguage):
+    """R"""
+    name = 'r'
+    extensions = ['R']
+    comments = ('#', '')
+    # Google Style http://google-styleguide.googlecode.com/svn/trunk/Rguide.xml
+    settings = {'indentation_level': 2, 'tab_width': 2, 'expand_tab': True}
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/R_%28programming_language%29
+- Official site : http://www.r-project.org/
+- Documentation : http://www.r-project.org/other-docs.html
+- Subreddit : http://www.reddit.com/r/Rlanguage
+- Tools online :
+    * Try R Code School : http://tryr.codeschool.com/
+- Learn in Y minutes : http://learnxinyminutes.com/docs/r/
+- Code samples :
+    * RosettaCode : http://rosettacode.org/wiki/Category:R
+''')
+    @classmethod
+    def get_interpreter_name(cls):
+        """Gets the name of the interpreter"""
+        return 'Rscript'
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            cat ("Hello, world!\\n")
+            ''')
+
+
 class ExampleLanguage(Language):
     """Example"""
     name = None
@@ -2636,7 +2668,7 @@ def get_extensions_map():
     extensions = dict()
     for lang in LANGUAGES:
         for ext in lang.extensions:
-            extensions.setdefault("." + ext, []).append(lang.name)
+            extensions.setdefault("." + ext.lower(), []).append(lang.name)
     return extensions
 
 
@@ -2728,6 +2760,7 @@ class TestLanguageDetection(unittest.TestCase):
         self.assertIn('php', ext['.php'])
         self.assertIn('.cpp', ext)
         self.assertIn('cpp', ext['.cpp'])
+        self.assertIn('r', ext['.r'])
 
     def test_detect_language(self):
         """Unit tests for detect_language_from_filename()"""
@@ -2741,6 +2774,8 @@ class TestLanguageDetection(unittest.TestCase):
         self.assertEqual(detect_language_from_filename('b/a.cpp'), 'cpp')
         self.assertEqual(detect_language_from_filename('/b/a.c'), 'c')
         self.assertEqual(detect_language_from_filename('/b/a.cpp'), 'cpp')
+        self.assertEqual(detect_language_from_filename('/b/a.R'), 'r')
+        self.assertEqual(detect_language_from_filename('/b/a.r'), 'r')
 
 
 # Idea - maybe interpretable language itself should inherit from unittest...
@@ -2887,6 +2922,10 @@ class TestableInterpretableLanguage(unittest.TestCase):
     def test_prolog(self):
         """Tests stuff"""
         self.interpreter_flow(Prolog)
+
+    def test_r(self):
+        """Tests stuff"""
+        self.interpreter_flow(RLanguage)
 
 
 class TestableCompilableLanguage(unittest.TestCase):
