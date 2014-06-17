@@ -487,6 +487,8 @@ class ObjectiveC(CLanguage):
     header_extensions = ['h']
     extensions = code_extensions + header_extensions
     compiler_options = ['-Wall', '-Wextra']
+    # Google Obj C http://google-styleguide.googlecode.com/svn/trunk/objcguide.xml
+    settings = {'indentation_level': 2, 'tab_width': 2, 'expand_tab': True}
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Objective-C
 - Official site : https://developer.apple.com/library/mac/documentation/cocoa/conceptual/ProgrammingWithObjectiveC/Introduction/Introduction.html
@@ -511,6 +513,8 @@ class Cpp(CLanguage):
     extensions = code_extensions + header_extensions
     compiler = 'g++'
     compiler_options = ['-Wall', '-Wextra']
+    # Google C++ http://google-styleguide.googlecode.com/svn/trunk/cppguide.xml
+    settings = {'indentation_level': 2, 'tab_width': 2, 'expand_tab': True}
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/C++
 - Official site : http://isocpp.org/
@@ -1999,7 +2003,6 @@ class Clojure(InterpretableLanguage):
         """Check if language is 'ready'."""
         return shutil.which(cls.get_interpreter_name()) is not None and \
             os.path.isfile(cls.path_to_clojure_jar)
-
 
 
 class Erlang(Language):
