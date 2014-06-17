@@ -1400,6 +1400,15 @@ class Perl(InterpretableLanguage):
     ''')
 
     @classmethod
+    def check(cls, args):
+        """Calls static checker"""
+        filename = cls.get_actual_filename_to_use(args)
+        return subprocess_call_wrapper(
+            [cls.get_interpreter_name(), '-c'] +
+            cls.interpreter_options +
+            [filename])
+
+    @classmethod
     def get_file_content(cls, _):
         """Returns the content to be put in the file."""
         return dedent('''
