@@ -26,6 +26,8 @@ install:
   - sudo apt-get install -y octave
   - sudo apt-get install -y clisp
   - sudo apt-get install -y gforth
+  - sudo apt-get install -y open-cobol
+  - sudo apt-get install -y ghc
 # sudo apt-get install -y julia
 # sudo apt-get install -y php
 # sudo apt-get install -y lua
