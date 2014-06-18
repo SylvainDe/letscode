@@ -2634,6 +2634,34 @@ class RLanguage(InterpretableLanguage):
             ''')
 
 
+class FSharp(Language):
+    """F#"""
+    name = 'fsharp'
+    extensions = ['fsx', 'fssscript']
+    comments = ('//', '')
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/F_Sharp_%28programming_language%29
+- Official site : http://fsharp.org/
+- Documentation : http://fsharp.org/about/index.html#documentation
+- Subreddit : http://www.reddit.com/r/fsharp
+- Tools online :
+    * Try F# : http://www.tryfsharp.org/Create
+    * F# Code formatting : http://fantomasweb.apphb.com
+- Learn in Y minutes : http://learnxinyminutes.com/docs/fsharp/
+- Code samples :
+    * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:F_Sharp
+    * Progopedia : http://progopedia.com/language/f-sharp/
+    * RosettaCode : http://rosettacode.org/wiki/Category:F_Sharp
+''')
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            printfn "Hello World!"
+            ''')
+
+
 class ExampleLanguage(Language):
     """Example"""
     name = None
