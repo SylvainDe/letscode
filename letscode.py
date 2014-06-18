@@ -566,6 +566,7 @@ class Java(CompilableLanguage):
 - Documentation : http://docs.oracle.com/javase/7/docs/api/
 - Subreddit : http://www.reddit.com/r/java/
 - Tools online :
+    * Paste and run : https://www.ktbyte.com/paste
     * Visualiser : http://cscircles.cemc.uwaterloo.ca/java_visualize/
     * Visualiser : http://visualize.learneroo.com/
     * Demangler : http://demangler.com/
