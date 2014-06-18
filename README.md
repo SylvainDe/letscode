@@ -96,6 +96,7 @@ Programming languages (partially) supported:
     * Octave
 
  * Languages with minimal support at the moment (basic information about the language):
+ 	* C#
     * F#
     * Caml
     * Coq

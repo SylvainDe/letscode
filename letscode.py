@@ -2634,6 +2634,44 @@ class RLanguage(InterpretableLanguage):
             ''')
 
 
+class CSharp(Language):
+    """C#"""
+    name = 'csharp'
+    extensions = ['cs']
+    comments = ('//', '')
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/C_Sharp_%28programming_language%29
+- Official site :
+- Documentation :
+- Subreddit : http://www.reddit.com/r/csharp
+- Tools online :
+    * C# format : http://www.manoli.net/csharpformat/
+    * JSON to C# : http://json2csharp.com
+- Learn in Y minutes : http://learnxinyminutes.com/docs/csharp/
+- Code samples :
+    * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:C_Sharp
+    * Progopedia : http://progopedia.com/language/c-sharp/
+    * RosettaCode : http://rosettacode.org/wiki/Category:C_sharp
+- Misc ressources :
+    * Hidden features (StackOverflow) : http://stackoverflow.com/questions/9033/hidden-features-of-c
+''')
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            using System;
+
+            class Program
+            {
+                static void Main()
+                {
+                    Console.WriteLine("Hello, world!");
+                }
+            }
+            ''')
+
+
 class FSharp(Language):
     """F#"""
     name = 'fsharp'
