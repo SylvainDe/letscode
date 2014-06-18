@@ -21,7 +21,9 @@ install:
   - sudo apt-get install -y tcsh
   - sudo apt-get install -y zsh
   - sudo apt-get install -y coq
-  - sudo apt-get install r-base
+  - sudo apt-get install -y r-base
+  - sudo apt-get install -y scilab
+  - sudo apt-get install -y octave
 # sudo apt-get install -y julia
 # sudo apt-get install -y php
 # sudo apt-get install -y lua
