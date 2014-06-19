@@ -34,8 +34,6 @@ InterpretableLanguage or CompilableLanguage.
 
 # Add a way to pass additional parameter to command-line
 
-# Add default actions (create?)
-
 # Next steps are :
 # - source control
 # - refactoring (splitting into files) + adding unit tests
@@ -135,6 +133,8 @@ MODELINE_OPTIONS = {
     # Gedit : https://help.gnome.org/users/gedit/stable/gedit-plugins-modelines.html.en
     # Komodo : http://community.activestate.com/forum/komode-modeline-support-komodo
 }
+
+MODELINE_SUPPORTED_EDITORS = set(MODELINE_OPTIONS.keys()) | MODELINE_VIMLIKE_EDITORS
 
 
 def get_modeline(editor, settings):
@@ -265,12 +265,10 @@ class Language(object):
     def get_content_to_write(cls, args):
         """Get content to be writen in the file - includes header and code."""
         filename = cls.get_actual_filename_to_use(args)
-        mod_pos = args.modeline
+        mod_pos, editors = args.modeline, args.text_editors
         assert mod_pos in ['none', 'top', 'bottom', 'both']
         top = mod_pos in ['both', 'top']
         bottom = mod_pos in ['both', 'bottom']
-        # a better list of editors could be retrieved
-        editors = set(MODELINE_OPTIONS.keys()) | MODELINE_VIMLIKE_EDITORS
         modeline = get_modelines(editors, cls.settings) if top or bottom else ''
         commented_modeline = cls.comment_string(modeline) if modeline else ''
         return cls.get_header_info(commented_modeline if top else '') + \
@@ -2805,16 +2803,13 @@ class TestModelineGeneration(unittest.TestCase):
 
     def test_modelinegeneration(self):
         """Just checking that we do not throw at the moment."""
-        get_modeline('vim', self.test_settings)
-        get_modeline('emacs', self.test_settings)
-        get_modeline('jedit', self.test_settings)
-        get_modeline('kate', self.test_settings)
-        get_modeline('invalid-editor', self.test_settings)
+        for editor in MODELINE_SUPPORTED_EDITORS | {'invalid-editor'}:
+            get_modeline(editor, self.test_settings)
 
     def test_multiplemodelinegeneration(self):
         """Just checking that we do not throw at the moment."""
         get_modelines(
-            ['vim', 'emacs', 'jedit', 'kate', 'invalid-editor'],
+            MODELINE_SUPPORTED_EDITORS | {'invalid-editor'},
             self.test_settings)
 
 
@@ -2875,10 +2870,11 @@ class TestableInterpretableLanguage(unittest.TestCase):
         """Tests stuff"""
         namespace = namedtuple(
             'Namespace',
-            'filename extension_mode override_file modeline')
+            'filename extension_mode override_file modeline text_editors')
         filename = os.path.join(tempfile.mkdtemp(
             prefix='letscode' + klass.name + '_'), "filename")
-        args = namespace(filename, 'auto', 'n', 'both')
+        args = namespace(
+            filename, 'auto', 'n', 'both', MODELINE_SUPPORTED_EDITORS)
         real_file = klass.get_actual_filename_to_use(args)
 
         # Cannot run if file does not exist
@@ -3024,10 +3020,11 @@ class TestableCompilableLanguage(unittest.TestCase):
         """Tests stuff"""
         namespace = namedtuple(
             'Namespace',
-            'filename extension_mode override_file modeline')
+            'filename extension_mode override_file modeline text_editors')
         filename = os.path.join(tempfile.mkdtemp(
             prefix='letscode' + klass.name + '_'), "filename")
-        args = namespace(filename, 'auto', 'n', 'both')
+        args = namespace(
+            filename, 'auto', 'n', 'both', MODELINE_SUPPORTED_EDITORS)
         real_file = klass.get_actual_filename_to_use(args)
         output_file = klass.get_output_filename(real_file)
 
@@ -3135,6 +3132,8 @@ class TestableCompilableLanguage(unittest.TestCase):
 
 def main():
     """Main"""
+    default_actions = ['create']
+    default_editors = ['vim']
     parser = argparse.ArgumentParser(
         description='Makes your code easy to edit/compile/run/test/check')
     parser.add_argument(
@@ -3142,13 +3141,13 @@ def main():
         help=('filename (with or without the extension)'))
     parser.add_argument(
         '--language', '-l',
-        help=('programming language to consider'),
+        help=('programming language to consider (default: %(default)s)'),
         choices=list(LANGUAGE_NAMES.keys()) + ['autodetect'],
         default='autodetect')
     parser.add_argument(
         '--action', '-a',
         action='append',
-        help=('action(s) to perform'),
+        help=('action(s) to perform (default: %s)' % default_actions),
         choices=[
             'create', 'edit', 'run', 'check', 'compile', 'coverage',
             'debug', 'info', 'upload', 'minify', 'pretty',
@@ -3159,25 +3158,33 @@ def main():
         default=[])
     parser.add_argument(
         '--failure', '-f',
-        help=('behavior on failure'),
+        help=('behavior on failure (default: %(default)s)'),
         choices=['stop', 'continue'],
         default='stop')
     parser.add_argument(
         '--extension_mode', '-e',
-        help=('extension mode'),
+        help=('extension mode (default: %(default)s)'),
         choices=['auto', 'never', 'always'],
         default='auto')
     parser.add_argument(
         '--override_file', '-o',
-        help=('override already existing file'),
+        help=('override already existing file (default: %(default)s)'),
         choices=['n', 'y'],
         default='n')
     parser.add_argument(
         '--modeline', '-m',
-        help=('location for modeline (editor settings)'),
+        help=('location for modeline (editor settings) (default: %(default)s)'),
         choices=['top', 'bottom', 'both', 'none'],
         default='top')
+    parser.add_argument(
+        '--text-editors', '-t',
+        action='append',
+        help=('text editors for modelines (default: %s)' % default_editors),
+        choices=MODELINE_SUPPORTED_EDITORS,
+        default=[])
     args = parser.parse_args()
+    if not args.action: args.action = default_actions
+    if not args.text_editors: args.text_editors = default_editors
 
     language = args.language
     if language == 'autodetect':
