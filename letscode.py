@@ -2703,7 +2703,7 @@ class FSharp(Language):
 class Factor(Language):
     """Factor"""
     name = 'factor'
-    extensions = ('factor')
+    extensions = ['factor']
     comments = ('!', '')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Factor_%28programming_language%29
