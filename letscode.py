@@ -2700,6 +2700,29 @@ class FSharp(Language):
             ''')
 
 
+class Factor(Language):
+    """Factor"""
+    name = 'factor'
+    extensions = ('factor')
+    comments = ('!', '')
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Factor_%28programming_language%29
+- Official site : http://factorcode.org/
+- Documentation : http://docs.factorcode.org/content/article-handbook.html
+- Subreddit : http://www.reddit.com/r/factor
+- Code samples :
+    * Progopedia : http://progopedia.com/language/factor/
+    * RosettaCode : http://rosettacode.org/wiki/Category:Factor
+''')
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            "Hello, world!" print
+            ''')
+
+
 class ExampleLanguage(Language):
     """Example"""
     name = None
