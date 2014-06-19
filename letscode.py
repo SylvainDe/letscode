@@ -1729,6 +1729,7 @@ class Lua(InterpretableLanguage):
     name = 'lua'
     extensions = ['lua']
     comments = ('--', '')
+    compiler = 'luac'
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Lua_%28programming_language%29
 - Official site : http://www.lua.org/
@@ -1749,6 +1750,13 @@ class Lua(InterpretableLanguage):
         return dedent('''
             print("Hello, world!")
         ''')
+
+    @classmethod
+    def check(cls, args):
+        """Calls static checker"""
+        filename = cls.get_actual_filename_to_use(args)
+        return subprocess_call_wrapper(
+            [cls.compiler, '-p', filename])
 
 
 class DatabaseLanguage(Language):
