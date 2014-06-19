@@ -100,6 +100,7 @@ MODELINE_OPTIONS = {
         'link': ' ',
         'indentation_level': 'shiftwidth=',
         'tab_width': 'tabstop=',
+        'textwidth': 'textwidth=',
         'expand_tab': ('noexpandtab', 'expandtab'),
     },
     # http://www.gnu.org/software/emacs/manual/html_node/emacs/File-Variables.html#File-Variables
@@ -109,6 +110,7 @@ MODELINE_OPTIONS = {
         'link': '\n',
         'indentation_level': 'c-basic-offset: ',
         'tab_width': 'tab-width: ',
+        'textwidth': 'fill-column: ',
         'expand_tab': ('indent-tabs-mode: nil', 'indent-tabs-mode: t'),
     },
     # http://www.jedit.org/users-guide/buffer-local.html
@@ -118,6 +120,7 @@ MODELINE_OPTIONS = {
         'link': ':',
         'indentation_level': 'indentSize=',
         'tab_width': 'tabSize=',
+        'textwidth': 'maxLineLen=',
         'expand_tab': ('noTabs=false', 'noTabs=true')
     },
     # http://docs.kde.org/stable/en/applications/kate/config-variables.html
@@ -127,6 +130,7 @@ MODELINE_OPTIONS = {
         'link': '; ',
         'indentation_level': 'indent-width ',
         'tab_width': 'tab-width ',
+        'tab_width': 'word-wrap-column ',
         'expand_tab': ('replace-tabs off', 'replace-tabs on')
     },
     # Pending :
