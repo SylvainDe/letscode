@@ -35,8 +35,8 @@ InterpretableLanguage or CompilableLanguage.
 # Add a way to pass additional parameter to command-line
 
 # Next steps are :
-# - source control
-# - refactoring (splitting into files) + adding unit tests
+# - refactoring (splitting into files)
+# - re-organising unit tests
 
 import argparse
 import subprocess
@@ -250,10 +250,12 @@ class Language(object):
                 return True
         try:
             cls.real_create(filename, args)
+            if args.filename != filename:
+                print_info("File %s created" % filename)
+            return True
         except IOError:
             print_error("Error while creating file" % filename)
             return False
-        return True
 
     @classmethod
     def display(cls, args):
@@ -311,6 +313,9 @@ class Language(object):
     @classmethod
     def comment_string(cls, string):
         """Comment string."""
+        # What could be cool is to be able to define single-line comment and/or
+        # multiline comment syntax for the languages and pick the relevant one
+        # based on the length of the text to comment.
         beg, end = cls.comments
         if beg is None or end is None:
             print_warning('Cannot comment string for %s' % (cls.name))
