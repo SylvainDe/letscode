@@ -2738,6 +2738,51 @@ class Factor(Language):
             ''')
 
 
+class SmallTalk(InterpretableLanguage):
+    """SmallTalk"""
+    name = 'smalltalk'
+    extensions = ['st']
+    comments = ('"', '"')
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Smalltalk
+- Official site : http://www.smalltalk.org/
+- Documentation : http://www.smalltalk.org/smalltalk/learning.html
+- Subreddit : http://www.reddit.com/r/smalltalk/
+- Tools online :
+    * Compile online : http://www.compileonline.com/execute_smalltalk_online.php
+- Learn in Y minutes :
+- Code samples :
+    * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:Smalltalk
+    * Progopedia : http://progopedia.com/language/smalltalk/
+    * RosettaCode : http://rosettacode.org/wiki/Category:Smalltalk
+''')
+
+    @classmethod
+    def get_interpreter_name(cls):
+        """Gets the name of the interpreter"""
+        return 'gst'
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            Transcript show: 'Hello, world!
+            '.
+            ''')
+
+    @classmethod
+    def run(cls, args):
+        """Runs the code"""
+        filename = cls.get_actual_filename_to_use(args)
+        # gst does not return error code so let's fail beautifully
+        if not os.path.isfile(filename):
+            return False
+        return subprocess_call_wrapper(
+            [cls.get_interpreter_name()] +
+            cls.interpreter_options +
+            [filename])
+
+
 class ExampleLanguage(Language):
     """Example"""
     name = None
@@ -2985,6 +3030,10 @@ class TestableInterpretableLanguage(unittest.TestCase):
     def test_perl(self):
         """Tests stuff"""
         self.interpreter_flow(Perl)
+
+    def test_smalltalk(self):
+        """Tests stuff"""
+        self.interpreter_flow(SmallTalk)
 
     def test_racket(self):
         """Tests stuff"""

@@ -87,6 +87,7 @@ Programming languages (partially) supported:
     * Tcl
     * Scala
     * Scheme
+    * Smalltalk
     * Racket
     * Forth
     * Swift (not the Apple one)
@@ -96,7 +97,7 @@ Programming languages (partially) supported:
     * Octave
 
  * Languages with minimal support at the moment (basic information about the language):
- 	* C#
+    * C#
     * F#
     * Caml
     * Coq
@@ -173,6 +174,7 @@ However, it calls a lot of other executables. Here's a non exhaustive list of th
  * coq - sudo apt-get install coq
  * r - sudo apt-get install r-base r-base-dev
  * fsharpc - sudo apt-get install fsharp
+ * gst - sudo apt-get install gnu-smalltalk
  * swift - wget http://swiftlang.org/packages/swift-0.94.1.tar.gz && tar xfz swift-0.94.1.tar.gz && export PATH=$PATH:/path/to/swift-0.94.1/bin
  * clojure - wget http://central.maven.org/maven2/org/clojure/clojure/1.6.0/clojure-1.6.0.jar
  * ceylon - wget http://staging.ceylon-lang.org/download/dist/1_0_Milestone1_deb && sudo dpkg -i 1_0_Milestone1_deb
