@@ -2783,6 +2783,34 @@ class SmallTalk(InterpretableLanguage):
             [filename])
 
 
+class Groovy(InterpretableLanguage):
+    """Groovy"""
+    name = 'groovy' 
+    extensions = ['groovy', 'gvy', 'gy', 'gsh']
+    comments = ('//', '')
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Groovy_(programming_language)
+- Official site : http://groovy.codehaus.org/
+- Documentation : http://groovy.codehaus.org/Documentation
+- Subreddit : http://www.reddit.com/r/groovy
+- Tools online :
+    * Groovy web console : http://groovyconsole.appspot.com/
+    * Execute online : http://www.compileonline.com/execute_groovy_online.php
+- Learn in Y minutes :
+- Code samples :
+    * LiteratePrograms :
+    * Progopedia :
+    * RosettaCode :
+''')
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            println("Hello, world!")
+            ''')
+
+
 class ExampleLanguage(Language):
     """Example"""
     name = None
@@ -3030,6 +3058,10 @@ class TestableInterpretableLanguage(unittest.TestCase):
     def test_perl(self):
         """Tests stuff"""
         self.interpreter_flow(Perl)
+
+    def test_groovy(self):
+        """Tests stuff"""
+        self.interpreter_flow(Groovy)
 
     def test_smalltalk(self):
         """Tests stuff"""
