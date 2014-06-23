@@ -95,7 +95,7 @@ MODELINE_VIMLIKE_EDITORS = {
 MODELINE_OPTIONS = {
     # http://vimdoc.sourceforge.net/htmldoc/usr_21.html#21.6
     'vim': {
-        'start': ': set ', # there will be a hack here for vimlike editors
+        'start': ': set ',  # there will be a hack here for vimlike editors
         'end': ':',
         'link': ' ',
         'indentation_level': 'shiftwidth=',
@@ -2636,6 +2636,7 @@ class RLanguage(InterpretableLanguage):
 - Code samples :
     * RosettaCode : http://rosettacode.org/wiki/Category:R
 ''')
+
     @classmethod
     def get_interpreter_name(cls):
         """Gets the name of the interpreter"""
@@ -2785,7 +2786,7 @@ class SmallTalk(InterpretableLanguage):
 
 class Groovy(InterpretableLanguage):
     """Groovy"""
-    name = 'groovy' 
+    name = 'groovy'
     extensions = ['groovy', 'gvy', 'gy', 'gsh']
     comments = ('//', '')
     information = dedent('''
