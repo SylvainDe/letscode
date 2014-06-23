@@ -2797,11 +2797,11 @@ class Groovy(InterpretableLanguage):
 - Tools online :
     * Groovy web console : http://groovyconsole.appspot.com/
     * Execute online : http://www.compileonline.com/execute_groovy_online.php
-- Learn in Y minutes :
+- Learn in Y minutes : http://learnxinyminutes.com/docs/groovy/
 - Code samples :
-    * LiteratePrograms :
-    * Progopedia :
-    * RosettaCode :
+    * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:Groovy
+    * Progopedia : http://progopedia.com/language/groovy/
+    * RosettaCode : http://rosettacode.org/wiki/Category:Groovy
 ''')
 
     @classmethod
