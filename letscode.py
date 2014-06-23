@@ -2812,6 +2812,37 @@ class Groovy(InterpretableLanguage):
             ''')
 
 
+class Eiffel(Language):
+    """Eiffel"""
+    name = 'eiffel'
+    extensions = ['e']
+    comments = ('--', '')
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Eiffel_%28programming_language%29
+- Official site : https://dev.eiffel.com/Main_Page
+- Documentation : https://docs.eiffel.com/
+- Code samples :
+    * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:Eiffel
+    * RosettaCode : http://rosettacode.org/wiki/Category:Eiffel
+''')
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            class
+                HELLO_WORLD
+            create
+                make
+            feature
+                make
+                    do
+                        print ("Hello, world!%N")
+                    end
+            end
+            ''')
+
+
 class ExampleLanguage(Language):
     """Example"""
     name = None
