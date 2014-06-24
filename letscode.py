@@ -1484,10 +1484,11 @@ class Php(InterpretableLanguage):
 - Subreddit : http://www.reddit.com/r/php
 - Tools online :
     * Sandbox with multiple versions http://sandbox.onlinephpfunctions.com/
-    * Performances on 100+ PHP versions http://3v4l.org/
-    * PHP Fiddle http://phpfiddle.org/
-    * PHP Sandbox http://www.exorithm.com/algorithm/sandbox
-    * PHP Lint www.icosaedro.it/phplint/phplint-on-line.html
+    * Performances on 100+ PHP versions : http://3v4l.org/
+    * PHP Fiddle : http://phpfiddle.org/
+    * PHP Sandbox : http://www.exorithm.com/algorithm/sandbox
+    * PHP Lint : www.icosaedro.it/phplint/phplint-on-line.html
+    * PHP Repl : http://phpepl.cloudcontrolled.com/
 - Learn in Y minutes : http://learnxinyminutes.com/docs/php/
 - Code samples :
     * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:PHP
