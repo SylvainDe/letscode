@@ -1044,15 +1044,33 @@ class InterpretableLanguage(Language):
     Attributes:
         interpreter (via get_interpreter_name) Name of the interpreter
         interpreter_options Options for the interpreter
-        nb_line_shebang     Number of lines of shebang."""
+        nb_line_shebang     Number of lines of shebang
+        shell (via get_shell_name) Name of the shell
+        shell_options       Options to lauch the shell
+        shell_stop          String to stop the shell."""
     interpreter_options = []
     comments = ('#', '')
     nb_line_shebang = 1  # 0 is no shebang, 1 is normal, 2 is multiline
+    shell_options = []
+    shell_stop = None
 
     @classmethod
     def get_interpreter_name(cls):
         """Gets the name of the interpreter"""
         return cls.name
+
+    @classmethod
+    def get_shell_name(cls):
+        """Gets the name of the interactive interpreter"""
+        return cls.get_interpreter_name()
+
+    @classmethod
+    def shell(cls, _):
+        """Start the shell"""
+        if cls.shell_stop is None:
+            return cls.function_not_implemented('shell')
+        print_info("Enter %s to exit." % cls.shell_stop)
+        return subprocess_call_wrapper([cls.get_shell_name()] + cls.shell_options)
 
     @classmethod
     def man(cls, _):
@@ -1107,6 +1125,7 @@ class Shell(InterpretableLanguage):
     name = 'sh'
     extensions = ['sh']
     comments = ('#', '')
+    shell_stop = 'exit'
     # Google https://google-styleguide.googlecode.com/svn/trunk/shell.xml
     settings = {'indentation_level': 2, 'tab_width': 2, 'expand_tab': True}
     information = dedent('''
@@ -1277,6 +1296,7 @@ class Ruby(InterpretableLanguage):
     """Ruby"""
     name = 'ruby'
     extensions = ['rb', 'rbw']
+    shell_stop = 'exit'  # or quit, irb_exit
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Ruby_%28programming_language%29
 - Official site : https://www.ruby-lang.org/fr/
@@ -1292,6 +1312,11 @@ class Ruby(InterpretableLanguage):
     * Progopedia : http://progopedia.com/language/ruby/
     * RosettaCode :http://rosettacode.org/wiki/Category:Ruby
     ''')
+
+    @classmethod
+    def get_shell_name(cls):
+        """Gets the name of the interactive interpreter"""
+        return 'irb'
 
     @classmethod
     def get_file_content(cls, _):
@@ -1312,7 +1337,7 @@ class Ruby(InterpretableLanguage):
         """Executes the script and enters interactive mode"""
         # irb does not look in '.' by default, let's give it the abs path
         filename = os.path.abspath(cls.get_actual_filename_to_use(args))
-        return subprocess_call_wrapper(['irb', '-r', filename])
+        return subprocess_call_wrapper([cls.get_shell_name, '-r', filename])
 
     @classmethod
     def metrics(cls, args):
@@ -1338,6 +1363,7 @@ class JavaScript(InterpretableLanguage):
     name = 'javascript'
     extensions = ['js']
     comments = ('//', '')
+    shell_stop = 'quit()'  # in rhino
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/JavaScript
 - "Official" sites :
@@ -1395,6 +1421,8 @@ class Perl(InterpretableLanguage):
     """Perl"""
     name = 'perl'
     extensions = ['pl']
+    shell_options = ['-d', '-e', '1']
+    shell_stop = 'q'
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Perl
 - Official site : http://www.perl.org/
@@ -1447,6 +1475,8 @@ class Php(InterpretableLanguage):
     # settings = {'indentation_level': 2, 'tab_width': 2, 'expand_tab': True}
     # Pear http://pear.php.net/manual/en/standards.indenting.php
     # settings = {'indentation_level': 4, 'tab_width': 4, 'expand_tab': True}
+    shell_options = ['-a']
+    shell_stop = 'exit'  # or quit
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/PHP
 - Official site : http://www.php.net/
@@ -1497,6 +1527,7 @@ class Python(InterpretableLanguage):
     extensions = ['py', 'pyc', 'pyo']
     # PEP8 http://legacy.python.org/dev/peps/pep-0008/
     settings = {'indentation_level': 4, 'tab_width': 4, 'expand_tab': True}
+    shell_stop = 'exit()'
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Python_%28programming_language%29
 - Official site : https://www.python.org/
@@ -1662,6 +1693,7 @@ class Julia(InterpretableLanguage):
     """Julia"""
     name = 'julia'
     extensions = ['jl']
+    shell_stop = 'exit()'
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Julia_%28programming_language%29
 - Official site : http://julialang.org/
@@ -1730,6 +1762,7 @@ class Lua(InterpretableLanguage):
     extensions = ['lua']
     comments = ('--', '')
     compiler = 'luac'
+    shell_stop = 'os.exit()'
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Lua_%28programming_language%29
 - Official site : http://www.lua.org/
@@ -2087,6 +2120,7 @@ class Lisp(InterpretableLanguage):
     name = 'lisp'
     extensions = ['lisp']
     comments = (';', '')
+    shell_stop = '(ext:exit)'
     information = dedent('''
 - Wikipedia page :
     * http://en.wikipedia.org/wiki/Lisp_%28programming_language%29
@@ -3283,7 +3317,7 @@ def main():
             'debug', 'info', 'upload', 'minify', 'pretty',
             'obfuscate', 'doctest', 'interactive', 'gendoc',
             'to_py3', 'uml', 'man', 'unittest', 'functionlist',
-            'profile', 'metrics', 'display'],
+            'profile', 'metrics', 'display', 'shell'],
         # this list could be generated
         default=[])
     parser.add_argument(

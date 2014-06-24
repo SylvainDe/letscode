@@ -43,8 +43,14 @@ Actions can be combined:
 
 **Other actions**
 
-Other actions can be/are defined.
-
+Other actions can be/are defined :
+ * `display`: shows the code that would be put in the file during creation
+ * `info`: provides useful information about the language
+ * `man`: opens the relevant manual (compiler or interpreter)
+ * `debug`: launches the debugger
+ * `shell`: starts a shell
+ * `interactive`: runs the file and starts an intereractive shell
+ * and more to be added.
 
 Programming languages (partially) supported:
 --------------------------------------------
