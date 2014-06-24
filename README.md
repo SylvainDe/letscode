@@ -102,6 +102,7 @@ Programming languages (partially) supported:
     * R
     * Scilab
     * Octave
+    * Genius
 
  * Languages with minimal support at the moment (basic information about the language):
     * C#

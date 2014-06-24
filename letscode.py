@@ -2496,6 +2496,26 @@ class Octave(InterpretableLanguage):
             ''')
 
 
+class Genius(InterpretableLanguage):
+    """Genius"""
+    name = 'genius'
+    extensions = ['gel']
+    comments = ('#', '')
+    shell_stop = 'quit'
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Genius_%28mathematics_software%29
+- Official site : http://www.jirka.org/genius.html
+- Documentation : http://www.jirka.org/genius-documentation/index.html
+''')
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            "Hello, world!"
+            ''')
+
+
 class Swift(InterpretableLanguage):
     """Swift - parallel scripting language"""
     name = 'swift'
