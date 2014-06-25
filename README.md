@@ -107,6 +107,7 @@ Programming languages (partially) supported:
  * Languages with minimal support at the moment (basic information about the language):
     * C#
     * F#
+    * J
     * Eiffel
     * Caml
     * Coq

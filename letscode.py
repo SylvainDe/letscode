@@ -2898,6 +2898,31 @@ class Eiffel(Language):
             ''')
 
 
+class JLanguage(Language):
+    """J"""
+    name = 'j'
+    extensions = ['ijs']
+    comments = ('NB.', '')
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/J_(programming_language)
+- Official site : http://www.jsoftware.com/
+- Documentation : http://www.jsoftware.com/jwiki/System/Documentation
+- Wiki : http://www.jsoftware.com/jwiki/
+- Subreddit : http://www.reddit.com/r/jlang
+- Code samples :
+    * LiteratePrograms :
+    * Progopedia :
+    * RosettaCode :
+''')
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            'Hello, world!'
+            ''')
+
+
 class ExampleLanguage(Language):
     """Example"""
     name = None
