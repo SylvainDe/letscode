@@ -115,6 +115,7 @@ Programming languages (partially) supported:
     * Elm
     * Erlang
     * Elixir
+    * Idris
     * Dart
     * Nimrod
     * SQL

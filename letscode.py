@@ -2923,6 +2923,33 @@ class JLanguage(Language):
             ''')
 
 
+class Idris(Language):
+    """Idris"""
+    name = 'idris'
+    extensions = ['idr', 'lidr']
+    comments = ('--', '')
+    shell_stop = ':q'  # or :quit
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Idris_%28programming_language%29
+- Official site : http://www.idris-lang.org/
+- Documentation : http://www.idris-lang.org/documentation/
+- Subreddit : http://www.reddit.com/r/Idris
+- Code samples :
+    * LiteratePrograms :
+    * RosettaCode : http://rosettacode.org/wiki/Category:Idris
+''')
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            module Main
+
+             main : IO ()
+             main = putStrLn "Hello, World!"
+            ''')
+
+
 class ExampleLanguage(Language):
     """Example"""
     name = None
