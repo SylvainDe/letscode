@@ -2911,8 +2911,8 @@ class JLanguage(Language):
 - Subreddit : http://www.reddit.com/r/jlang
 - Code samples :
     * LiteratePrograms :
-    * Progopedia :
-    * RosettaCode :
+    * Progopedia : http://progopedia.com/language/j/
+    * RosettaCode : http://rosettacode.org/wiki/Category:J
 ''')
 
     @classmethod
