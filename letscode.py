@@ -1010,7 +1010,24 @@ class CoffeeScript(Language):
 - Tools online :
     * JS to Coffee : http://js2coffee.org/
     * Coffee Lint : http://www.coffeelint.org/
+    * Try Coffee Script on http://coffeescript.org/
 - Learn in Y minutes : http://learnxinyminutes.com/docs/coffeescript/
+- Subreddit : http://www.reddit.com/r/coffeescript/
+''')
+
+
+class TypeScript(Language):
+    """TypeScript"""
+    name = 'typescript'
+    extensions = ['ts']
+    comments = ('//', '')
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/TypeScript
+- Official site : http://www.typescriptlang.org/
+- Documentation : http://www.typescriptlang.org/Handbook
+- Tools online :
+    * Playground : http://www.typescriptlang.org/Playground
+- Subreddit : http://www.reddit.com/r/typescript/
 ''')
 
 
