@@ -3034,6 +3034,34 @@ class Idris(Language):
             ''')
 
 
+class Pike(InterpretableLanguage):
+    """Pike"""
+    name = 'pike'
+    extensions = ['pike']
+    inline_comment = '//'
+    block_comment = ('/*', '*/')
+    shell_stop = 'exit'
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Pike_%28programming_language%29
+- Official site : http://pike.lysator.liu.se/
+- Documentation : http://pike.lysator.liu.se/docs/
+- Code samples :
+    * LiteratePrograms :
+    * Progopedia : http://progopedia.com/language/pike/
+    * RosettaCode : http://rosettacode.org/wiki/Category:Pike
+''')
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            int main() {
+                write("Hello, world!\\n");
+                return 0;
+            }
+            ''')
+
+
 class ExampleLanguage(Language):
     """Example"""
     name = None
@@ -3301,6 +3329,10 @@ class TestableInterpretableLanguage(unittest.TestCase):
     def test_swift(self):
         """Tests stuff"""
         self.interpreter_flow(Swift)
+
+    def test_pike(self):
+        """Tests stuff"""
+        self.interpreter_flow(Pike)
 
     def test_forth(self):
         """Tests stuff"""
