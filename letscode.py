@@ -173,14 +173,13 @@ class Language(object):
         extensions  Extensions (list of string without leading dot). First
                         extension will be used by default for file creation
         information Additional information about the language (useful links)
-        inline_comment  String describing how to start inline comments
-        block_comment   Pair of string describing how to block comments start
-                        and end
+        inline_comment  String how inline comments begin
+        block_comment   Pair of string describing how block comments begin and
+                        end
         settings    Formatting settings for the language."""
     name = None
     extensions = None
     information = None
-    comments = (None, None)
     inline_comment = None
     block_comment = None
     settings = {}
@@ -403,7 +402,6 @@ class CLanguage(CompilableLanguage):
     extensions = code_extensions + header_extensions
     compiler = 'gcc'
     compiler_options = ['-Wall', '-Wextra', '-std=c99']
-    comments = ('//', '')  # or ('/*', '*/') but it's a bit more complicated
     inline_comment = '//'
     block_comment = ('/*', '*/')
     # Kernel https://www.kernel.org/doc/Documentation/CodingStyle
@@ -570,7 +568,6 @@ class Java(CompilableLanguage):
     name = 'java'
     extensions = ['java', 'class', 'jar']
     compiler = 'javac'  # support for gcj could be added if needed
-    comments = ('//', '')
     inline_comment = '//'
     block_comment = ('/*', '*/')
     # Google http://google-styleguide.googlecode.com/svn/trunk/javaguide.html
@@ -655,7 +652,6 @@ class Vala(CompilableLanguage):
     name = 'vala'
     extensions = ['vala', 'vapi']
     compiler = 'valac'
-    comments = ('//', '')
     inline_comment = '//'
     block_comment = ('/*', '*/')
     information = dedent('''
@@ -683,7 +679,6 @@ class Pascal(CompilableLanguage):
     name = 'pascal'
     extensions = ['pas']
     compiler = 'fpc'
-    comments = ('//', '')  # or ('(*', '*)') or ('{', '}')
     inline_comment = '//'
     block_comment = ('(*', '*)')  # or ('{', '}')
     information = dedent('''
@@ -731,7 +726,6 @@ class Ada(CompilableLanguage):
     extensions = ['adb', 'ads']
     compiler = 'gnat'  # many options - documentation with 'html' for instance
     compiler_options = ['make']
-    comments = ('--', '')
     inline_comment = '--'
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Ada_(programming_language)
@@ -768,7 +762,6 @@ class Fortran(CompilableLanguage):
     extensions = ['f', 'for', 'f90', 'f95']
     compiler = 'gfortran'
     compiler_options = ['--free-form']
-    comments = ('!', '')
     inline_comment = '!'
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Fortran
@@ -807,7 +800,6 @@ class Cobol(CompilableLanguage):
     """Cobol"""
     name = 'cobol'
     extensions = ['cob', 'cbl']
-    comments = ('       *', '')
     inline_comment = '       *'
     compiler = 'cobc'
     compiler_options = ['-x']
@@ -845,7 +837,6 @@ class Haskell(CompilableLanguage):
     name = 'haskell'
     extensions = ['hs', 'lhs']
     compiler = 'ghc'
-    comments = ('--', '')
     inline_comment = '--'
     block_comment = ('{-', '-}')
     information = dedent('''
@@ -888,7 +879,6 @@ class DLanguage(CompilableLanguage):
     name = 'd'
     extensions = ['d']
     compiler = 'gdc'
-    comments = ('//', '')
     inline_comment = '//'
     block_comment = ('/*', '*/')
     information = dedent('''
@@ -928,7 +918,6 @@ class DLanguage(CompilableLanguage):
 
 class MarkupLanguage(Language):
     """A generic class for markup languages"""
-    comments = ('<!--', '-->')
     block_comment = ('<!--', '-->')
 
 class HTML(MarkupLanguage):
@@ -972,7 +961,6 @@ class CSS(Language):
     """CSS"""
     name = 'css'
     extensions = ['css']
-    comments = ('/*', '*/')
     block_comment = ('/*', '*/')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Cascading_Style_Sheets
@@ -988,7 +976,7 @@ class JSON(Language):
     """JSON"""
     name = 'json'
     extensions = ['json']
-    comments = (None, None)  # No comment in JSON
+    # No comment in JSON
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/JSON
 - Official site : http://www.json.org/
@@ -1006,7 +994,6 @@ class YAML(Language):
     """YAML"""
     name = 'yaml'
     extensions = ['yaml', 'yml']
-    comments = ('#', '')
     inline_comment = '#'
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/YAML
@@ -1025,7 +1012,6 @@ class CoffeeScript(Language):
     """CoffeeScript"""
     name = 'coffeescript'
     extensions = ['coffee']
-    comments = ('#', '')
     inline_comment = '#'
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/CoffeeScript
@@ -1044,7 +1030,6 @@ class TypeScript(Language):
     """TypeScript"""
     name = 'typescript'
     extensions = ['ts']
-    comments = ('//', '')
     inline_comment = '//'
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/TypeScript
@@ -1061,7 +1046,6 @@ class Markdown(Language):
     name = 'markdown'
     extensions = ['md']
     # From http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax
-    comments = ('[//]: # (', ')')
     block_comment = ('[//]: # (', ')')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Markdown
@@ -1092,7 +1076,6 @@ class InterpretableLanguage(Language):
         shell_options       Options to lauch the shell
         shell_stop          String to stop the shell."""
     interpreter_options = []
-    comments = ('#', '')
     inline_comment = '#'
     nb_line_shebang = 1  # 0 is no shebang, 1 is normal, 2 is multiline
     shell_options = []
@@ -1405,7 +1388,6 @@ class JavaScript(InterpretableLanguage):
     """JavaScript"""
     name = 'javascript'
     extensions = ['js']
-    comments = ('//', '')
     inline_comment = '//'
     block_comment = ('/*', '*/')
     shell_stop = 'quit()'  # in rhino
@@ -1762,7 +1744,6 @@ class VimScript(InterpretableLanguage):
     """VimScript"""
     name = 'vimscript'
     extensions = ['vim']
-    comments = ('"', '')
     inline_comment = '"'
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Vim_script
@@ -1807,7 +1788,6 @@ class Lua(InterpretableLanguage):
     """Lua"""
     name = 'lua'
     extensions = ['lua']
-    comments = ('--', '')
     inline_comment = '--'
     compiler = 'luac'
     shell_stop = 'os.exit()'
@@ -1848,7 +1828,6 @@ class SQL(DatabaseLanguage):
     """SQL"""
     name = 'sql'
     extensions = ['sql']
-    comments = ('--', '')
     inline_comment = '--'
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/SQL
@@ -1880,7 +1859,6 @@ class Dot(CompiledDescriptionLanguages):
         'sfdp',   # large undirected graphs
     ]
     compiler = compilers[0]
-    comments = ('//', '')
     inline_comment = '//'
     block_comment = ('/*', '*/')
     information = dedent('''
@@ -1928,7 +1906,6 @@ class Latex(CompiledDescriptionLanguages):
     name = 'latex'
     extensions = ['tex']
     compiler = 'pdflatex'
-    comments = ('%', '')
     inline_comment = '%'
     information = dedent('''
 - Wikipedia page :
@@ -2023,7 +2000,6 @@ class Go(CompilableLanguage):
     extensions = ['go']
     compiler = 'gccgo'
     compiler_options = ['-g']
-    comments = ('//', '')
     inline_comment = '//'
     block_comment = ('/*', '*/')
     information = dedent('''
@@ -2055,7 +2031,6 @@ class Clojure(InterpretableLanguage):
     """Clojure"""
     name = 'clojure'
     extensions = ['clj', 'edn']
-    comments = (';', '')
     inline_comment = ';'
     nb_line_shebang = 0
     information = dedent('''
@@ -2114,7 +2089,6 @@ class Erlang(Language):
     """Erlang"""
     name = 'erlang'
     extensions = ['erl', 'hrl']
-    comments = ('%', '')
     inline_comment = '%'
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Erlang_%28programming_language%29
@@ -2153,7 +2127,6 @@ class Elixir(Language):
     """Elixir"""
     name = 'elixir'
     extensions = ['ex', 'exs']
-    comments = ('#', '')
     inline_comment = '#'
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Elixir_%28programming_language%29
@@ -2176,7 +2149,6 @@ class Lisp(InterpretableLanguage):
     """Lisp"""
     name = 'lisp'
     extensions = ['lisp']
-    comments = (';', '')
     inline_comment = ';'
     block_comment = ('#|', '|#')
     shell_stop = '(ext:exit)'
@@ -2219,7 +2191,6 @@ class Scheme(InterpretableLanguage):
     """Scheme"""
     name = 'scheme'
     extensions = ['scm', 'ss']
-    comments = (';', '')
     inline_comment = ';'
     block_comment = ('#|', '|#')
     nb_line_shebang = 0
@@ -2263,7 +2234,6 @@ class Racket(InterpretableLanguage):
     """Racket"""
     name = 'racket'
     extensions = ['rkt', 'rktl', 'rktd', 'plt', 'scrbl']
-    comments = (';', '')
     inline_comment = ';'
     block_comment = ('#|', '|#')
     information = dedent('''
@@ -2294,7 +2264,6 @@ class Caml(Language):
     """Caml"""
     name = 'caml'
     extensions = ['ml', 'mli']
-    comments = ('(*', '*)')
     block_comment = ('(*', '*)')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Caml
@@ -2313,7 +2282,6 @@ class Scala(InterpretableLanguage):  # it can be compiled too but that's for lat
     """Scala"""
     name = 'scala'
     extensions = ['scala']
-    comments = ('//', '')
     inline_comment = '//'
     block_comment = ('/*', '*/')
     nb_line_shebang = 2
@@ -2358,7 +2326,6 @@ class Rust(CompilableLanguage):
     extensions = ['rs']
     compiler = 'rustc'
     compiler_options = ['-g']
-    comments = ('//', '')
     inline_comment = '//'
     block_comment = ('/*', '*/')
     information = dedent('''
@@ -2393,7 +2360,6 @@ class Elm(Language):
     """Elm"""
     name = 'elm'
     extensions = ['elm']
-    comments = ('--', '')
     inline_comment = '--'
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Elm_%28programming_language%29
@@ -2415,7 +2381,6 @@ class Dart(Language):
     """Dart"""
     name = 'dart'
     extensions = ['dart']
-    comments = ('//', '')
     inline_comment = '//'
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Dart_%28programming_language%29
@@ -2440,7 +2405,6 @@ class Prolog(InterpretableLanguage):
     name = 'prolog'
     interpreter_options = ['-t', 'goal', '-s']
     extensions = ['pl', 'pro', 'p']
-    comments = ('%', '')
     inline_comment = '%'
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Prolog
@@ -2477,7 +2441,6 @@ class PostScript(Language):
     """PostScript"""
     name = 'postscript'
     extensions = ['ps']
-    comments = ('%', '')
     inline_comment = '%'
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/PostScript
@@ -2501,7 +2464,6 @@ class Scilab(InterpretableLanguage):
         'sce',  # Executable statements
         'sci',  # Scilab or user defined functions
         ]
-    comments = ('//', '')
     inline_comment = '//'
     interpreter_options = ['-nwni', '-f']
     nb_line_shebang = 0
@@ -2605,7 +2567,6 @@ class Forth(InterpretableLanguage):
     """Forth"""
     name = 'forth'
     extensions = ['fs', 'fth']
-    comments = ('\\', '')
     inline_comment = '\\'
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Forth_%28programming_language%29
@@ -2639,7 +2600,6 @@ class Nimrod(Language):
     """Nimrod"""
     name = 'nimrod'
     extensions = ['nim']
-    comments = ('#', '')
     inline_comment = '#'
     information = dedent('''
 - Wikipedia page : Not yet?
@@ -2664,7 +2624,6 @@ class ActionScript(Language):
     """ActionScript"""
     name = 'actionscript'
     extensions = ['as']
-    comments = ('//', '')
     inline_comment = '//'
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/ActionScript
@@ -2683,7 +2642,6 @@ class EcmaScript(Language):
     """EcmaScript"""
     name = 'ecmascript'
     extensions = ['es']
-    comments = ('//', '')
     inline_comment = '//'
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/ECMAScript
@@ -2696,7 +2654,6 @@ class Ceylon(Language):
     """Ceylon"""
     name = 'ceylon'
     extensions = ['ceylon']
-    comments = ('//', '')
     inline_comment = '//'
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Ceylon_%28programming_language%29
@@ -2718,7 +2675,6 @@ class Coq(Language):
     """Coq"""
     name = 'coq'
     extensions = ['v']
-    comments = ('(*', '*)')
     block_comment = ('(*', '*)')
     compiler = 'coqc'  # interpreter is coqtop
     information = dedent('''
@@ -2783,7 +2739,6 @@ class CSharp(Language):
     """C#"""
     name = 'csharp'
     extensions = ['cs']
-    comments = ('//', '')
     inline_comment = '//'
     block_comment = ('/*', '*/')
     information = dedent('''
@@ -2823,7 +2778,6 @@ class FSharp(Language):
     """F#"""
     name = 'fsharp'
     extensions = ['fsx', 'fssscript']
-    comments = ('//', '')
     inline_comment = '//'
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/F_Sharp_%28programming_language%29
@@ -2852,7 +2806,6 @@ class Factor(Language):
     """Factor"""
     name = 'factor'
     extensions = ['factor']
-    comments = ('!', '')
     inline_comment = '!'
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Factor_%28programming_language%29
@@ -2876,7 +2829,6 @@ class SmallTalk(InterpretableLanguage):
     """SmallTalk"""
     name = 'smalltalk'
     extensions = ['st']
-    comments = ('"', '"')
     block_comment = ('"', '"')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Smalltalk
@@ -2922,7 +2874,6 @@ class Groovy(InterpretableLanguage):
     """Groovy"""
     name = 'groovy'
     extensions = ['groovy', 'gvy', 'gy', 'gsh']
-    comments = ('//', '')
     inline_comment = '//'
     block_comment = ('/*', '*/')
     information = dedent('''
@@ -2952,7 +2903,6 @@ class Eiffel(Language):
     """Eiffel"""
     name = 'eiffel'
     extensions = ['e']
-    comments = ('--', '')
     inline_comment = '--'
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Eiffel_%28programming_language%29
@@ -2984,7 +2934,6 @@ class JLanguage(Language):
     """J"""
     name = 'j'
     extensions = ['ijs']
-    comments = ('NB.', '')
     inline_comment = 'NB.'
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/J_(programming_language)
@@ -3010,7 +2959,6 @@ class Idris(Language):
     """Idris"""
     name = 'idris'
     extensions = ['idr', 'lidr']
-    comments = ('--', '')
     inline_comment = '--'
     shell_stop = ':q'  # or :quit
     information = dedent('''
@@ -3066,7 +3014,8 @@ class ExampleLanguage(Language):
     """Example"""
     name = None
     extensions = None
-    comments = (None, None)
+    inline_comment = None
+    block_comment = None 
     information = dedent('''
 - Wikipedia page :
 - Official site :
