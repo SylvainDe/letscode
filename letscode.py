@@ -3026,6 +3026,41 @@ class Pike(InterpretableLanguage):
             ''')
 
 
+class Oz(CompilableLanguage):
+    """Oz"""
+    name = 'oz'
+    extensions = ['oz']
+    inline_comment = '%'
+    block_comment = ('/*', '*/')
+    compiler = 'ozc'
+    compiler_options = ['-x']
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Oz_%28programming_language%29
+- Official site : http://mozart.github.io/
+- Documentation : http://mozart.github.io/documentation/
+- Code samples :
+    * LiteratePrograms :
+    * Progopedia : http://progopedia.com/language/oz/
+    * RosettaCode : http://rosettacode.org/wiki/Category:Oz
+''')
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            functor
+            import
+               Application
+               System
+
+            define
+               {System.showInfo 'Hello, world!'}
+               {Application.exit 0}
+
+            end
+            ''')
+
+
 class ExampleLanguage(Language):
     """Example"""
     name = None
@@ -3442,6 +3477,10 @@ class TestableCompilableLanguage(unittest.TestCase):
     def test_go(self):
         """Tests stuff"""
         self.compilation_flow(Go)
+
+    def test_oz(self):
+        """Tests stuff"""
+        self.compilation_flow(Oz)
 
     def test_latex(self):
         """Tests stuff"""
