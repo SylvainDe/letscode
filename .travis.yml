@@ -33,7 +33,7 @@ install:
   - sudo apt-get install -y groovy
   - sudo apt-get install -y pike7.8
   - sudo apt-get install -y fish
-  - sudo apt-get install -y mozart
+# sudo apt-get install -y mozart
 # sudo apt-get install -y gccgo -> not enough to make golang compile properly
 # sudo apt-get install -y mit-scheme -> "E: Sub-process /usr/bin/dpkg returned an error code (1)" to be investigated
 # sudo apt-get install -y rustc
