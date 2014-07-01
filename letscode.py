@@ -1290,6 +1290,22 @@ class Tcl(Shell):
         return subprocess_call_wrapper(['tcl_count', filename])
 
 
+class FishShell(Shell):
+    """FishShell"""
+    name = 'fishshell'
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Friendly_interactive_shell
+- Official site : http://fishshell.com/
+- Documentation : http://fishshell.com/docs/current/index.html
+- Subreddit : http://www.reddit.com/r/fishshell/
+''')
+
+    @classmethod
+    def get_interpreter_name(cls):
+        """Gets the name of the interpreter"""
+        return 'fish'
+
+
 class Awk(InterpretableLanguage):
     """Awk"""
     name = 'awk'
@@ -3015,7 +3031,7 @@ class ExampleLanguage(Language):
     name = None
     extensions = None
     inline_comment = None
-    block_comment = None 
+    block_comment = None
     information = dedent('''
 - Wikipedia page :
 - Official site :
@@ -3246,6 +3262,10 @@ class TestableInterpretableLanguage(unittest.TestCase):
     def test_dash(self):
         """Tests stuff"""
         self.interpreter_flow(Dash)
+
+    def test_fishshell(self):
+        """Tests stuff"""
+        self.interpreter_flow(FishShell)
 
     def test_awk(self):
         """Tests stuff"""

@@ -92,6 +92,7 @@ Programming languages (partially) supported:
     * Dash
     * Zsh
     * Tcl
+    * FishShell
     * Pike
     * Scala
     * Scheme
@@ -192,6 +193,7 @@ However, it calls a lot of other executables. Here's a non exhaustive list of th
  * groovy - sudo apt-get install groovy
  * genius - sudo apt-get install genius
  * pike - sudo apt-get install pike7.8
+ * fish - sudo apt-get install fish
  * swift - wget http://swiftlang.org/packages/swift-0.94.1.tar.gz && tar xfz swift-0.94.1.tar.gz && export PATH=$PATH:/path/to/swift-0.94.1/bin
  * clojure - wget http://central.maven.org/maven2/org/clojure/clojure/1.6.0/clojure-1.6.0.jar
  * ceylon - wget http://staging.ceylon-lang.org/download/dist/1_0_Milestone1_deb && sudo dpkg -i 1_0_Milestone1_deb
