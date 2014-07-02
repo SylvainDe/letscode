@@ -2720,6 +2720,23 @@ class Coq(Language):
             ''')
 
 
+class Agda(Language):
+    """Agda"""
+    name = 'agda'
+    extensions = ['agda', 'lagda']
+    inline_comment = '--'
+    block_comment = ('{-', '-}')
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Agda_%28programming_language%29
+- Official site : http://wiki.portal.chalmers.se/agda/pmwiki.php
+- Documentation : http://wiki.portal.chalmers.se/agda/pmwiki.php?n=Main.Documentation
+- Subreddit : http://www.reddit.com/r/agda/
+- Code samples :
+    * Progopedia : http://progopedia.com/language/agda/
+    * RosettaCode : http://rosettacode.org/wiki/Category:Agda
+''')
+
+
 class RLanguage(InterpretableLanguage):
     """R"""
     name = 'r'
