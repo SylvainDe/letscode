@@ -3061,6 +3061,40 @@ class Oz(CompilableLanguage):
             ''')
 
 
+class Verilog(CompilableLanguage):
+    """Verilog"""
+    name = 'verilog'
+    extensions = ['v']
+    inline_comment = '//'
+    block_comment = ('/*', '*/')
+    compiler = 'iverilog'
+    compiler_options = ['-N']
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Verilog
+- Official site : http://www.verilog.com/
+- Subreddit : http://www.reddit.com/r/Verilog
+- Tools online :
+    * Verilog online : http://iverilog.com/
+- Learn in Y minutes :
+- Code samples :
+    * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:Verilog
+    * RosettaCode : http://rosettacode.org/wiki/Category:Verilog
+''')
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            module main;
+              initial
+                begin
+                  $display("Hello, world!");
+                  $finish;
+                end
+            endmodule
+            ''')
+
+
 class ExampleLanguage(Language):
     """Example"""
     name = None
@@ -3469,6 +3503,10 @@ class TestableCompilableLanguage(unittest.TestCase):
     def test_haskell(self):
         """Tests stuff"""
         self.compilation_flow(Haskell)
+
+    def test_verilog(self):
+        """Tests stuff"""
+        self.compilation_flow(Verilog)
 
     def test_d(self):
         """Tests stuff"""
