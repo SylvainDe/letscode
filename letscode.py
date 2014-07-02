@@ -130,7 +130,7 @@ MODELINE_OPTIONS = {
         'link': '; ',
         'indentation_level': 'indent-width ',
         'tab_width': 'tab-width ',
-        'tab_width': 'word-wrap-column ',
+        'textwidth': 'word-wrap-column ',
         'expand_tab': ('replace-tabs off', 'replace-tabs on')
     },
     # Pending :
@@ -152,7 +152,7 @@ def get_modeline(editor, settings):
             flag = ed_opt.get(opt)
             if flag is not None:
                 ret += (flag[val] if isinstance(flag, tuple)
-                    else flag+str(val)) + link
+                        else flag+str(val)) + link
         if ret:
             ret = (editor if editor in MODELINE_VIMLIKE_EDITORS else '') + \
                 ed_opt['start'] + \
@@ -330,7 +330,7 @@ class Language(object):
             # Using inline comments
             beg = cls.inline_comment
             return '\n'.join(beg + ' ' +
-                            s.strip() for s in string.split('\n')) + '\n'
+                             s.strip() for s in string.split('\n')) + '\n'
         assert cls.block_comment is None and cls.inline_comment is None
         print_warning('Cannot comment string for %s' % (cls.name))
         return ''  # Empty string is safe and shoudn't cause troubles
@@ -3503,7 +3503,7 @@ def main():
     parser.add_argument(
         '--language', '-l',
         help=('programming language to consider (default: %(default)s)'),
-        choices=list(LANGUAGE_NAMES.keys()) + ['autodetect'],
+        choices=sorted(LANGUAGE_NAMES.keys()) + ['autodetect'],
         default='autodetect')
     parser.add_argument(
         '--action', '-a',
@@ -3544,8 +3544,12 @@ def main():
         choices=MODELINE_SUPPORTED_EDITORS,
         default=[])
     args = parser.parse_args()
-    if not args.action: args.action = default_actions
-    if not args.text_editors: args.text_editors = default_editors
+
+    # Workaround issue http://bugs.python.org/issue16399
+    if not args.action:
+        args.action = default_actions
+    if not args.text_editors:
+        args.text_editors = default_editors
 
     language = args.language
     if language == 'autodetect':
