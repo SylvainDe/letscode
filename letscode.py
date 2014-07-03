@@ -1041,6 +1041,32 @@ class TypeScript(Language):
 ''')
 
 
+class JSX(Language):
+    """JSX"""
+    name = 'jsx'
+    extensions = ['jsx']
+    inline_comment = '//'
+    information = dedent('''
+- Wikipedia page :
+- Official site : http://jsx.github.io
+- Documentation : http://jsx.github.io/doc.html
+- Tools online :
+    * Try on Web : http://jsx.github.io/try-on-web/
+- Subreddit :
+''')
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            class _Main {
+              static function main(args : string[]) :void {
+                log "Hello, world!";
+              }
+            }
+            ''')
+
+
 class Markdown(Language):
     """Markdown"""
     name = 'markdown'

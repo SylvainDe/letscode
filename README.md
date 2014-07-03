@@ -122,6 +122,7 @@ Programming languages (partially) supported:
     * Idris
     * CoffeeScript
     * TypeScript
+    * JSX
     * Dart
     * Nimrod
     * Agda
