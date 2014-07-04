@@ -234,9 +234,10 @@ class Language(object):
         # if extension mode is auto, we check if the extension is required
         # (if it is not in the list of extensions) and fallback to always/never
         if extmode == 'auto':
-            extmode = 'never' if (os.path.splitext(filename)[1].lower() in
-                            ("." + e.lower() for e in cls.extensions)
-                            ) else 'always'
+            extmode = 'never' if (
+                os.path.splitext(filename)[1].lower() in
+                ("." + e.lower() for e in cls.extensions)
+                ) else 'always'
         assert extmode in ['never', 'always']
 
         # if extension is required, add the first one
@@ -277,7 +278,7 @@ class Language(object):
         assert mod_pos in ['none', 'top', 'bottom', 'both']
         top, bottom = mod_pos in ['both', 'top'], mod_pos in ['both', 'bottom']
         modeline = cls.comment_string(
-                get_modelines(editors, cls.settings) if top or bottom else '')
+            get_modelines(editors, cls.settings) if top or bottom else '')
         filename = cls.get_actual_filename_to_use(args)
         return cls.get_header_info(modeline if top else '') + \
             cls.get_file_content(filename) + \
@@ -410,19 +411,19 @@ class CLanguage(CompilableLanguage):
 - Wikipedia page : http://en.wikipedia.org/wiki/C_%28programming_language%29
 - Official site :
 - Documentation :
-    * FAQ http://www.c-faq.com/
+    * FAQ : http://www.c-faq.com/
 - Subreddit : http://www.reddit.com/r/C_Programming/
 - Tools online :
-    * Compiler (with ASM output - no run) http://gcc.godbolt.org/
-    * Compiler (with ASM output - no run) http://assembly.ynh.io/
-    * C gibberish <-> English http://cdecl.org/
+    * Compiler (with ASM output - no run) : http://gcc.godbolt.org/
+    * Compiler (with ASM output - no run) : http://assembly.ynh.io/
+    * C gibberish <-> English : http://cdecl.org/
     * Demangler : http://demangler.com/
-    * Online compiler (run) http://coliru.stacked-crooked.com/
+    * Online compiler (run) : http://coliru.stacked-crooked.com/
 - Learn in Y minutes : http://learnxinyminutes.com/docs/c/
 - Code samples :
     * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:C
     * Progopedia : http://progopedia.com/language/c/
-    * RosettaCode :http://rosettacode.org/wiki/Category:C
+    * RosettaCode : http://rosettacode.org/wiki/Category:C
 ''')
 
     @classmethod
@@ -515,7 +516,7 @@ class ObjectiveC(CLanguage):
 - Code samples :
     * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:Objective-C
     * Progopedia : http://progopedia.com/language/objective-c/
-    * RosettaCode :http://rosettacode.org/wiki/Category:Objective-C
+    * RosettaCode : http://rosettacode.org/wiki/Category:Objective-C
 ''')
 
 
@@ -534,18 +535,18 @@ class Cpp(CLanguage):
 - Official site : http://isocpp.org/
 - Documentation : http://en.cppreference.com/
 - Misc :
-    * Guru of the week http://www.gotw.ca/gotw/
+    * Guru of the week : http://www.gotw.ca/gotw/
 - Subreddit : http://www.reddit.com/r/cpp/
 - Tools online :
-    * Compiler (with ASM output - no run) http://gcc.godbolt.org/
-    * Compiler (with ASM output - no run) http://assembly.ynh.io/
-    * C gibberish <-> English http://cdecl.org/
+    * Compiler (with ASM output - no run) : http://gcc.godbolt.org/
+    * Compiler (with ASM output - no run) : http://assembly.ynh.io/
+    * C gibberish <-> English : http://cdecl.org/
     * Demangler : http://demangler.com/
-    * Online compiler (run) http://coliru.stacked-crooked.com/
+    * Online compiler (run) : http://coliru.stacked-crooked.com/
 - Code samples :
     * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:C_Plus_Plus
     * Progopedia : http://progopedia.com/language/c-plus-plus/
-    * RosettaCode :http://rosettacode.org/wiki/Category:C%2B%2B
+    * RosettaCode : http://rosettacode.org/wiki/Category:C%2B%2B
 ''')
 
     @classmethod
@@ -590,7 +591,7 @@ class Java(CompilableLanguage):
 - Code samples :
     * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:Java
     * Progopedia : http://progopedia.com/language/java/
-    * RosettaCode :http://rosettacode.org/wiki/Category:Java
+    * RosettaCode : http://rosettacode.org/wiki/Category:Java
 - Misc ressources :
     * Hidden features (StackOverflow) : http://stackoverflow.com/questions/15496/hidden-features-of-java
     ''')
@@ -660,7 +661,7 @@ class Vala(CompilableLanguage):
 - Documentation : https://wiki.gnome.org/Projects/Vala/Documentation
 - Subreddit : http://www.reddit.com/r/vala
 - Code samples :
-    * RosettaCode :http://rosettacode.org/wiki/Category:Vala
+    * RosettaCode : http://rosettacode.org/wiki/Category:Vala
     ''')
 
     @classmethod
@@ -691,7 +692,7 @@ class Pascal(CompilableLanguage):
 - Code samples :
     * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:Pascal
     * Progopedia : http://progopedia.com/language/pascal/
-    * RosettaCode :http://rosettacode.org/wiki/Category:Pascal
+    * RosettaCode : http://rosettacode.org/wiki/Category:Pascal
     ''')
 
     @classmethod
@@ -735,7 +736,7 @@ class Ada(CompilableLanguage):
 - Code samples :
     * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:Ada
     * Progopedia : http://progopedia.com/language/ada/
-    * RosettaCode :http://rosettacode.org/wiki/Category:Ada
+    * RosettaCode : http://rosettacode.org/wiki/Category:Ada
     ''')
 
     @classmethod
@@ -771,7 +772,7 @@ class Fortran(CompilableLanguage):
 - Code samples :
     * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:Fortran
     * Progopedia : http://progopedia.com/language/fortran/
-    * RosettaCode :http://rosettacode.org/wiki/Category:Fortran
+    * RosettaCode : http://rosettacode.org/wiki/Category:Fortran
     ''')
 
     @classmethod
@@ -810,7 +811,7 @@ class Cobol(CompilableLanguage):
     * Compile online : http://www.compileonline.com/compile_cobol_online.php
 - Code samples :
     * Progopedia : http://progopedia.com/language/cobol/
-    * RosettaCode :http://rosettacode.org/wiki/Category:COBOL
+    * RosettaCode : http://rosettacode.org/wiki/Category:COBOL
     ''')
 
     @classmethod
@@ -850,7 +851,7 @@ class Haskell(CompilableLanguage):
 - Code samples :
     * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:Haskell
     * Progopedia : http://progopedia.com/language/haskell/
-    * RosettaCode :http://rosettacode.org/wiki/Category:Haskell
+    * RosettaCode : http://rosettacode.org/wiki/Category:Haskell
 ''')
 
     @classmethod
@@ -894,7 +895,7 @@ class DLanguage(CompilableLanguage):
 - Code samples :
     * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:D
     * Progopedia : http://progopedia.com/language/d/
-    * RosettaCode :http://rosettacode.org/wiki/Category:D
+    * RosettaCode : http://rosettacode.org/wiki/Category:D
 ''')
 
     @classmethod
@@ -919,6 +920,7 @@ class DLanguage(CompilableLanguage):
 class MarkupLanguage(Language):
     """A generic class for markup languages"""
     block_comment = ('<!--', '-->')
+
 
 class HTML(MarkupLanguage):
     """HTML"""
@@ -1020,7 +1022,7 @@ class CoffeeScript(Language):
 - Tools online :
     * JS to Coffee : http://js2coffee.org/
     * Coffee Lint : http://www.coffeelint.org/
-    * Try Coffee Script on http://coffeescript.org/
+    * Try Coffee Script : http://coffeescript.org/
 - Learn in Y minutes : http://learnxinyminutes.com/docs/coffeescript/
 - Subreddit : http://www.reddit.com/r/coffeescript/
 ''')
@@ -1079,7 +1081,7 @@ class Markdown(Language):
 - Misc :
     * Github flavored markdown : https://help.github.com/articles/github-flavored-markdown
 - Documentation :
-    * Basic https://help.github.com/articles/markdown-basics
+    * Basic : https://help.github.com/articles/markdown-basics
 - Tools online :
     * Markdown editors/viewers:
         http://daringfireball.net/projects/markdown/dingus
@@ -1087,7 +1089,7 @@ class Markdown(Language):
         http://markable.in/editor/
         http://dillinger.io/
         https://stackedit.io/
-    * HTML to text http://www.aaronsw.com/2002/html2text/
+    * HTML to text : http://www.aaronsw.com/2002/html2text/
 ''')
 
 
@@ -1185,7 +1187,7 @@ class Shell(InterpretableLanguage):
 - Official site :
 - Documentation :
 - Tool online:
-    * Explain shell http://explainshell.com/
+    * Explain shell : http://explainshell.com/
 - Subreddit :
 ''')
 
@@ -1210,9 +1212,9 @@ class Bash(Shell):
 - Wikipedia page : http://en.wikipedia.org/wiki/Bash_%28Unix_shell%29
 - Official site : https://www.gnu.org/software/bash/
 - Documentation :
-    * Bash reference manual http://www.gnu.org/software/bash/manual/bashref.html
+    * Bash reference manual : http://www.gnu.org/software/bash/manual/bashref.html
     * Bash scripting guide www.tldp.org/LDP/abs/html/
-    * Bash guide http://mywiki.wooledge.org/BashGuide
+    * Bash guide : http://mywiki.wooledge.org/BashGuide
 - Subreddit : http://www.reddit.com/r/bash/
 - Learn in Y minutes : http://learnxinyminutes.com/docs/bash/
 ''')
@@ -1294,7 +1296,7 @@ class Tcl(Shell):
 - Code samples :
     * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:Tcl
     * Progopedia : http://progopedia.com/language/tcl/
-    * RosettaCode :http://rosettacode.org/wiki/Category:Tcl
+    * RosettaCode : http://rosettacode.org/wiki/Category:Tcl
 ''')
 
     @classmethod
@@ -1351,7 +1353,7 @@ class Awk(InterpretableLanguage):
 - Code samples :
     * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:AWK
     * Progopedia : http://progopedia.com/language/awk/
-    * RosettaCode :http://rosettacode.org/wiki/Category:AWK
+    * RosettaCode : http://rosettacode.org/wiki/Category:AWK
 ''')
 
     @classmethod
@@ -1378,7 +1380,7 @@ class Ruby(InterpretableLanguage):
 - Code samples :
     * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:Ruby
     * Progopedia : http://progopedia.com/language/ruby/
-    * RosettaCode :http://rosettacode.org/wiki/Category:Ruby
+    * RosettaCode : http://rosettacode.org/wiki/Category:Ruby
     ''')
 
     @classmethod
@@ -1440,30 +1442,30 @@ class JavaScript(InterpretableLanguage):
     * http://www.ecmascript.org/
 - Subreddit : http://www.reddit.com/r/javascript/
 - Tools online :
-    * JS Bin http://jsbin.com/
-    * JS Hint http://www.jshint.com/
-    * JS Lint http://www.jslint.com/
-    * JS Lint http://www.javascriptlint.com/online_lint.php
-    * JS Perf http://jsperf.com/
-    * JS Fiddle http://jsfiddle.net/
-    * JS Compress http://jscompress.com/
-    * JS Compressor http://www.jscompressor.com/
-    * JS Nice http://www.jsnice.org/
-    * JS Minifier http://javascript-minifier.com/
-    * JS Mini http://www.jsmini.com/
-    * JS Obfuscator http://packer.50x.eu/
-    * JS Obfuscator http://javascriptobfuscator.com/
-    * JS Obfuscate http://www.jsobfuscate.com/
-    * UglifyJS http://lisperator.net/uglifyjs/#demo
-    * Visualise Javascript http://jstutor.herokuapp.com/
-    * Javascript interpreter (with pause and undo) http://wthimbleby.github.io/tailspin/
-    * Google playground (Google APIs) http://code.google.com/apis/ajax/playground/
-    * Fun : Sound of JS http://soundofjs.com
+    * JS Bin : http://jsbin.com/
+    * JS Hint : http://www.jshint.com/
+    * JS Lint : http://www.jslint.com/
+    * JS Lint : http://www.javascriptlint.com/online_lint.php
+    * JS Perf : http://jsperf.com/
+    * JS Fiddle : http://jsfiddle.net/
+    * JS Compress : http://jscompress.com/
+    * JS Compressor : http://www.jscompressor.com/
+    * JS Nice : http://www.jsnice.org/
+    * JS Minifier : http://javascript-minifier.com/
+    * JS Mini : http://www.jsmini.com/
+    * JS Obfuscator : http://packer.50x.eu/
+    * JS Obfuscator : http://javascriptobfuscator.com/
+    * JS Obfuscate : http://www.jsobfuscate.com/
+    * UglifyJS : http://lisperator.net/uglifyjs/#demo
+    * Visualise Javascript : http://jstutor.herokuapp.com/
+    * Javascript interpreter (with pause and undo) : http://wthimbleby.github.io/tailspin/
+    * Google playground (Google APIs) : http://code.google.com/apis/ajax/playground/
+    * Fun : Sound of JS : http://soundofjs.com
 - Learn in Y minutes : http://learnxinyminutes.com/docs/javascript/
 - Code samples :
     * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:JavaScript
     * Progopedia : http://progopedia.com/dialect/javascript/
-    * RosettaCode :http://rosettacode.org/wiki/Category:JavaScript
+    * RosettaCode : http://rosettacode.org/wiki/Category:JavaScript
     ''')
 
     @classmethod
@@ -1506,7 +1508,7 @@ class Perl(InterpretableLanguage):
 - Code samples :
     * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:Perl
     * Progopedia : http://progopedia.com/language/perl/
-    * RosettaCode :http://rosettacode.org/wiki/Category:Perl
+    * RosettaCode : http://rosettacode.org/wiki/Category:Perl
     ''')
 
     @classmethod
@@ -1552,7 +1554,7 @@ class Php(InterpretableLanguage):
 - Documentation : http://www.php.net/manual/en/
 - Subreddit : http://www.reddit.com/r/php
 - Tools online :
-    * Sandbox with multiple versions http://sandbox.onlinephpfunctions.com/
+    * Sandbox with multiple versions : http://sandbox.onlinephpfunctions.com/
     * Performances on 100+ PHP versions : http://3v4l.org/
     * PHP Fiddle : http://phpfiddle.org/
     * PHP Sandbox : http://www.exorithm.com/algorithm/sandbox
@@ -1562,7 +1564,7 @@ class Php(InterpretableLanguage):
 - Code samples :
     * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:PHP
     * Progopedia : http://progopedia.com/language/php/
-    * RosettaCode :http://rosettacode.org/wiki/Category:PHP
+    * RosettaCode : http://rosettacode.org/wiki/Category:PHP
     ''')
 
     @classmethod
@@ -1603,7 +1605,7 @@ class Python(InterpretableLanguage):
 - Official site : https://www.python.org/
 - List of PEPs : http://legacy.python.org/dev/peps/
     * PEP 8 : http://legacy.python.org/dev/peps/pep-0008/
-    * PEP 20: The Zen of Python http://legacy.python.org/dev/peps/pep-0020/
+    * PEP 20: The Zen of Python : http://legacy.python.org/dev/peps/pep-0020/
 - Documentation by version : https://www.python.org/doc/versions/
     * Python 2.7 : https://docs.python.org/release/2.7.6/
         # Library Reference : https://docs.python.org/release/2.7.6/library/index.html
@@ -1619,17 +1621,17 @@ class Python(InterpretableLanguage):
     * Python shell : http://shell.appspot.com/
     * Python interpreter : http://mathcs.holycross.edu/~kwalsh/python/
     * Learn Python with interactive console : http://www.learnpython.org/
-    * Python Anywhere https://www.pythonanywhere.com/try-ipython/
-    * Client side Python interpreter http://www.skulpt.org/
-    * Python checker http://pych.atomidata.com/
-    * Python Obfuscator http://pyobf.herokuapp.com/
+    * Python Anywhere : https://www.pythonanywhere.com/try-ipython/
+    * Client side Python interpreter : http://www.skulpt.org/
+    * Python checker : http://pych.atomidata.com/
+    * Python Obfuscator : http://pyobf.herokuapp.com/
 - Learn in Y minutes :
     * http://learnxinyminutes.com/docs/python/
     * http://learnxinyminutes.com/docs/python3/
 - Code samples :
     * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:Python
     * Progopedia : http://progopedia.com/language/python/
-    * RosettaCode :http://rosettacode.org/wiki/Category:Python
+    * RosettaCode : http://rosettacode.org/wiki/Category:Python
 - Misc ressources :
     * Hidden features (StackOverflow) : http://stackoverflow.com/questions/101268/hidden-features-of-python
     * Snippets/tips/tricks (/r/Python) : http://www.reddit.com/r/Python/comments/19dir2/whats_the_one_code_snippetpython_tricketc_did_you/
@@ -1771,7 +1773,7 @@ class Julia(InterpretableLanguage):
 - Subreddit : http://www.reddit.com/r/Julia/
 - Learn in Y minutes : http://learnxinyminutes.com/docs/julia/
 - Code samples :
-    * RosettaCode :http://rosettacode.org/wiki/Category:Julia
+    * RosettaCode : http://rosettacode.org/wiki/Category:Julia
 ''')
 
     @classmethod
@@ -1793,10 +1795,10 @@ class VimScript(InterpretableLanguage):
 - Documentation :
     * http://vimdoc.sourceforge.net/htmldoc/usr_41.html
     * http://learnvimscriptthehardway.stevelosh.com/
-    * Examples http://www.vim.org/scripts/
+    * Examples : http://www.vim.org/scripts/
 - Subreddit : http://www.reddit.com/r/vim/
 - Code samples :
-    * RosettaCode :http://rosettacode.org/wiki/Category:Vim_Script
+    * RosettaCode : http://rosettacode.org/wiki/Category:Vim_Script
 ''')
 
     @classmethod
@@ -1839,12 +1841,12 @@ class Lua(InterpretableLanguage):
 - Documentation : www.lua.org/docs.html
 - Subreddit : http://www.reddit.com/r/lua/
 - Tools online :
-    * Demo http://www.lua.org/demo.html
+    * Demo : http://www.lua.org/demo.html
 - Learn in Y minutes : http://learnxinyminutes.com/docs/lua/
 - Code samples :
     * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:Lua
     * Progopedia : http://progopedia.com/language/lua/
-    * RosettaCode :http://rosettacode.org/wiki/Category:Lua
+    * RosettaCode : http://rosettacode.org/wiki/Category:Lua
 ''')
 
     @classmethod
@@ -1877,14 +1879,14 @@ class SQL(DatabaseLanguage):
 - Documentation :
 - Subreddit : http://www.reddit.com/r/SQL/
 - Tools online :
-    * SQL Fiddle http://sqlfiddle.com/
-    * SQL query visualisation http://queryviz.com/online/
-    * SQL Hands on http://www.headfirstlabs.com/sql_hands_on/
-    * SQL sandbox http://coderzone.org/sqlsandbox/
+    * SQL Fiddle : http://sqlfiddle.com/
+    * SQL query visualisation : http://queryviz.com/online/
+    * SQL Hands on : http://www.headfirstlabs.com/sql_hands_on/
+    * SQL sandbox : http://coderzone.org/sqlsandbox/
 - Code samples :
-    * LiteratePrograms :
-    * Progopedia :
-    * RosettaCode :http://rosettacode.org/wiki/Category:SQL
+    * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:SQL
+    * Progopedia : http://progopedia.com/language/sql/
+    * RosettaCode : http://rosettacode.org/wiki/Category:SQL
 ''')
 
 
@@ -1962,13 +1964,12 @@ class Latex(CompiledDescriptionLanguages):
     * Online collaborative LaTeX editor : https://www.writelatex.com/
     * Equation editor : http://www.codecogs.com/latex/eqneditor.php
     * Detexify (symbol classifier) : http://detexify.kirelabs.org/classify.html
-    * Texify http://www.texify.com/
-    * BibTeX Concerter http://www.bibtex.org/Convert/
+    * Texify : http://www.texify.com/
+    * BibTeX Concerter : http://www.bibtex.org/Convert/
     * Compile Latex Online : http://www.compileonline.com/try_latex_online.php
 - Code samples :
-    * LiteratePrograms :
-    * Progopedia :
-    * RosettaCode :http://rosettacode.org/wiki/Category:LaTeX
+    * Progopedia : http://progopedia.com/language/tex/
+    * RosettaCode : http://rosettacode.org/wiki/Category:LaTeX
 ''')
 
     @classmethod
@@ -2053,9 +2054,9 @@ class Go(CompilableLanguage):
     * Playground : http://play.golang.org/
 - Learn in Y minutes : http://learnxinyminutes.com/docs/go/
 - Code samples :
-    * LiteratePrograms :
-    * Progopedia :
-    * RosettaCode :http://rosettacode.org/wiki/Category:Go
+    * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:Go
+    * Progopedia : http://progopedia.com/language/go/
+    * RosettaCode : http://rosettacode.org/wiki/Category:Go
 ''')
 
     @classmethod
@@ -2081,17 +2082,17 @@ class Clojure(InterpretableLanguage):
 - Documentation :
 - Subreddit : http://www.reddit.com/r/Clojure/
 - Tools online :
-    * Try Clojure http://tryclj.com/
-    * Clojure compiler http://closure-compiler.appspot.com/home
-    * Clojure REPL http://himera.herokuapp.com/index.html
-    * Interactive problems https://www.4clojure.com/
+    * Try Clojure : http://tryclj.com/
+    * Clojure compiler : http://closure-compiler.appspot.com/home
+    * Clojure REPL : http://himera.herokuapp.com/index.html
+    * Interactive problems : https://www.4clojure.com/
 - Learn in Y minutes :
     * http://learnxinyminutes.com/docs/clojure/
     * http://learnxinyminutes.com/docs/clojure-macros/
 - Code samples :
-    * LiteratePrograms :
-    * Progopedia :
-    * RosettaCode :http://rosettacode.org/wiki/Category:Clojure
+    * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:Clojure
+    * Progopedia : http://progopedia.com/dialect/clojure/
+    * RosettaCode : http://rosettacode.org/wiki/Category:Clojure
 ''')
     path_to_clojure_jar = \
         '/home/sylvaindesodt/TmpCode/.tmp/letscode/clojure-1.6.0.jar'
@@ -2142,13 +2143,13 @@ class Erlang(Language):
     * http://www.erlang.org/course/course.html
 - Subreddit : http://www.reddit.com/r/erlang/
 - Tools online :
-    * Try Erlang http://www.tryerlang.org/
-    * Compile Erlang Online http://www.compileonline.com/compile_erlang_online.php
+    * Try Erlang : http://www.tryerlang.org/
+    * Compile Erlang Online : http://www.compileonline.com/compile_erlang_online.php
 - Learn in Y minutes : http://learnxinyminutes.com/docs/erlang/
 - Code samples :
-    * LiteratePrograms :
-    * Progopedia :
-    * RosettaCode :http://rosettacode.org/wiki/Category:Erlang
+    * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:Erlang
+    * Progopedia : http://progopedia.com/language/erlang/
+    * RosettaCode : http://rosettacode.org/wiki/Category:Erlang
 ''')
 
     @classmethod
@@ -2179,9 +2180,7 @@ class Elixir(Language):
     * Try Elixir : http://try-elixir.herokuapp.com/
 - Learn in Y minutes : http://learnxinyminutes.com/docs/elixir/
 - Code samples :
-    * LiteratePrograms :
-    * Progopedia :
-    * RosettaCode :http://rosettacode.org/wiki/Category:Elixir
+    * RosettaCode : http://rosettacode.org/wiki/Category:Elixir
 ''')
 
 
@@ -2200,7 +2199,7 @@ class Lisp(InterpretableLanguage):
     * http://en.wikipedia.org/wiki/Common_Lisp
 - Official site :
 - Documentation :
-    * Common lisp wiki http://www.cliki.net/
+    * Common lisp wiki : http://www.cliki.net/
 - Subreddit :
     * http://www.reddit.com/r/lisp/
     * http://www.reddit.com/r/common_lisp
@@ -2209,8 +2208,8 @@ class Lisp(InterpretableLanguage):
     * http://learnxinyminutes.com/docs/common-lisp/
     * http://learnxinyminutes.com/docs/elisp/
 - Code samples :
-    * LiteratePrograms :
-    * Progopedia :
+    * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:Lisp
+    * Progopedia : http://progopedia.com/language/lisp/
     * RosettaCode :
         * http://rosettacode.org/wiki/Category:Lisp
         * http://rosettacode.org/wiki/Common_Lisp
@@ -2243,9 +2242,9 @@ class Scheme(InterpretableLanguage):
 - Subreddit : http://www.reddit.com/r/scheme
 - Tools online :
 - Code samples :
-    * LiteratePrograms :
-    * Progopedia :
-    * RosettaCode :http://rosettacode.org/wiki/Category:Scheme
+    * LiteratePrograms : en.literateprograms.org/Category:Programming_language:Scheme
+    * Progopedia : http://progopedia.com/dialect/scheme/
+    * RosettaCode : http://rosettacode.org/wiki/Category:Scheme
 ''')
 
     @classmethod
@@ -2282,15 +2281,13 @@ class Racket(InterpretableLanguage):
 - Wikipedia page : http://en.wikipedia.org/wiki/Racket_%28programming_language%29
 - Official site : http://racket-lang.org/
 - Documentation : http://docs.racket-lang.org/index.html
-    * Guide http://docs.racket-lang.org/guide/
-    * Reference http://docs.racket-lang.org/reference/
+    * Guide : http://docs.racket-lang.org/guide/
+    * Reference : http://docs.racket-lang.org/reference/
 - Subreddit : http://www.reddit.com/r/Racket
 - Tools online :
 - Learn in Y minutes : http://learnxinyminutes.com/docs/racket/
 - Code samples :
-    * LiteratePrograms :
-    * Progopedia :
-    * RosettaCode :http://rosettacode.org/wiki/Category:Racket
+    * RosettaCode : http://rosettacode.org/wiki/Category:Racket
 ''')
 
     @classmethod
@@ -2314,9 +2311,9 @@ class Caml(Language):
 - Subreddit :
 - Tools online :
 - Code samples :
-    * LiteratePrograms :
-    * Progopedia :
-    * RosettaCode :http://rosettacode.org/wiki/Category:Caml
+    * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:Standard_ML
+    * Progopedia : http://progopedia.com/language/standard-ml/
+    * RosettaCode : http://rosettacode.org/wiki/Category:Caml
 ''')
 
 
@@ -2333,14 +2330,14 @@ class Scala(InterpretableLanguage):  # it can be compiled too but that's for lat
 - Documentation : http://docs.scala-lang.org/
 - Subreddit : http://www.reddit.com/r/scala/
 - Tools online :
-    * Scala tutorials http://scalatutorials.com/tour/
-    * Scala fiddle http://scalafiddle.net/console
-    * Scala JS Fiddle http://www.scala-js-fiddle.com/
+    * Scala tutorials : http://scalatutorials.com/tour/
+    * Scala fiddle : http://scalafiddle.net/console
+    * Scala JS Fiddle : http://www.scala-js-fiddle.com/
 - Learn in Y minutes : http://learnxinyminutes.com/docs/scala/
 - Code samples :
-    * LiteratePrograms :
-    * Progopedia :
-    * RosettaCode :http://rosettacode.org/wiki/Category:Scala
+    * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:Scala
+    * Progopedia : http://progopedia.com/language/scala/
+    * RosettaCode : http://rosettacode.org/wiki/Category:Scala
 ''')
 
     @classmethod
@@ -2377,10 +2374,11 @@ class Rust(CompilableLanguage):
 - Wiki : https://github.com/mozilla/rust/wiki
 - Subreddit : http://www.reddit.com/r/rust/
 - Tools online :
+    * CompileOnline : http://www.compileonline.com/compile_rust_online.php
+- Learn in Y minutes : http://learnxinyminutes.com/docs/rust/
 - Code samples :
-    * LiteratePrograms :
-    * Progopedia :
-    * RosettaCode :http://rosettacode.org/wiki/Category:Rust
+    * Progopedia : http://progopedia.com/language/rust/
+    * RosettaCode : http://rosettacode.org/wiki/Category:Rust
 ''')
 
     @classmethod
@@ -2407,15 +2405,13 @@ class Elm(Language):
 - Wikipedia page : http://en.wikipedia.org/wiki/Elm_%28programming_language%29
 - Official site : http://elm-lang.org/
 - Documentation :
-    * Syntax http://elm-lang.org/learn/Syntax.elm
-    * Librairies http://elm-lang.org/Libraries.elm
+    * Syntax : http://elm-lang.org/learn/Syntax.elm
+    * Librairies : http://elm-lang.org/Libraries.elm
 - Subreddit : http://www.reddit.com/r/elm
 - Tools online :
     * Try Elm : http://elm-lang.org/try
 - Code samples :
-    * LiteratePrograms :
-    * Progopedia :
-    * RosettaCode :http://rosettacode.org/wiki/Category:Elm
+    * RosettaCode : http://rosettacode.org/wiki/Category:Elm
 ''')
 
 
@@ -2428,17 +2424,16 @@ class Dart(Language):
 - Wikipedia page : http://en.wikipedia.org/wiki/Dart_%28programming_language%29
 - Official site : https://www.dartlang.org/
 - Documentation :
-    * Programmer's guide https://www.dartlang.org/docs/
-    * API http://api.dartlang.org/
-    * Language specifications https://www.dartlang.org/docs/spec/
+    * Programmer's guide : https://www.dartlang.org/docs/
+    * API : http://api.dartlang.org/
+    * Language specifications : https://www.dartlang.org/docs/spec/
 - Subreddit : http://www.reddit.com/r/dartlang/
 - Tools online :
     * Try Dart : http://try.dartlang.org/
 - Learn in Y minutes : http://learnxinyminutes.com/docs/dart/
 - Code samples :
-    * LiteratePrograms :
-    * Progopedia :
-    * RosettaCode :http://rosettacode.org/wiki/Category:Dart
+    * Progopedia : http://progopedia.com/language/dart/
+    * RosettaCode : http://rosettacode.org/wiki/Category:Dart
 ''')
 
 
@@ -2460,9 +2455,9 @@ class Prolog(InterpretableLanguage):
 - Tools online :
     * http://ioctl.org/logic/prolog-latest
 - Code samples :
-    * LiteratePrograms :
-    * Progopedia :
-    * RosettaCode :http://rosettacode.org/wiki/Category:Prolog
+    * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:Prolog
+    * Progopedia : http://progopedia.com/language/prolog/
+    * RosettaCode : http://rosettacode.org/wiki/Category:Prolog
 ''')
 
     @classmethod
@@ -2491,11 +2486,10 @@ class PostScript(Language):
     * http://www.adobe.com/products/postscript/pdfs/PLRM.pdf
 - Subreddit : http://www.reddit.com/r/PostScript
 - Tools online :
-    * PS 2 PDF http://www.ps2pdf.com/convert.htm
+    * PS 2 PDF : http://www.ps2pdf.com/convert.htm
 - Code samples :
-    * LiteratePrograms :
-    * Progopedia :
-    * RosettaCode :http://rosettacode.org/wiki/Category:PostScript
+    * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:PostScript
+    * RosettaCode : http://rosettacode.org/wiki/Category:PostScript
 ''')
 
 
@@ -2517,9 +2511,7 @@ class Scilab(InterpretableLanguage):
     * http://cloud.scilab.in/
     * http://hotcalcul.com/on-line-calculator/scilab
 - Code samples :
-    * LiteratePrograms :
-    * Progopedia :
-    * RosettaCode :http://rosettacode.org/wiki/Category:Scilab
+    * RosettaCode : http://rosettacode.org/wiki/Category:Scilab
 ''')
 
     @classmethod
@@ -2558,9 +2550,7 @@ class Octave(InterpretableLanguage):
     * Octave Online : http://octave-online.net/
     * Execute Matlab/Octave online : http://www.compileonline.com/execute_matlab_online.php
 - Code samples :
-    * LiteratePrograms :
-    * Progopedia :
-    * RosettaCode :http://rosettacode.org/wiki/Category:Octave
+    * RosettaCode : http://rosettacode.org/wiki/Category:Octave
 ''')
 
     @classmethod
@@ -2618,10 +2608,10 @@ class Forth(InterpretableLanguage):
 - Tools online :
     * JSForth (interpreter in JS) : http://www.forthfreak.net/jsforth.html
     * Forth online : http://www.compileonline.com/execute_forth_online.php
-- Code samples :
-    * LiteratePrograms :
-    * Progopedia :
-    * RosettaCode :
+ http://rosettacode.org/wiki/Category:Forth- Code samples :
+    * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:Forth
+    * Progopedia : http://progopedia.com/language/forth/
+    * RosettaCode : http://rosettacode.org/wiki/Category:Forth
 ''')
 
     @classmethod
@@ -2633,7 +2623,7 @@ class Forth(InterpretableLanguage):
     def get_file_content(cls, _):
         """Returns the content to be put in the file."""
         return dedent('''
-            .( Hello World!) CR
+            .( Hello, world!) CR
             bye
             ''')
 
@@ -2649,9 +2639,8 @@ class Nimrod(Language):
 - Documentation : http://nimrod-lang.org/documentation.html
 - Subreddit : http://www.reddit.com/r/nimrod
 - Code samples :
-    * LiteratePrograms :
-    * Progopedia :
-    * RosettaCode :http://rosettacode.org/wiki/Category:Nimrod
+    * Progopedia : http://progopedia.com/language/nimrod/
+    * RosettaCode : http://rosettacode.org/wiki/Category:Nimrod
 ''')
 
     @classmethod
@@ -2674,9 +2663,7 @@ class ActionScript(Language):
 - Documentation :
 - Subreddit : http://www.reddit.com/r/actionscript
 - Code samples :
-    * LiteratePrograms :
-    * Progopedia :
-    * RosettaCode :http://rosettacode.org/wiki/Category:ActionScript
+    * RosettaCode : http://rosettacode.org/wiki/Category:ActionScript
 ''')
 
 
@@ -2706,8 +2693,7 @@ class Ceylon(Language):
     * Try Ceylon : http://try.ceylon-lang.org/
 - Learn in Y minutes :
 - Code samples :
-    * LiteratePrograms :
-    * Progopedia :
+    * Progopedia : http://progopedia.com/language/ceylon/
     * RosettaCode :
 ''')
     compiler = 'ceylonc'
@@ -2857,7 +2843,7 @@ class FSharp(Language):
     def get_file_content(cls, _):
         """Returns the content to be put in the file."""
         return dedent('''
-            printfn "Hello World!"
+            printfn "Hello, world!"
             ''')
 
 
@@ -3001,7 +2987,7 @@ class JLanguage(Language):
 - Wiki : http://www.jsoftware.com/jwiki/
 - Subreddit : http://www.reddit.com/r/jlang
 - Code samples :
-    * LiteratePrograms :
+    * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:J
     * Progopedia : http://progopedia.com/language/j/
     * RosettaCode : http://rosettacode.org/wiki/Category:J
 ''')
@@ -3026,7 +3012,6 @@ class Idris(Language):
 - Documentation : http://www.idris-lang.org/documentation/
 - Subreddit : http://www.reddit.com/r/Idris
 - Code samples :
-    * LiteratePrograms :
     * RosettaCode : http://rosettacode.org/wiki/Category:Idris
 ''')
 
@@ -3037,7 +3022,7 @@ class Idris(Language):
             module Main
 
              main : IO ()
-             main = putStrLn "Hello, World!"
+             main = putStrLn "Hello, world!"
             ''')
 
 
@@ -3053,7 +3038,6 @@ class Pike(InterpretableLanguage):
 - Official site : http://pike.lysator.liu.se/
 - Documentation : http://pike.lysator.liu.se/docs/
 - Code samples :
-    * LiteratePrograms :
     * Progopedia : http://progopedia.com/language/pike/
     * RosettaCode : http://rosettacode.org/wiki/Category:Pike
 ''')
@@ -3082,7 +3066,7 @@ class Oz(CompilableLanguage):
 - Official site : http://mozart.github.io/
 - Documentation : http://mozart.github.io/documentation/
 - Code samples :
-    * LiteratePrograms :
+    * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:Oz
     * Progopedia : http://progopedia.com/language/oz/
     * RosettaCode : http://rosettacode.org/wiki/Category:Oz
 ''')
