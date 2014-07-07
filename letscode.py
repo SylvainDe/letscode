@@ -3149,6 +3149,32 @@ class Verilog(CompilableLanguage):
             ''')
 
 
+class SLang(InterpretableLanguage):
+    """SLang"""
+    name = 'slang'
+    extensions = ['sl']
+    inline_comment = '%' 
+    shell_stop = 'quit' 
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/S-Lang_%28programming_language%29
+- Official site : http://www.jedsoft.org/slang/index.html
+- Documentation : http://www.jedsoft.org/slang/docs.html
+- Code samples :
+    * Progopedia : http://progopedia.com/language/s-lang/
+    * RosettaCode : http://rosettacode.org/wiki/Category:S-lang
+''')
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return 'printf("Hello, world!\\n");'
+
+    @classmethod
+    def get_interpreter_name(cls):
+        """Gets the name of the interpreter"""
+        return 'slsh'
+
+
 class ExampleLanguage(Language):
     """Example"""
     name = None
@@ -3441,6 +3467,10 @@ class TestableInterpretableLanguage(unittest.TestCase):
     def test_clojure(self):
         """Tests stuff"""
         self.interpreter_flow(Clojure)
+
+    def test_slang(self):
+        """Tests stuff"""
+        self.interpreter_flow(SLang)
 
     def test_scilab(self):
         """Tests stuff"""

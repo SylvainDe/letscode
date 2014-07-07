@@ -102,6 +102,7 @@ Programming languages (partially) supported:
     * Racket
     * Forth
     * Swift (not the Apple one)
+    * S-Lang
     * Prolog
     * R
     * Scilab
@@ -203,6 +204,7 @@ However, it calls a lot of other executables. Here's a non exhaustive list of th
  * iverilog - sudo apt-get install verilog
  * agda - sudo apt-get install agda
  * swift - wget http://swiftlang.org/packages/swift-0.94.1.tar.gz && tar xfz swift-0.94.1.tar.gz && export PATH=$PATH:/path/to/swift-0.94.1/bin
+ * slsh - sudo apt-get install slsh
  * clojure - wget http://central.maven.org/maven2/org/clojure/clojure/1.6.0/clojure-1.6.0.jar
  * ceylon - wget http://staging.ceylon-lang.org/download/dist/1_0_Milestone1_deb && sudo dpkg -i 1_0_Milestone1_deb
  * factor - wget http://downloads.factorcode.org/releases/0.96/factor-linux-x86-32-0.96.tar.gz
