@@ -120,6 +120,7 @@ Programming languages (partially) supported:
     * Erlang
     * Elixir
     * Idris
+    * APL
     * CoffeeScript
     * TypeScript
     * JSX

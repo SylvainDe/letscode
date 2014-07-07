@@ -3026,6 +3026,33 @@ class Idris(Language):
             ''')
 
 
+class APL(Language):
+    """APL"""
+    name = 'apl'
+    extensions = ['apl']
+    inline_comment = '@'  # '⍝' seems to be suggested sometimes
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/APL_%28programming_language%29
+- Official site :
+- Documentation :
+- Subreddit : http://www.reddit.com/r/apljk/
+- Tools online :
+    * APL Demo : http://ngn.github.io/apl/web/index.html
+    * Try APL : http://tryapl.org/
+    * Gnu APL.js : http://baruchel.hd.free.fr/apps/apl/
+- Learn in Y minutes :
+- Code samples :
+    * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:APL
+    * Progopedia : http://progopedia.com/language/apl/
+    * RosettaCode : http://rosettacode.org/wiki/Category:APL
+''')
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return 'Hello, world!'
+
+
 class Pike(InterpretableLanguage):
     """Pike"""
     name = 'pike'
