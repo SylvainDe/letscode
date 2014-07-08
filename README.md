@@ -94,6 +94,7 @@ Programming languages (partially) supported:
     * Ash
     * Dash
     * Zsh
+    * Yash
     * Tcl
     * FishShell
     * Pike
@@ -166,6 +167,7 @@ However, it calls a lot of other executables. Here's a non exhaustive list of th
  * ash - sudo apt-get install ash
  * dash - sudo apt-get install dash
  * ksh - sudo apt-get install ksh
+ * yash - sudo apt-get install yash
  * tcsh - sudo apt-get install tcsh
  * clisp - sudo apt-get install clisp
  * scheme / mit-scheme - sudo apt-get install mit-scheme

@@ -1254,6 +1254,7 @@ class Tcsh(Shell):
 
 class Ksh(Shell):
     """Ksh"""
+    # Other implementations : mksh and pdksh
     name = 'ksh'
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Korn_shell
@@ -1281,6 +1282,14 @@ class Dash(Shell):
 - Wikipedia page : http://en.wikipedia.org/wiki/Debian_Almquist_shell
 - Code samples :
     * RosettaCode : http://rosettacode.org/wiki/Debian_Almquist_Shell
+''')
+
+
+class Yash(Shell):
+    """Yash"""
+    name = 'dash'
+    information = dedent('''
+- Official site : http://www.samiam.org/software/yash.html
 ''')
 
 
@@ -3462,6 +3471,10 @@ class TestableInterpretableLanguage(unittest.TestCase):
     def test_dash(self):
         """Tests stuff"""
         self.interpreter_flow(Dash)
+
+    def test_yash(self):
+        """Tests stuff"""
+        self.interpreter_flow(Yash)
 
     def test_fishshell(self):
         """Tests stuff"""

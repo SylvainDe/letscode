@@ -13,6 +13,7 @@ install:
   - sudo apt-get install -y ash
   - sudo apt-get install -y csh
   - sudo apt-get install -y ksh
+  - sudo apt-get install -y yash
   - sudo apt-get install -y racket
   - sudo apt-get install -y scala
   - sudo apt-get install -y graphviz
