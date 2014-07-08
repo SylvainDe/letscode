@@ -3165,8 +3165,8 @@ class SLang(InterpretableLanguage):
     """SLang"""
     name = 'slang'
     extensions = ['sl']
-    inline_comment = '%' 
-    shell_stop = 'quit' 
+    inline_comment = '%'
+    shell_stop = 'quit'
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/S-Lang_%28programming_language%29
 - Official site : http://www.jedsoft.org/slang/index.html
@@ -3233,6 +3233,21 @@ class Icon(CompilableLanguage):  # Could also be interpreted
         output = cls.get_output_filename(filename)
         return subprocess_call_wrapper(
             [cls.compiler, '-o', output] + cls.compiler_options + [filename])
+
+
+class Mars(Language):
+    """Mars"""
+    name = 'mars'
+    extensions = ['mar']
+    inline_comment = '#'
+    information = dedent('''
+- Wikipedia page :
+- Official site : http://mars-lang.appspot.com/
+- Documentation :
+    * General doc : http://mars-lang.appspot.com/docs/index.html
+    * Language ref : http://mars-lang.appspot.com/docs/ref/index.html
+    * Library ref : http://mars-lang.appspot.com/docs/lib/index.html
+''')
 
 
 class ExampleLanguage(Language):
