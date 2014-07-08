@@ -37,6 +37,9 @@ InterpretableLanguage or CompilableLanguage.
 # Next steps are :
 # - refactoring (splitting into files)
 # - re-organising unit tests
+# - change design to split things related to the language itself and things
+#   related to the compiler/intepreter/etc. It could be a good idea to use
+#   composition over inheritance.
 
 import argparse
 import subprocess
@@ -2821,7 +2824,7 @@ class CSharp(Language):
 
 class FSharp(Language):
     """F#"""
-    name = 'fsharp'
+    name = 'fsharp'  # fsharpc
     extensions = ['fsx', 'fssscript']
     inline_comment = '//'
     information = dedent('''
@@ -3173,6 +3176,54 @@ class SLang(InterpretableLanguage):
     def get_interpreter_name(cls):
         """Gets the name of the interpreter"""
         return 'slsh'
+
+
+class Spark(Language):
+    """Spark"""
+    name = 'spark'
+    extensions = ['spark']
+    inline_comment = '#'
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/SPARK_%28programming_language%29
+- Code samples :
+    * RosettaCode : http://rosettacode.org/wiki/Category:SPARK
+''')
+
+
+class Icon(CompilableLanguage):  # Could also be interpreted
+    """Icon"""
+    name = 'icon'
+    extensions = ['icn']
+    inline_comment = '#'
+    compiler = 'icont'
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Icon_programming_language
+- Official site : http://www.cs.arizona.edu/icon/
+- Documentation :
+    * http://www.cs.arizona.edu/icon/refernce/ref.htm
+    * http://www.cs.arizona.edu/icon/v951/docguide.htm
+- Code samples :
+    * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:Icon
+    * Progopedia : http://progopedia.com/language/icon/
+    * RosettaCode : http://rosettacode.org/wiki/Category:Icon
+''')
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            procedure main()
+                write("Hello, world!")
+            end
+            ''')
+
+    @classmethod
+    def compile(cls, args):
+        """Compiles the file"""
+        filename = cls.get_actual_filename_to_use(args)
+        output = cls.get_output_filename(filename)
+        return subprocess_call_wrapper(
+            [cls.compiler, '-o', output] + cls.compiler_options + [filename])
 
 
 class ExampleLanguage(Language):
@@ -3603,6 +3654,10 @@ class TestableCompilableLanguage(unittest.TestCase):
     def test_oz(self):
         """Tests stuff"""
         self.compilation_flow(Oz)
+
+    def test_icon(self):
+        """Tests stuff"""
+        self.compilation_flow(Icon)
 
     def test_latex(self):
         """Tests stuff"""
