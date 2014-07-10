@@ -7,8 +7,7 @@ import os
 import stat
 import re
 import myshutil as shutil
-from helper import print_warning, print_error, print_info
-from helper import subprocess_call_wrapper
+from helper import print_error, print_info, subprocess_call_wrapper
 from modeline import get_modelines
 from comments import comment_string
 from textwrap import dedent

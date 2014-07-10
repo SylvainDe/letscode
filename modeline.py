@@ -69,7 +69,7 @@ def get_modeline(editor, settings):
             flag = ed_opt.get(opt)
             if flag is not None:
                 ret += (flag[val] if isinstance(flag, tuple)
-                        else flag+str(val)) + link
+                        else flag + str(val)) + link
         if ret:
             ret = (editor if editor in MODELINE_VIMLIKE_EDITORS else '') + \
                 ed_opt['start'] + \

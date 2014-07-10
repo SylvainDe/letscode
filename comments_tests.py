@@ -7,6 +7,7 @@ from comments import comment_string_with_inline, \
         comment_string
 import unittest
 
+
 class TestCommentString(unittest.TestCase):
     """Unit tests related to string commenting"""
     def test_inline_comment(self):
