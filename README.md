@@ -137,6 +137,9 @@ Programming languages (partially) supported:
     * Markdown
     * HTML
     * XML
+    * YAML
+    * HAML
+    * CSS
     * Spark
     * Factor
     * Mars

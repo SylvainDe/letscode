@@ -818,6 +818,7 @@ class CSS(Language):
 - Documentation :
 - Tools online :
     * CSS Lint : http://csslint.net/
+    * CSS Comb (in progress) : http://csscomb.com/
 - Learn in Y minutes : http://learnxinyminutes.com/docs/css/
 ''')
 
@@ -855,6 +856,22 @@ class YAML(Language):
     * YAML to JSON : http://yamltojson.com/
     * JSON to YAML : http://jsontoyaml.com/
 - Learn in Y minutes : http://learnxinyminutes.com/docs/yaml/
+''')
+
+
+class HAML(Language):
+    """HAML  (HTML Abstraction Markup Language)"""
+    name = 'haml'
+    extensions = ['haml']
+    inline_comment = '-#'
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Haml
+- Official site : http://haml.info/
+- Documentation : http://haml.info/docs.html
+- Tools online :
+    * HAML to ERB : http://haml2erb.herokuapp.com/
+    * HAML to HTML : http://www.haml-converter.com/
+    * HTML to HAML : http://htmltohaml.com/
 ''')
 
 
