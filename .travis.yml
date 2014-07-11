@@ -45,4 +45,8 @@ install:
 # sudo apt-get install -y php
 # sudo apt-get install -y lua
 
-script: python3 -m unittest discover --pattern=*.py
+before_script:
+ - pep8 *.py --ignore=E501
+
+script:
+ - python3 -m unittest discover --pattern=*.py

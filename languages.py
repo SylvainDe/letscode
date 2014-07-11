@@ -1587,9 +1587,9 @@ class Python(InterpretableLanguage):
         """Calls static checker"""
         filename = cls.get_actual_filename_to_use(args)
         commands = {
-            'pep8':      [],
-            'pylint':    [],
-            'pyflakes':  [],
+            'pep8': [],
+            'pylint': [],
+            'pyflakes': [],
             'pychecker': ['--limit', '100']
         }
         return_values = [
