@@ -2226,6 +2226,8 @@ class Rust(CompilableLanguage):
     compiler_options = ['-g']
     inline_comment = '//'
     block_comment = ('/*', '*/')
+    # Official Rust guidelines : https://github.com/rust-lang/rust-guidelines
+    settings = {'indentation_level': 4, 'tab_width': 4, 'expand_tab': True}
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Rust_%28programming_language%29
 - Official site : http://www.rust-lang.org/
