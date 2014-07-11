@@ -7,6 +7,7 @@ before_install:
   - sudo apt-get update -qq
 
 install:
+  - pip install pep8
   - sudo apt-get install -y gfortran
   - sudo apt-get install -y gnat
   - sudo apt-get install -y fpc
