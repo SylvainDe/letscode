@@ -759,6 +759,8 @@ class HTML(MarkupLanguage):
     """HTML"""
     name = 'html'
     extensions = ['html']
+    # Google http://google-styleguide.googlecode.com/svn/trunk/htmlcssguide.xml#Indentation
+    settings = {'indentation_level': 2, 'tab_width': 2, 'expand_tab': True}
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/HTML
 - Official site : http://www.w3.org/
@@ -797,6 +799,8 @@ class CSS(Language):
     name = 'css'
     extensions = ['css']
     block_comment = ('/*', '*/')
+    # https://github.com/csswizardry/CSS-Guidelines
+    settings = {'indentation_level': 4, 'tab_width': 4, 'expand_tab': True}
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Cascading_Style_Sheets
 - Official site : http://www.w3.org/Style/CSS/Overview.en.html
@@ -865,6 +869,9 @@ class CoffeeScript(Language):
     name = 'coffeescript'
     extensions = ['coffee']
     inline_comment = '#'
+    shell_stop = 'process.exit()'  # not relevant but in order not to forget
+    # https://github.com/polarmobile/coffeescript-style-guide
+    settings = {'indentation_level': 4, 'tab_width': 4, 'expand_tab': True}
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/CoffeeScript
 - Official site : http://coffeescript.org/
@@ -1226,6 +1233,9 @@ class Ruby(InterpretableLanguage):
     name = 'ruby'
     extensions = ['rb', 'rbw']
     shell_stop = 'exit'  # or quit, irb_exit
+    # https://github.com/bbatsov/ruby-style-guide
+    # https://github.com/styleguide/ruby
+    settings = {'indentation_level': 2, 'tab_width': 2, 'expand_tab': True}
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Ruby_%28programming_language%29
 - Official site : https://www.ruby-lang.org/fr/
@@ -1294,6 +1304,8 @@ class JavaScript(InterpretableLanguage):
     inline_comment = '//'
     block_comment = ('/*', '*/')
     shell_stop = 'quit()'  # in rhino
+    # https://github.com/styleguide/javascript
+    settings = {'indentation_level': 2, 'tab_width': 2, 'expand_tab': True}
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/JavaScript
 - "Official" sites :
