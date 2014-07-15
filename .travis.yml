@@ -9,6 +9,7 @@ before_install:
 
 install:
   - pip install pep8
+  - pip install --upgrade pyflakes
   - sudo apt-get install -y gfortran
   - sudo apt-get install -y gnat
   - sudo apt-get install -y fpc
@@ -48,6 +49,7 @@ install:
 # sudo apt-get install -y lua
 
 before_script:
+ - pyflakes .
  - pep8 *.py --ignore=E501,E713
   # to have the list anyway
  - pep8 *.py --select=E501,E713 || true
