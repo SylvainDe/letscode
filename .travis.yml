@@ -48,9 +48,9 @@ install:
 # sudo apt-get install -y lua
 
 before_script:
- - pep8 *.py --ignore=E501
+ - pep8 *.py --ignore=E501,E713
   # to have the list anyway
- - pep8 *.py --select=E501 || true
+ - pep8 *.py --select=E501,E713 || true
 
 script:
  - python3 -m unittest discover --pattern=*.py
