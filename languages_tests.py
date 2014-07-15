@@ -6,7 +6,7 @@ from languages import Ada, Ash, Awk, Bash, CLanguage, Clojure, Cobol, Cpp, \
     Csh, Dash, DLanguage, Dot, FishShell, Forth, Fortran, Go, Groovy, Haskell, \
     Icon, Java, JavaScript, Julia, Ksh, Latex, Lisp, Lua, ObjectiveC, Octave, \
     Oz, Pascal, Perl, Php, Pike, Prolog, Python, Python2, Python3, Racket, \
-    RLanguage, Ruby, Rust, Scala, Scheme, Scilab, Shell, SLang, \
+    reST, RLanguage, Ruby, Rust, Scala, Scheme, Scilab, Shell, SLang, \
     SmallTalk, Swift, Tcl, Tcsh, Vala, Verilog, Yash, Zsh
 from modeline import MODELINE_SUPPORTED_EDITORS
 from collections import namedtuple
@@ -313,6 +313,10 @@ class TestableCompilableLanguage(unittest.TestCase):
     def test_latex(self):
         """Tests stuff"""
         self.compilation_flow(Latex)
+
+    def test_rest(self):
+        """Tests stuff"""
+        self.compilation_flow(reST)
 
     def test_dot(self):
         """Tests stuff"""

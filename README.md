@@ -72,6 +72,7 @@ Programming languages (partially) supported:
     * Oz
     * Icon
     * LaTeX
+    * reST
     * DOT
 
  * Languages with running (interpreted) Hello World :

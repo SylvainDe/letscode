@@ -864,6 +864,48 @@ class HAML(Language):
 ''')
 
 
+class reST(CompiledDescriptionLanguages):
+    """reStructuredText"""
+    name = 'rest'
+    extensions = ['rst']
+    inline_comment = '..'
+    compiler = 'rst2html'
+    # other compilers : rst2html rst2latex rst2man rst2odt rst2odt_prepstyles
+    # rst2pseudoxml rst2s5 rst2xetex rst2xml
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/ReStructuredText
+- Official site : http://docutils.sourceforge.net/rst.html
+- Documentation : http://docutils.sourceforge.net/docs/ref/rst/restructuredtext.html
+- Cheatsheet : http://docutils.sourceforge.net/docs/user/rst/cheatsheet.txt
+''')
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            Section Header
+            ==============
+
+            Subsection Header
+            -----------------
+
+            Hello, world!
+            ''')
+
+    @classmethod
+    def get_output_filename(cls, filename):
+        """Gets the name of the output file"""
+        return os.path.splitext(filename)[0] + '.html'
+
+    @classmethod
+    def compile(cls, args):
+        """Compiles the file"""
+        filename = cls.get_actual_filename_to_use(args)
+        output = cls.get_output_filename(filename)
+        return subprocess_call_wrapper(
+            [cls.compiler] + cls.compiler_options + [filename, output])
+
+
 class CoffeeScript(Language):
     """CoffeeScript"""
     name = 'coffeescript'
