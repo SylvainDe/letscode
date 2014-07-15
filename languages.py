@@ -926,6 +926,11 @@ class CoffeeScript(Language):
 - Subreddit : http://www.reddit.com/r/coffeescript/
 ''')
 
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return JavaScript.get_file_content(_)
+
 
 class TypeScript(Language):
     """TypeScript"""
