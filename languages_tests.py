@@ -2,7 +2,12 @@
 # -*- coding: utf-8
 """Unit tests for code in languages.py."""
 
-from languages import Ada, Ash, Awk, Bash, CLanguage, Clojure, Cobol, Cpp, Csh, Dash, DLanguage, Dot, FishShell, Forth, Fortran, Go, Groovy, Haskell, Icon, Java, JavaScript, Julia, Ksh, Latex, Lisp, Lua, ObjectiveC, Octave, Oz, Pascal, Perl, Php, Pike, Prolog, Python, Python2, Python3, Racket, RLanguage, Ruby, Rust, Scala, Scheme, Scilab, Shell, SLang, SmallTalk, Swift, Tcl, Tcsh, Vala, Verilog, Yash, Zsh
+from languages import Ada, Ash, Awk, Bash, CLanguage, Clojure, Cobol, Cpp, \
+    Csh, Dash, DLanguage, Dot, FishShell, Forth, Fortran, Go, Groovy, Haskell, \
+    Icon, Java, JavaScript, Julia, Ksh, Latex, Lisp, Lua, ObjectiveC, Octave, \
+    Oz, Pascal, Perl, Php, Pike, Prolog, Python, Python2, Python3, Racket, \
+    RLanguage, Ruby, Rust, Scala, Scheme, Scilab, Shell, SLang, \
+    SmallTalk, Swift, Tcl, Tcsh, Vala, Verilog, Yash, Zsh
 from modeline import MODELINE_SUPPORTED_EDITORS
 from collections import namedtuple
 import tempfile

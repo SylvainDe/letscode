@@ -9,8 +9,8 @@ def comment_string_with_inline(string, inline_comment):
     """Return string commented using inline comments"""
     if not string:
         return string
-    return '\n'.join(inline_comment + ' ' +
-             s.strip() for s in string.split('\n')) + '\n'
+    return '\n'.join(
+        inline_comment + ' ' + s.strip() for s in string.split('\n')) + '\n'
 
 
 def comment_string_with_block(string, block_comment):

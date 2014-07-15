@@ -85,7 +85,7 @@ class Language(object):
             extmode = 'never' if (
                 os.path.splitext(filename)[1].lower() in
                 ("." + e.lower() for e in cls.extensions)
-                ) else 'always'
+            ) else 'always'
         assert extmode in ['never', 'always']
 
         # if extension is required, add the first one
@@ -2360,7 +2360,7 @@ class Scilab(InterpretableLanguage):
     extensions = [
         'sce',  # Executable statements
         'sci',  # Scilab or user defined functions
-        ]
+    ]
     inline_comment = '//'
     interpreter_options = ['-nwni', '-f']
     nb_line_shebang = 0

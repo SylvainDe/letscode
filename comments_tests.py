@@ -3,8 +3,8 @@
 """Unit tests for code in comments.py."""
 
 from comments import comment_string_with_inline, \
-        comment_string_with_block, \
-        comment_string
+    comment_string_with_block, \
+    comment_string
 import unittest
 
 
