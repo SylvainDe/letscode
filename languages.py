@@ -3158,6 +3158,27 @@ class Mars(Language):
 ''')
 
 
+class Kotlin(Language):
+    """Kotlin"""
+    name = 'kotlin'
+    extensions = ['kt']
+    inline_comment = '//'
+    # Coding conventions : http://kotlinlang.org/docs/reference/coding-conventions.html
+    settings = {'indentation_level': 4, 'tab_width': 4, 'expand_tab': True}
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Kotlin_%28programming_language%29
+- Official site : http://kotlinlang.org/
+- Documentation : http://kotlinlang.org/docs/reference/
+- Subreddit : http://www.reddit.com/r/Kotlin
+- Tools online :
+    * Kotlin Web Demo : http://kotlin-demo.jetbrains.com/?_ga=1.9307441.522235683.1405500063
+- Code samples :
+    * LiteratePrograms :
+    * Progopedia :
+    * RosettaCode : http://rosettacode.org/wiki/Category:Kotlin
+''')
+
+
 class ExampleLanguage(Language):
     """Example"""
     name = None

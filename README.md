@@ -144,6 +144,7 @@ Programming languages (partially) supported:
     * Spark
     * Factor
     * Mars
+    * Kotlin
 
 
 Status:
