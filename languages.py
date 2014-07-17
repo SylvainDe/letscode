@@ -2548,13 +2548,15 @@ class Forth(InterpretableLanguage):
             ''')
 
 
-class Nimrod(Language):
+class Nimrod(InterpretableLanguage):
     """Nimrod"""
     name = 'nimrod'
     extensions = ['nim']
     inline_comment = '#'
+    nb_line_shebang = 0
+    interpreter_options = ['c', '--r']
     information = dedent('''
-- Wikipedia page : Not yet?
+- Wikipedia page : http://en.wikipedia.org/wiki/Nimrod_%28programming_language%29
 - Official site : http://nimrod-lang.org/
 - Documentation : http://nimrod-lang.org/documentation.html
 - Subreddit : http://www.reddit.com/r/nimrod
@@ -2567,7 +2569,7 @@ class Nimrod(Language):
     def get_file_content(cls, _):
         """Returns the content to be put in the file."""
         return dedent('''
-            echo("Hello, world!")
+            echo "Hello, world!"
             ''')
 
 

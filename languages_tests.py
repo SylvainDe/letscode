@@ -4,9 +4,9 @@
 
 from languages import Ada, Ash, Awk, Bash, CLanguage, Clojure, Cobol, Cpp, \
     Csh, Dash, DLanguage, Dot, FishShell, Forth, Fortran, Go, Groovy, Haskell, \
-    Icon, Java, JavaScript, Julia, Ksh, Latex, Lisp, Lua, ObjectiveC, Octave, \
-    Oz, Pascal, Perl, Php, Pike, Prolog, Python, Python2, Python3, Racket, \
-    reST, RLanguage, Ruby, Rust, Scala, Scheme, Scilab, Shell, SLang, \
+    Icon, Java, JavaScript, Julia, Ksh, Latex, Lisp, Lua, ObjectiveC, Nimrod, \
+    Octave, Oz, Pascal, Perl, Php, Pike, Prolog, Python, Python2, Python3, \
+    Racket, reST, RLanguage, Ruby, Rust, Scala, Scheme, Scilab, Shell, SLang, \
     SmallTalk, Swift, Tcl, Tcsh, Vala, Verilog, Yash, Zsh
 from modeline import MODELINE_SUPPORTED_EDITORS
 from collections import namedtuple
@@ -129,6 +129,10 @@ class TestableInterpretableLanguage(unittest.TestCase):
     def test_perl(self):
         """Tests stuff"""
         self.interpreter_flow(Perl)
+
+    def test_nimrod(self):
+        """Tests stuff"""
+        self.interpreter_flow(Nimrod)
 
     def test_groovy(self):
         """Tests stuff"""

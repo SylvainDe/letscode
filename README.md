@@ -100,6 +100,7 @@ Programming languages (partially) supported:
     * FishShell
     * Pike
     * Scala
+    * Nimrod
     * Scheme
     * Smalltalk
     * Racket
@@ -129,7 +130,6 @@ Programming languages (partially) supported:
     * TypeScript
     * JSX
     * Dart
-    * Nimrod
     * Agda
     * SQL
     * EcmaScript
