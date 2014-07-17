@@ -49,9 +49,17 @@ MODELINE_OPTIONS = {
         'textwidth': 'word-wrap-column ',
         'expand_tab': ('replace-tabs off', 'replace-tabs on')
     },
+    # Komodo plugin : http://community.activestate.com/forum/komode-modeline-support-komodo
+    'komodo': {
+        'start': 'komode: ',
+        'end': '',
+        'link': ' ',
+        'indentation_level': 'indentwidth=',
+        'tab_width': 'tabwidth=',
+        'expandtab': ('tabs', 'notabs')
+    }
     # Pending :
     # Gedit : https://help.gnome.org/users/gedit/stable/gedit-plugins-modelines.html.en
-    # Komodo : http://community.activestate.com/forum/komode-modeline-support-komodo
 }
 
 MODELINE_SUPPORTED_EDITORS = \
