@@ -145,6 +145,7 @@ Programming languages (partially) supported:
     * Factor
     * Mars
     * Kotlin
+    * AMPL
 
 
 Status:

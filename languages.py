@@ -3181,6 +3181,28 @@ class Kotlin(Language):
 ''')
 
 
+class AMPL(Language):
+    """AMPL"""
+    name = 'ampl'
+    extensions = ['ampl', 'mod', 'dat', 'run']
+    inline_comment = '#'
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/AMPL
+- Official site : http://ampl.com/
+- Tools online :
+    * Try AMPL Online : http://ampl.com/try-ampl/start/
+- Code samples :
+    * RosettaCode : http://rosettacode.org/wiki/Category:AMPL
+''')
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            printf "Hello, world!\\n";
+            ''')
+
+
 class ExampleLanguage(Language):
     """Example"""
     name = None
