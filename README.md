@@ -233,4 +233,5 @@ A few projects that are doing somewhat related tasks and are much more developpe
  * Syntastic : https://github.com/scrooloose/syntastic : integration of different syntax checkers in Vim
  * SingleCompile : https://github.com/xuhdev/SingleCompile : integration of multiple compilers/interpreters in Vim
  * CookieCutter : https://github.com/audreyr/cookiecutter : command line tool to create project from templates (I haven't look at it much yet).
-
+ * Linguist : https://github.com/github/linguist : language detection
+ * Rockstack : https://github.com/rockstack/rock : command line tool to simplify building, testing and running applications. Looks pretty similar but also much better. I might contribute to it quite soon.
