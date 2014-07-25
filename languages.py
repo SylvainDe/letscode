@@ -3203,6 +3203,30 @@ class AMPL(Language):
             ''')
 
 
+class Gosu(Language):
+    """Gosu"""
+    name = 'gosu'
+    extensions = ['gsp', 'gs', 'gst', 'gsx']
+    inline_comment = '//'
+    block_comment = ('/*', '*/')
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Gosu_%28programming_language%29
+- Official site : http://gosu-lang.org
+- Documentation : http://gosu-lang.github.io/docs.html
+- Tools online :
+    * Play : http://gosu-lang.github.io/play.html
+- Code samples :
+    * RosettaCode : http://rosettacode.org/wiki/Category:Gosu
+''')
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            print('Hello, world!')
+            ''')
+
+
 class ExampleLanguage(Language):
     """Example"""
     name = None

@@ -146,6 +146,7 @@ Programming languages (partially) supported:
     * Mars
     * Kotlin
     * AMPL
+    * Gosu
 
 
 Status:
