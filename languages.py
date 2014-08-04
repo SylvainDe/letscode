@@ -784,6 +784,9 @@ class XML(MarkupLanguage):
     extensions = ['xml']
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/XML
+- Tools online :
+    * XML Playground : http://xmlplayground.com/
+    * XML Beautify/Viewer : http://codebeautify.org/xmlviewer/
 - Learn in Y minutes : http://learnxinyminutes.com/docs/xml/
 ''')
 
@@ -807,6 +810,7 @@ class CSS(Language):
 - Documentation :
 - Tools online :
     * CSS Lint : http://csslint.net/
+    * CSS Desk : http://www.cssdesk.com/
     * CSS Comb (in progress) : http://csscomb.com/
 - Learn in Y minutes : http://learnxinyminutes.com/docs/css/
 ''')
@@ -823,6 +827,7 @@ class JSON(Language):
 - Documentation :
 - Tools online :
     * JSON Lint : http://jsonlint.com/
+    * JSON Fiddle : http://jsonfiddle.net/
     * JSON Schema Lint : http://jsonschemalint.com
     * JSON Selector : http://jsonselector.com/
     * Geo JSON Lint : http://geojsonlint.com/
@@ -1537,6 +1542,7 @@ class Python(InterpretableLanguage):
     * PEP 8 online : http://pep8online.com/
     * Python tutor - visualisation : http://www.pythontutor.com/visualize.html
     * Python shell : http://shell.appspot.com/
+    * Python console : http://www.brython.info/console.html
     * Python interpreter : http://mathcs.holycross.edu/~kwalsh/python/
     * Learn Python with interactive console : http://www.learnpython.org/
     * Python Anywhere : https://www.pythonanywhere.com/try-ipython/
