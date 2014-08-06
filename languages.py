@@ -3233,6 +3233,21 @@ class Gosu(Language):
             ''')
 
 
+class Nemerle(Language):
+    """Nemerle"""
+    name = 'nemerle'
+    extensions = ['n']
+    inline_comment = '//'
+    block_comment = ('/*', '*/')
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Nemerle
+- Official site : http://nemerle.org
+- Code samples :
+    * Progopedia : http://progopedia.com/language/nemerle/
+    * RosettaCode : http://rosettacode.org/wiki/Category:Nemerle
+''')
+
+
 class ExampleLanguage(Language):
     """Example"""
     name = None

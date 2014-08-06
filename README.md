@@ -147,6 +147,7 @@ Programming languages (partially) supported:
     * Kotlin
     * AMPL
     * Gosu
+    * Nemerle
 
 
 Status:
