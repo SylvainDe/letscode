@@ -149,6 +149,10 @@ Programming languages (partially) supported:
     * Gosu
     * Nemerle
 
+ * Languages with no support whatsoever that I might consider in the future :
+    * QML and other Markup languages ( http://en.wikipedia.org/wiki/User_interface_markup_language )
+	* Brainfush and other esoteric languages ( http://en.wikipedia.org/wiki/Esoteric_programming_language )
+	* And others ( http://en.wikipedia.org/wiki/Categorical_list_of_programming_languages )
 
 Status:
 -------
