@@ -937,6 +937,22 @@ class CoffeeScript(Language):
         return JavaScript.get_file_content(_)
 
 
+class Move(Language):
+    """Move"""
+    name = 'move'
+    extensions = ['mv']
+    inline_comment = '#'
+    information = dedent('''
+- Wikipedia page : Not yet
+- Official site : http://movelang.org/
+- Documentation :
+    * Language : http://movelang.org/language/
+    * Library : http://movelang.org/library/
+- Tools online :
+    * Try Move : http://movelang.org/try/
+''')
+
+
 class TypeScript(Language):
     """TypeScript"""
     name = 'typescript'
