@@ -3264,6 +3264,26 @@ class Nemerle(Language):
 ''')
 
 
+class Zimbu(Language):
+    """Zimbu"""
+    name = 'zimbu'
+    extensions = ['zu']
+    inline_comment = '#'
+    information = dedent('''
+- Official site : http://www.zimbu.org/
+''')
+
+    @classmethod
+    def get_file_content(cls, _):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            FUNC Main() int
+              IO.write("Hello, World!\n")
+                RETURN 0
+            }
+            ''')
+
+
 class ExampleLanguage(Language):
     """Example"""
     name = None
