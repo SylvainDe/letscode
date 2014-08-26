@@ -831,6 +831,7 @@ class JSON(Language):
     * JSON Schema Lint : http://jsonschemalint.com
     * JSON Selector : http://jsonselector.com/
     * Geo JSON Lint : http://geojsonlint.com/
+    * JSON Processor : https://jqplay.org/
 - Learn in Y minutes : http://learnxinyminutes.com/docs/json/
 ''')
 
