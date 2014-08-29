@@ -2973,6 +2973,21 @@ class JLanguage(Language):
             ''')
 
 
+class WolframLanguage(Language):
+    """Wolfram"""
+    name = 'wolfram'
+    extensions = ['wl', 'nb', 'm']
+    block_comment = ('/*', '*/')
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Wolfram_Language
+- Official site : http://reference.wolfram.com/language/
+- Subreddit : http://www.reddit.com/r/wolframlanguage/
+- Code samples :
+    * Progopedia : http://progopedia.com/language/wolfram-mathematica/
+    * RosettaCode : http://rosettacode.org/wiki/Category:Wolfram_Language
+''')
+
+
 class Idris(Language):
     """Idris"""
     name = 'idris'

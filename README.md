@@ -117,6 +117,7 @@ Programming languages (partially) supported:
     * C#
     * F#
     * J
+    * Wolfram Language
     * Eiffel
     * Caml
     * Coq
