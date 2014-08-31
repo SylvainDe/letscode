@@ -150,6 +150,7 @@ Programming languages (partially) supported:
     * Nemerle
     * Move
     * Zimbu
+    * Mirah
 
  * Languages with no support whatsoever that I might consider in the future :
     * QML and other Markup languages ( http://en.wikipedia.org/wiki/User_interface_markup_language )

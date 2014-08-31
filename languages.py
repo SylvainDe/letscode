@@ -3285,6 +3285,16 @@ class Zimbu(Language):
             ''')
 
 
+class Mirah(Language):
+    """Mirah"""
+    name = 'mirah'
+    extensions = ['mirah']
+    inline_comment = '#'
+    information = dedent('''
+- Official site : http://www.mirah.org/
+''')
+
+
 class ExampleLanguage(Language):
     """Example"""
     name = None
