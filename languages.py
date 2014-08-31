@@ -750,6 +750,34 @@ class DLanguage(CompilableLanguage):
         return subprocess_call_wrapper(['gdb', output])
 
 
+class Qi(Language):
+    """Qi"""
+    name = 'qi'
+    extensions = ['qi']
+    block_comment = ('\\', '\\')
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Qi_(programming_language)
+- Official site : http://www.lambdassociates.org/
+- Code samples :
+    * RosettaCode : http://rosettacode.org/wiki/Category:Qi
+''')
+
+
+class Shen(Language):
+    """Shen"""
+    name = 'shen'
+    extensions = ['shen']
+    inline_comment = '\\\\'
+    block_comment = ('\\*', '*\\')
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Shen_(programming_language)
+- Official site : http://www.shenlanguage.org/
+- Documentation : http://www.shenlanguage.org/learn-shen/index.html
+- Code samples :
+    * RosettaCode : http://rosettacode.org/wiki/Category:Shen
+''')
+
+
 class MarkupLanguage(Language):
     """A generic class for markup languages"""
     block_comment = ('<!--', '-->')

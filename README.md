@@ -126,6 +126,8 @@ Programming languages (partially) supported:
     * Elixir
     * Idris
     * APL
+    * Qi
+    * Shen
     * CoffeeScript
     * TypeScript
     * JSX
