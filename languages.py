@@ -1031,13 +1031,16 @@ class Markdown(Language):
     block_comment = ('[//]: # (', ')')
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Markdown
-- Official site : http://daringfireball.net/projects/markdown/
+- Official site :
+    * http://standardmarkdown.com/
+    * (Use to be http://daringfireball.net/projects/markdown/ )
 - Misc :
     * Github flavored markdown : https://help.github.com/articles/github-flavored-markdown
 - Documentation :
     * Basic : https://help.github.com/articles/markdown-basics
 - Tools online :
     * Markdown editors/viewers:
+        http://try.standardmarkdown.com/
         http://daringfireball.net/projects/markdown/dingus
         http://www.markdownviewer.com/
         http://markable.in/editor/
