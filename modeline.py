@@ -10,7 +10,7 @@ MODELINE_VIMLIKE_EDITORS = {
 
 MODELINE_OPTIONS = {
     # Style description, can be nice to have
-    'style_desc' : {
+    'style_desc': {
         'start': 'Coding style: ',
         'end': '',
         'link': ' ',
