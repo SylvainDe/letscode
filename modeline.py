@@ -9,6 +9,14 @@ MODELINE_VIMLIKE_EDITORS = {
 }
 
 MODELINE_OPTIONS = {
+    # Style description, can be nice to have
+    'style_desc' : {
+        'start': 'Coding style: ',
+        'end': '',
+        'link': ' ',
+        'name': 'Name: ',
+        'ref': 'Reference: ',
+    },
     # http://vimdoc.sourceforge.net/htmldoc/usr_21.html#21.6
     'vim': {
         'start': ': set ',  # there will be a hack here for vimlike editors

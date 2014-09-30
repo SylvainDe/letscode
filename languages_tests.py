@@ -23,11 +23,11 @@ class TestableInterpretableLanguage(unittest.TestCase):
         """Tests stuff"""
         namespace = namedtuple(
             'Namespace',
-            'filename extension_mode override_file modeline text_editors')
+            'filename extension_mode override_file modeline text_editors style')
         filename = os.path.join(tempfile.mkdtemp(
             prefix='letscode' + klass.name + '_'), "filename")
         args = namespace(
-            filename, 'auto', 'n', 'both', MODELINE_SUPPORTED_EDITORS)
+            filename, 'auto', 'n', 'both', MODELINE_SUPPORTED_EDITORS, None)
         real_file = klass.get_actual_filename_to_use(args)
 
         # Cannot run if file does not exist
@@ -201,11 +201,11 @@ class TestableCompilableLanguage(unittest.TestCase):
         """Tests stuff"""
         namespace = namedtuple(
             'Namespace',
-            'filename extension_mode override_file modeline text_editors')
+            'filename extension_mode override_file modeline text_editors style')
         filename = os.path.join(tempfile.mkdtemp(
             prefix='letscode' + klass.name + '_'), "filename")
         args = namespace(
-            filename, 'auto', 'n', 'both', MODELINE_SUPPORTED_EDITORS)
+            filename, 'auto', 'n', 'both', MODELINE_SUPPORTED_EDITORS, None)
         real_file = klass.get_actual_filename_to_use(args)
         output_file = klass.get_output_filename(real_file)
 

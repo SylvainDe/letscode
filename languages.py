@@ -8,6 +8,7 @@ import stat
 import re
 import myshutil as shutil
 from helper import print_error, print_info, subprocess_call_wrapper
+from codestyles import CODESTYLES
 from modeline import get_modelines
 from comments import comment_string
 from textwrap import dedent
@@ -24,13 +25,13 @@ class Language(object):
         inline_comment  String how inline comments begin
         block_comment   Pair of string describing how block comments begin and
                         end
-        settings    Formatting settings for the language."""
+        styles      Code styles for the language (first one is the default)."""
     name = None
     extensions = None
     information = None
     inline_comment = None
     block_comment = None
-    settings = {}
+    styles = []
 
     @classmethod
     def function_not_implemented(cls, function):
@@ -120,12 +121,22 @@ class Language(object):
         return True
 
     @classmethod
+    def get_code_style(cls, args):
+        """Retrieve the relevant code style for the language taking into
+        account the preference given in the arguments."""
+        style_arg = args.style
+        if style_arg is not None:
+            assert style_arg in CODESTYLES
+            return CODESTYLES[style_arg]
+        return cls.styles[0] if cls.styles else {}
+
+    @classmethod
     def get_content_to_write(cls, args):
         """Get content to be writen in the file - includes header and code."""
         mod_pos, editors = args.modeline, args.text_editors
         assert mod_pos in ['none', 'top', 'bottom', 'both']
         top, bottom = mod_pos in ['both', 'top'], mod_pos in ['both', 'bottom']
-        modeline = get_modelines(editors, cls.settings) if top or bottom else ''
+        modeline = get_modelines(editors, cls.get_code_style(args)) if top or bottom else ''
         filename = cls.get_actual_filename_to_use(args)
         return cls.get_header_info(modeline if top else '') + \
             cls.get_file_content(filename) + \
@@ -238,8 +249,7 @@ class CLanguage(CompilableLanguage):
     compiler_options = ['-Wall', '-Wextra', '-std=c99']
     inline_comment = '//'
     block_comment = ('/*', '*/')
-    # Kernel https://www.kernel.org/doc/Documentation/CodingStyle
-    settings = {'indentation_level': 8, 'tab_width': 8}
+    styles = [CODESTYLES['kernel']]
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/C_%28programming_language%29
 - Official site :
@@ -335,8 +345,7 @@ class ObjectiveC(CLanguage):
     header_extensions = ['h']
     extensions = code_extensions + header_extensions
     compiler_options = ['-Wall', '-Wextra']
-    # Google Obj C http://google-styleguide.googlecode.com/svn/trunk/objcguide.xml
-    settings = {'indentation_level': 2, 'tab_width': 2, 'expand_tab': True}
+    styles = [CODESTYLES['objc-google']]
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Objective-C
 - Official site : https://developer.apple.com/library/mac/documentation/cocoa/conceptual/ProgrammingWithObjectiveC/Introduction/Introduction.html
@@ -361,8 +370,7 @@ class Cpp(CLanguage):
     extensions = code_extensions + header_extensions
     compiler = 'g++'
     compiler_options = ['-Wall', '-Wextra']
-    # Google C++ http://google-styleguide.googlecode.com/svn/trunk/cppguide.xml
-    settings = {'indentation_level': 2, 'tab_width': 2, 'expand_tab': True}
+    styles = [CODESTYLES['cpp-google']]
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/C++
 - Official site : http://isocpp.org/
@@ -404,10 +412,7 @@ class Java(CompilableLanguage):
     compiler = 'javac'  # support for gcj could be added if needed
     inline_comment = '//'
     block_comment = ('/*', '*/')
-    # Google http://google-styleguide.googlecode.com/svn/trunk/javaguide.html
-    # settings = {'indentation_level': 2, 'tab_width': 2, 'expand_tab': True}
-    # Oracle http://www.oracle.com/technetwork/java/codeconventions-150003.pdf
-    settings = {'indentation_level': 4, 'tab_width': 8, 'expand_tab': True}
+    styles = [CODESTYLES['java-google'], CODESTYLES['java-oracle']]
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Java_%28programming_language%29
 - Official site : http://www.java.com/
@@ -787,8 +792,7 @@ class HTML(MarkupLanguage):
     """HTML"""
     name = 'html'
     extensions = ['html']
-    # Google http://google-styleguide.googlecode.com/svn/trunk/htmlcssguide.xml#Indentation
-    settings = {'indentation_level': 2, 'tab_width': 2, 'expand_tab': True}
+    styles = [CODESTYLES['html-google']]
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/HTML
 - Official site : http://www.w3.org/
@@ -830,8 +834,7 @@ class CSS(Language):
     name = 'css'
     extensions = ['css']
     block_comment = ('/*', '*/')
-    # https://github.com/csswizardry/CSS-Guidelines
-    settings = {'indentation_level': 4, 'tab_width': 4, 'expand_tab': True}
+    styles = [CODESTYLES['css']]
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Cascading_Style_Sheets
 - Official site : http://www.w3.org/Style/CSS/Overview.en.html
@@ -946,8 +949,7 @@ class CoffeeScript(Language):
     extensions = ['coffee']
     inline_comment = '#'
     shell_stop = 'process.exit()'  # not relevant but in order not to forget
-    # https://github.com/polarmobile/coffeescript-style-guide
-    settings = {'indentation_level': 4, 'tab_width': 4, 'expand_tab': True}
+    styles = [CODESTYLES['coffeescript']]
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/CoffeeScript
 - Official site : http://coffeescript.org/
@@ -1137,8 +1139,7 @@ class Shell(InterpretableLanguage):
     name = 'sh'
     extensions = ['sh']
     shell_stop = 'exit'
-    # Google https://google-styleguide.googlecode.com/svn/trunk/shell.xml
-    settings = {'indentation_level': 2, 'tab_width': 2, 'expand_tab': True}
+    styles = [CODESTYLES['shell-google']]
     information = dedent('''
 - Wikipedia page :
 - Official site :
@@ -1333,9 +1334,7 @@ class Ruby(InterpretableLanguage):
     name = 'ruby'
     extensions = ['rb', 'rbw']
     shell_stop = 'exit'  # or quit, irb_exit
-    # https://github.com/bbatsov/ruby-style-guide
-    # https://github.com/styleguide/ruby
-    settings = {'indentation_level': 2, 'tab_width': 2, 'expand_tab': True}
+    styles = [CODESTYLES['ruby']]
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Ruby_%28programming_language%29
 - Official site : https://www.ruby-lang.org/fr/
@@ -1404,8 +1403,7 @@ class JavaScript(InterpretableLanguage):
     inline_comment = '//'
     block_comment = ('/*', '*/')
     shell_stop = 'quit()'  # in rhino
-    # https://github.com/styleguide/javascript
-    settings = {'indentation_level': 2, 'tab_width': 2, 'expand_tab': True}
+    styles = [CODESTYLES['javascript']]
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/JavaScript
 - "Official" sites :
@@ -1511,12 +1509,7 @@ class Php(InterpretableLanguage):
     """Php"""
     name = 'php'
     extensions = ['php', 'php3', 'php4', 'php5', 'phtml']
-    # Zend http://framework.zend.com/manual/1.12/en/coding-standard.html
-    settings = {'indentation_level': 4, 'tab_width': 4, 'expand_tab': True}
-    # Symfony http://trac.symfony-project.org/wiki/HowToContributeToSymfony#CodingStandards
-    # settings = {'indentation_level': 2, 'tab_width': 2, 'expand_tab': True}
-    # Pear http://pear.php.net/manual/en/standards.indenting.php
-    # settings = {'indentation_level': 4, 'tab_width': 4, 'expand_tab': True}
+    styles = [CODESTYLES['php-zend'], CODESTYLES['php-symfony'], CODESTYLES['php-pear']]
     shell_options = ['-a']
     shell_stop = 'exit'  # or quit
     information = dedent('''
@@ -1568,8 +1561,7 @@ class Python(InterpretableLanguage):
     """Python"""
     name = 'python'
     extensions = ['py', 'pyc', 'pyo']
-    # PEP8 http://legacy.python.org/dev/peps/pep-0008/
-    settings = {'indentation_level': 4, 'tab_width': 4, 'expand_tab': True}
+    styles = [CODESTYLES['python']]
     shell_stop = 'exit()'
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Python_%28programming_language%29
@@ -2339,8 +2331,7 @@ class Rust(CompilableLanguage):
     compiler_options = ['-g']
     inline_comment = '//'
     block_comment = ('/*', '*/')
-    # Official Rust guidelines : https://github.com/rust-lang/rust-guidelines
-    settings = {'indentation_level': 4, 'tab_width': 4, 'expand_tab': True}
+    styles = [CODESTYLES['rust']]
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Rust_%28programming_language%29
 - Official site : http://www.rust-lang.org/
@@ -2729,8 +2720,7 @@ class RLanguage(InterpretableLanguage):
     """R"""
     name = 'r'
     extensions = ['R']
-    # Google Style http://google-styleguide.googlecode.com/svn/trunk/Rguide.xml
-    settings = {'indentation_level': 2, 'tab_width': 2, 'expand_tab': True}
+    styles = [CODESTYLES['r-google']]
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/R_%28programming_language%29
 - Official site : http://www.r-project.org/
@@ -3234,8 +3224,7 @@ class Kotlin(Language):
     name = 'kotlin'
     extensions = ['kt']
     inline_comment = '//'
-    # Coding conventions : http://kotlinlang.org/docs/reference/coding-conventions.html
-    settings = {'indentation_level': 4, 'tab_width': 4, 'expand_tab': True}
+    styles = [CODESTYLES['kotlin']]
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Kotlin_%28programming_language%29
 - Official site : http://kotlinlang.org/

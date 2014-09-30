@@ -43,13 +43,14 @@ import argparse
 from helper import print_info
 from modeline import MODELINE_SUPPORTED_EDITORS
 from languages import LANGUAGE_NAMES
+from codestyles import CODESTYLES
 from detectlanguage import detect_language_from_filename
 
 
 def main():
     """Main"""
     default_actions = ['create']
-    default_editors = ['vim']
+    default_editors = ['style_desc', 'vim']
     parser = argparse.ArgumentParser(
         description='Makes your code easy to edit/compile/run/test/check')
     parser.add_argument(
@@ -60,6 +61,10 @@ def main():
         help=('programming language to consider (default: %(default)s)'),
         choices=sorted(LANGUAGE_NAMES.keys()) + ['autodetect'],
         default='autodetect')
+    parser.add_argument(
+        '--style', '-s',
+        help=('code style to be used (default is to get the one specific to the language - if any)'),
+        choices=sorted(CODESTYLES.keys()))
     parser.add_argument(
         '--action', '-a',
         action='append',
