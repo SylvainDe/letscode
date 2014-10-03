@@ -249,7 +249,7 @@ class CLanguage(CompilableLanguage):
     compiler_options = ['-Wall', '-Wextra', '-std=c99']
     inline_comment = '//'
     block_comment = ('/*', '*/')
-    styles = [CODESTYLES['kernel']]
+    styles = [CODESTYLES['c-kernel'], CODESTYLES['c-apache']]
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/C_%28programming_language%29
 - Official site :
@@ -370,7 +370,7 @@ class Cpp(CLanguage):
     extensions = code_extensions + header_extensions
     compiler = 'g++'
     compiler_options = ['-Wall', '-Wextra']
-    styles = [CODESTYLES['cpp-google']]
+    styles = [CODESTYLES['cpp-google'], CODESTYLES['cpp-boost']]
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/C++
 - Official site : http://isocpp.org/
@@ -520,6 +520,7 @@ class Pascal(CompilableLanguage):
     compiler = 'fpc'
     inline_comment = '//'
     block_comment = ('(*', '*)')  # or ('{', '}')
+    styles = [CODESTYLES['pascal-gnu']]
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Pascal_%28programming_language%29
 - Official site :
@@ -564,8 +565,10 @@ class Ada(CompilableLanguage):
     name = 'ada'
     extensions = ['adb', 'ads']
     compiler = 'gnat'  # many options - documentation with 'html' for instance
+    # also for https://gcc.gnu.org/onlinedocs/gnat_ugn_unw/Style-Checking.html
     compiler_options = ['make']
     inline_comment = '--'
+    styles = [CODESTYLES['ada-gnat']]
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Ada_(programming_language)
 - Official site : http://www.adaic.org/
@@ -678,6 +681,7 @@ class Haskell(CompilableLanguage):
     compiler = 'ghc'
     inline_comment = '--'
     block_comment = ('{-', '-}')
+    styles = [CODESTYLES['haskell']]
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Haskell_%28programming_language%29
 - Official site : http://www.haskell.org/
@@ -720,6 +724,7 @@ class DLanguage(CompilableLanguage):
     compiler = 'gdc'
     inline_comment = '//'
     block_comment = ('/*', '*/')
+    styles = [CODESTYLES['d']]
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/D_%28programming_language%29
 - Official site : http://dlang.org/
@@ -1463,6 +1468,7 @@ class Perl(InterpretableLanguage):
     extensions = ['pl']
     shell_options = ['-d', '-e', '1']
     shell_stop = 'q'
+    styles = [CODESTYLES['perl']]
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Perl
 - Official site : http://www.perl.org/
@@ -1509,7 +1515,12 @@ class Php(InterpretableLanguage):
     """Php"""
     name = 'php'
     extensions = ['php', 'php3', 'php4', 'php5', 'phtml']
-    styles = [CODESTYLES['php-zend'], CODESTYLES['php-symfony'], CODESTYLES['php-pear']]
+    styles = [
+        CODESTYLES['php-zend'],
+        CODESTYLES['php-symfony'],
+        CODESTYLES['php-pear'],
+        CODESTYLES['php-drupal'],
+        CODESTYLES['php-fig']]
     shell_options = ['-a']
     shell_stop = 'exit'  # or quit
     information = dedent('''
@@ -1799,6 +1810,7 @@ class Lua(InterpretableLanguage):
     inline_comment = '--'
     compiler = 'luac'
     shell_stop = 'os.exit()'
+    styles = [CODESTYLES['lua']]
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Lua_%28programming_language%29
 - Official site : http://www.lua.org/
@@ -2752,6 +2764,7 @@ class CSharp(Language):
     extensions = ['cs']
     inline_comment = '//'
     block_comment = ('/*', '*/')
+    styles = [CODESTYLES['csharp']]
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/C_Sharp_%28programming_language%29
 - Official site :

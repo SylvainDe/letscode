@@ -10,9 +10,11 @@ Why this script ?
 I love working on little pieces of codes in different programming languages and I've spent too much time doing the same things again and again :
  * look for the exact syntax for an hello world in a given language
  * struggle to get the code to compile with the right options
- * forget the different static analysers that one can use
+ * forget the different tools (code analysis, code formatting, etc) that one can use
  * write a script and call `chmod +x` because I have forgotten to give the right permissions
  * go through my notes to find the one link that can save me some googling
+ * google to find basic documentation
+ * look for the usual coding style and write the corresponding modeline
 
 Also, I wanted to have some fun and discover new things (Python concepts & programming languages).
 
@@ -173,7 +175,7 @@ In the current implementation, all programming languages inherit from a common `
 Next steps :
 ------------
 
-Re-organisation in multiple smaller files.
+Move compilers/interpreters out of the languages implementation (like it was done for codestyles) to have more modularity.
 
 
 Installation :
