@@ -8,6 +8,7 @@ CODESTYLE_LIST = [
         'ref': 'https://www.kernel.org/doc/Documentation/CodingStyle',
         'indentation_level': 8,
         'tab_width': 8,
+        'expand_tab': False,
     },
     {
         'name': 'c-apache',
@@ -200,8 +201,38 @@ CODESTYLE_LIST = [
     },
     {
         'name': 'haskell',
-        'ref': 'http://www.gnu-pascal.de/h-gpcs-en.html',
+        'ref': 'http://www.haskell.org/haskellwiki/Programming_guidelines',
         'expand_tab': True,
+    },
+    {
+        'name': 'go',
+        'ref': 'http://golang.org/doc/effective_go.html https://golang.org/cmd/gofmt/',
+        'expand_tab': False,
+    },
+    {
+        'name': 'caml',
+        'ref': 'http://caml.inria.fr/resources/doc/guides/guidelines.en.html',
+        'indentation_level': 2,
+        'tab_width': 2,
+        'expand_tab': True,
+    },
+    {
+        'name': 'scala',
+        'ref': 'http://docs.scala-lang.org/style/',
+        'indentation_level': 2,
+        'tab_width': 2,
+        'expand_tab': True,
+    },
+    {
+        'name': 'dart',
+        'ref': 'http://www.dartlang.org/articles/style-guide/',
+        'indentation_level': 2,
+        'tab_width': 2,
+        'expand_tab': True,
+    },
+    {
+        'name': 'julia',
+        'ref': 'http://julia.readthedocs.org/en/latest/manual/style-guide/',
     },
 
 

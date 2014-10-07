@@ -674,6 +674,7 @@ class Cobol(CompilableLanguage):
         return subprocess_call_wrapper(['cobol_count', filename])
 
 
+# hlint
 class Haskell(CompilableLanguage):
     """Haskell"""
     name = 'haskell'
@@ -1741,6 +1742,7 @@ class Julia(InterpretableLanguage):
     name = 'julia'
     extensions = ['jl']
     shell_stop = 'exit()'
+    styles = [CODESTYLES['julia']]
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Julia_%28programming_language%29
 - Official site : http://julialang.org/
@@ -2021,6 +2023,7 @@ class Go(CompilableLanguage):
     compiler_options = ['-g']
     inline_comment = '//'
     block_comment = ('/*', '*/')
+    styles = [CODESTYLES['go']]
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Go_%28programming_language%29
 - Official site : http://golang.org/
@@ -2280,6 +2283,7 @@ class Caml(Language):
     name = 'caml'
     extensions = ['ml', 'mli']
     block_comment = ('(*', '*)')
+    styles = [CODESTYLES['caml']]
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Caml
 - Official site : http://caml.inria.fr/
@@ -2300,6 +2304,7 @@ class Scala(InterpretableLanguage):  # it can be compiled too but that's for lat
     inline_comment = '//'
     block_comment = ('/*', '*/')
     nb_line_shebang = 2
+    styles = [CODESTYLES['scala']]
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Scala_%28programming_language%29
 - Official site : http://www.scala-lang.org/
@@ -2397,6 +2402,7 @@ class Dart(Language):
     name = 'dart'
     extensions = ['dart']
     inline_comment = '//'
+    styles = [CODESTYLES['dart']]
     information = dedent('''
 - Wikipedia page : http://en.wikipedia.org/wiki/Dart_%28programming_language%29
 - Official site : https://www.dartlang.org/
