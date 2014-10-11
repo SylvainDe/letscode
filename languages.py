@@ -378,6 +378,7 @@ class Cpp(CLanguage):
 - Misc :
     * Guru of the week : http://www.gotw.ca/gotw/
 - Subreddit : http://www.reddit.com/r/cpp/
+- Learn in Y minutes : http://learnxinyminutes.com/docs/c++/
 - Tools online :
     * Compiler (with ASM output - no run) : http://gcc.godbolt.org/
     * Compiler (with ASM output - no run) : http://assembly.ynh.io/
@@ -1002,6 +1003,7 @@ class TypeScript(Language):
 - Tools online :
     * Playground : http://www.typescriptlang.org/Playground
 - Subreddit : http://www.reddit.com/r/typescript/
+- Learn in Y minutes : http://learnxinyminutes.com/docs/typescript/
 ''')
 
 
@@ -2623,6 +2625,7 @@ class Nimrod(InterpretableLanguage):
 - Official site : http://nimrod-lang.org/
 - Documentation : http://nimrod-lang.org/documentation.html
 - Subreddit : http://www.reddit.com/r/nimrod
+- Learn in Y minutes : http://learnxinyminutes.com/docs/nim/
 - Code samples :
     * Progopedia : http://progopedia.com/language/nimrod/
     * RosettaCode : http://rosettacode.org/wiki/Category:Nimrod
