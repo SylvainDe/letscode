@@ -2655,6 +2655,26 @@ class ActionScript(Language):
 ''')
 
 
+class LiveScript(Language):
+    """LiveScript"""
+    name = 'livescript'
+    extensions = ['ls']
+    inline_comment = '//'  # or '#'
+    block_comment = ('/*', '*/')
+    styles = [CODESTYLES['livescript']]
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/LiveScript
+- Official site : http://livescript.net/
+- Documentation : http://livescript.net/#introduction
+- Subreddit : http://www.reddit.com/r/livescript/
+- Tools online :
+    * Compile/run/AST : http://livescript.net/
+- Learn in Y minutes : http://learnxinyminutes.com/docs/livescript/
+- Code samples :
+    * RosettaCode : http://rosettacode.org/wiki/Category:LiveScript
+''')
+
+
 class EcmaScript(Language):
     """EcmaScript"""
     name = 'ecmascript'

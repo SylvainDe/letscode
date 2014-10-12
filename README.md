@@ -138,6 +138,7 @@ Programming languages (partially) supported:
     * Agda
     * SQL
     * EcmaScript
+    * LiveScript
     * ActionScript
     * PostScript
     * Markdown

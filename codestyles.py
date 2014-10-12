@@ -234,8 +234,13 @@ CODESTYLE_LIST = [
         'name': 'julia',
         'ref': 'http://julia.readthedocs.org/en/latest/manual/style-guide/',
     },
-
-
+    {
+        'name': 'livescript',
+        'ref': 'https://github.com/gkz/LiveScript-style-guide',
+        'indentation_level': 2,
+        'tab_width': 2,
+        'expand_tab': True,
+    },
 ]
 
 CODESTYLES = {s['name']: s for s in CODESTYLE_LIST}
