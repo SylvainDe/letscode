@@ -3510,6 +3510,35 @@ class Kaya(Language):
             ''')
 
 
+class Haxe(Language):
+    """Haxe"""
+    name = 'haxe'
+    extensions = ['hx', 'hxml']
+    inline_comment = '//'
+    block_comment = ('/*', '*/')
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Haxe
+- Official site : http://haxe.org/
+- Documentation : http://haxe.org/documentation/introduction/
+- Subreddit : http://www.reddit.com/r/haxe/
+- Tools online : http://try.haxe.org/
+- Learn in Y minutes : http://learnxinyminutes.com/docs/haxe/
+- Code samples :
+    * RosettaCode : http://rosettacode.org/wiki/Category:Haxe
+''')
+
+    @classmethod
+    def get_file_content(cls, filename):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            class HelloWorld {
+                static public function main() {
+                    trace("Hello, world!");
+                }
+            }
+            ''')
+
+
 class ExampleLanguage(Language):
     """Example"""
     name = None
