@@ -762,6 +762,23 @@ class DLanguage(CompilableLanguage):
         return subprocess_call_wrapper(['gdb', output])
 
 
+class AppleScript(Language):
+    """AppleScript"""
+    name = 'applescript'
+    extensions = ['scpt', 'AppleScript']
+    inline_comment = '--'  # and more recently '#'
+    block_comment = ('(*', '*)')
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/AppleScript
+- Official site : http://www.macosxautomation.com/applescript/
+- Documentation : https://developer.apple.com/library/mac/documentation/AppleScript/Conceptual/AppleScriptLangGuide/introduction/ASLR_intro.html
+- Subreddit : http://www.reddit.com/r/applescript
+- Code samples :
+    * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:AppleScript
+    * RosettaCode : http://rosettacode.org/wiki/Category:AppleScript
+''')
+
+
 class Qi(Language):
     """Qi"""
     name = 'qi'
@@ -2280,6 +2297,18 @@ class Racket(InterpretableLanguage):
             ''')
 
 
+class Arc(Language):
+    """Arc"""
+    name = 'arc'
+    extensions = ['arc']
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Arc_%28programming_language%29
+- Official site : http://arclanguage.org/
+- Code samples :
+    * RosettaCode : http://rosettacode.org/wiki/Category:Arc
+''')
+
+
 class Caml(Language):
     """Caml"""
     name = 'caml'
@@ -2687,6 +2716,23 @@ class EcmaScript(Language):
 ''')
 
 
+class MoonScript(Language):
+    """MoonScript"""
+    name = 'moonscript'
+    extensions = ['moon']
+    inline_comment = '--'
+    information = dedent('''
+- Wikipedia page : Not yet
+- Official site : http://moonscript.org/
+- Documentation : http://moonscript.org/reference/
+- Subreddit : http://www.reddit.com/r/moonscript/
+- Tools online :
+    * Compile to Lua and/or run : http://moonscript.org/compiler/
+- Code samples :
+    * RosettaCode : http://rosettacode.org/wiki/Category:MoonScript
+''')
+
+
 class Ceylon(Language):
     """Ceylon"""
     name = 'ceylon'
@@ -2785,6 +2831,16 @@ class RLanguage(InterpretableLanguage):
         return dedent('''
             cat ("Hello, world!\\n")
             ''')
+
+
+class SAS(Language):
+    """SAS"""
+    name = 'sas'
+    extensions = ['sas']
+    block_comment = ('/*', '*/')
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/SAS_language
+''')
 
 
 class CSharp(Language):
@@ -3370,6 +3426,88 @@ class Mirah(Language):
     information = dedent('''
 - Official site : http://www.mirah.org/
 ''')
+
+
+class QKx(Language):
+    """Q (Programming Language from Kx Systems"""
+    name = 'q-kx'
+    extensions = ['q']
+    inline_comment = ' /'  # space is important
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Q_%28programming_language_from_Kx_Systems%29
+- Official site :
+- Documentation :
+- Code samples :
+    * RosettaCode : http://rosettacode.org/wiki/Category:Q
+''')
+
+
+class QEquational(Language):  # Interpretable with 'q'
+    """Q (Equational Programming Language)"""
+    name = 'q-eq'
+    extensions = ['q']
+    inline_comment = '//'
+    block_comment = ('/*', '*/')
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Q_%28equational_programming_language%29
+- Official site : http://q-lang.sourceforge.net/
+- Documentation : http://q-lang.sourceforge.net/documentation.html
+''')
+
+    @classmethod
+    def get_file_content(cls, filename):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            hello = writes "Hello, world!";''')
+
+
+class Pure(Language):  # Interpretable AND compilable with 'pure'
+    """Pure"""
+    name = 'pure'
+    extensions = ['pure']
+    inline_comment = '//'
+    block_comment = ('/*', '*/')
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Pure_%28programming_language%29
+- Official site : http://purelang.bitbucket.org/
+- Documentation : http://puredocs.bitbucket.org/pure.html
+- Code samples :
+    * RosettaCode : http://rosettacode.org/wiki/Category:Pure
+''')
+
+    @classmethod
+    def get_file_content(cls, filename):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            using system;
+            puts "Hello, world!";''')
+
+
+class Kaya(Language):
+    """Kaya"""
+    name = 'kaya'
+    extensions = ['k']
+    inline_comment = '//'
+    block_comment = ('/*', '*/')
+    information = dedent('''
+- Wikipedia page : http://en.wikipedia.org/wiki/Kaya_%28programming_language%29
+- Official site : http://kayalang.org/
+- Documentation : http://kayalang.org/tutorial
+- Code samples :
+    * Progopedia :
+    * RosettaCode : http://rosettacode.org/wiki/Category:Kaya
+''')
+
+    @classmethod
+    def get_file_content(cls, filename):
+        """Returns the content to be put in the file."""
+        return dedent('''
+            program hello;
+
+            Void main() {
+                putStrLn("Hello, world!");
+            }
+            ''')
 
 
 class ExampleLanguage(Language):

@@ -140,6 +140,7 @@ Programming languages (partially) supported:
     * EcmaScript
     * LiveScript
     * ActionScript
+    * AppleScript
     * PostScript
     * Markdown
     * HTML
@@ -157,11 +158,18 @@ Programming languages (partially) supported:
     * Move
     * Zimbu
     * Mirah
+    * Arc
+    * MoonScript
+    * SAS
+    * Q (from Kx systems)
+    * Q (equational language)
+    * Pure
+    * Kaya
 
  * Languages with no support whatsoever that I might consider in the future :
     * QML and other Markup languages ( http://en.wikipedia.org/wiki/User_interface_markup_language )
-	* Brainfush and other esoteric languages ( http://en.wikipedia.org/wiki/Esoteric_programming_language )
-	* And others ( http://en.wikipedia.org/wiki/Categorical_list_of_programming_languages )
+    * Brainfush and other esoteric languages ( http://en.wikipedia.org/wiki/Esoteric_programming_language )
+    * And others ( http://en.wikipedia.org/wiki/Categorical_list_of_programming_languages )
 
 Status:
 -------
