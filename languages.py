@@ -733,10 +733,11 @@ class DLanguage(CompilableLanguage):
 - Documentation :
     * Language reference : http://dlang.org/spec.html
     * Library reference : dlang.org/phobos/index.html
-- Subreddit :
+- Subreddit : http://www.reddit.com/r/d_language/
+- Tools online :
     * D Paste : http://dpaste.dzfl.pl/
     * Compile Online : http://www.compileonline.com/compile_d_online.php
-- Tools online : http://www.reddit.com/r/d_language/
+    * ASM : http://asm.dlang.org/
 - Code samples :
     * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:D
     * Progopedia : http://progopedia.com/language/d/
@@ -824,6 +825,7 @@ class HTML(MarkupLanguage):
 - Tools online :
     * W3C Validator : http://validator.w3.org/
     * HTML Obfuscator : http://htmlobfuscator.com/
+    * HTML 2 Jade : http://html2jade.org/
 ''')
 
     @classmethod
@@ -1171,6 +1173,7 @@ class Shell(InterpretableLanguage):
 - Documentation :
 - Tool online:
     * Explain shell : http://explainshell.com/
+    * Shell Check : http://www.shellcheck.net/
 - Subreddit :
 ''')
 
@@ -2858,6 +2861,7 @@ class CSharp(Language):
 - Tools online :
     * C# format : http://www.manoli.net/csharpformat/
     * JSON to C# : http://json2csharp.com
+    * C# compile and run : http://www.volatileread.com/utilitylibrary/snippetcompiler
 - Learn in Y minutes : http://learnxinyminutes.com/docs/csharp/
 - Code samples :
     * LiteratePrograms : http://en.literateprograms.org/Category:Programming_language:C_Sharp
