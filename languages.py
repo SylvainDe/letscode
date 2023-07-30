@@ -476,7 +476,7 @@ class Java(CompilableLanguage):
         classfile = cls.get_classfile(cls.get_actual_filename_to_use(args))
         classpath, classname = os.path.split(classfile)
         return subprocess_call_wrapper(
-            ['java', '-classpath', classpath, classname])
+            ['java', '-enableassertions', '-classpath', classpath, classname])
 
     @classmethod
     def debug(cls, args):
